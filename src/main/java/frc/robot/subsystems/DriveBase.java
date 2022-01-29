@@ -150,7 +150,6 @@ public class DriveBase extends SubsystemBase {
 
   @Override
   public void periodic() {
-
     if (m_isActive == false) {
       return;
     }
@@ -186,6 +185,7 @@ public class DriveBase extends SubsystemBase {
 
     SmartDashboard.putNumber("Right Motor Level", getRightMotorLevel());
     SmartDashboard.putNumber("Left Motor Level", getLeftMotorLevel());
+    SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
   }
 
   public double getLeftEncoder() {
