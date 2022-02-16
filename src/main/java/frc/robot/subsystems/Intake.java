@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.commands.RunIntakeBackwards;
 
 public class Intake extends SubsystemBase {
   public boolean m_isActive = true;
@@ -42,6 +43,14 @@ public class Intake extends SubsystemBase {
 
   public double getIntakeMotorLevel() {
     return m_intakeMotor.get();
+  }
+
+  public void runIntakeForwards() {
+    setIntakeMotorLevel(Constants.IntakeMotorLevel);
+  }
+
+  public void runIntakeBackwards() {
+    setIntakeMotorLevel(Constants.IntakeBackMotorLevel);
   }
 
   @Override
