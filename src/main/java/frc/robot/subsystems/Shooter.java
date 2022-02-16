@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -25,6 +26,7 @@ public class Shooter extends SubsystemBase {
   private RelativeEncoder m_leftShooterEncoder;
   private RelativeEncoder m_rightShooterEncoder;
   private double mLevel;
+  private BangBangController shootController;
   /**
    * Creates a new Shooter.
    */
@@ -32,6 +34,7 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
+    shootController = new BangBangController(5);
     m_leftShooterMotor = new CANSparkMax(Constants.LeftShooterMotorCAN_Address, MotorType.kBrushless);
     m_rightShooterMotor = new CANSparkMax(Constants.RightShooterMotorCAN_Address, MotorType.kBrushless);
     m_leftShooterMotor.follow(m_rightShooterMotor, /*invert=*/ true);

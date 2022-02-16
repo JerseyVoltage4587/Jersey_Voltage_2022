@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -26,10 +25,10 @@ public class DriveBase extends SubsystemBase {
   private boolean m_isActive = true;
   public DifferentialDrive m_drive = null;
   static DriveBase m_Instance = null;
-  public WPI_TalonSRX m_lefttalon1;
-  public WPI_TalonSRX m_righttalon2;
-  private WPI_VictorSPX m_leftvictor11;
-  private WPI_VictorSPX m_rightvictor21;
+  public CANSparkMax m_leftSpark;
+  public CANSparkMax m_rightSpark;
+  private RelativeEncoder m_leftDriveEncoder;
+  private RelativeEncoder m_rightDriveEncoder;
   private double LeftMotorLevel;
   private double RightMotorLevel;
   private double partialLeftInches = 0;
@@ -47,27 +46,33 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_lefttalon1 = new WPI_TalonSRX(Constants.LeftTalon1CAN_Address);
-    m_righttalon2 = new WPI_TalonSRX(Constants.RightTalon2CAN_Address);
+/*     m_leftSpark = new WPI_TalonSRX(Constants.LeftSparkCAN_Address);
+    m_rightSpark = new WPI_TalonSRX(Constants.RightSparkCAN_Address);
     m_leftvictor11 = new WPI_VictorSPX(Constants.LeftVictor1CAN_Address);
-    m_rightvictor21 = new WPI_VictorSPX(Constants.RightVictor21CAN_Address);
-    m_lefttalon1.configFactoryDefault();
+    m_rightvictor21 = new WPI_VictorSPX(Constants.RightVictor21CAN_Address); */
+    m_leftSpark = new CANSparkMax(Constants.LeftShooterMotorCAN_Address, MotorType.kBrushless);
+    m_rightSpark = new CANSparkMax(Constants.RightShooterMotorCAN_Address, MotorType.kBrushless);
+    m_leftSpark.follow(m_rightSpark, /*invert=*/ true);
+    m_leftDriveEncoder = m_leftSpark.getEncoder();
+    m_rightDriveEncoder = m_rightSpark.getEncoder();
+    m_leftSpark.restoreFactoryDefaults();
+    m_rightSpark.restoreFactoryDefaults();
+    m_leftSpark.set(0);
+    m_rightSpark.set(0);
+    m_leftSpark.setIdleMode(IdleMode.kBrake);
+    m_rightSpark.setIdleMode(IdleMode.kBrake);
+    m_leftSpark.setInverted(true);
+    m_rightSpark.setInverted(false);
+    /*
     m_leftvictor11.configFactoryDefault();
-    m_righttalon2.configFactoryDefault(); 
     m_rightvictor21.configFactoryDefault();
-    m_lefttalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    m_righttalon2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    m_lefttalon1.setNeutralMode(NeutralMode.Brake);
     m_leftvictor11.setNeutralMode(NeutralMode.Brake);
-    m_righttalon2.setNeutralMode(NeutralMode.Brake);
     m_rightvictor21.setNeutralMode(NeutralMode.Brake);
-    m_leftvictor11.follow(m_lefttalon1);
-    m_rightvictor21.follow(m_righttalon2);
-    m_lefttalon1.setInverted(false);
-    m_righttalon2.setInverted(true);
+    m_leftvictor11.follow(m_leftSpark);
+    m_rightvictor21.follow(m_rightSpark);
     m_leftvictor11.setInverted(InvertType.FollowMaster);
-    m_rightvictor21.setInverted(InvertType.FollowMaster);
-    m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
+    m_rightvictor21.setInverted(InvertType.FollowMaster); */
+    m_drive = new DifferentialDrive(m_leftSpark, m_rightSpark);
     m_drive.setSafetyEnabled(false);
     m_loggingData = new DriveBaseLoggingData();
     m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
@@ -89,7 +94,7 @@ public class DriveBase extends SubsystemBase {
       return;
     }
     LeftMotorLevel = x;
-    m_lefttalon1.set(LeftMotorLevel);
+    m_leftSpark.set(LeftMotorLevel);
   }
 
   public double getLeftMotorLevel() {
@@ -104,7 +109,7 @@ public class DriveBase extends SubsystemBase {
       return;
     }
     RightMotorLevel = x;
-    m_righttalon2.set(RightMotorLevel);
+    m_rightSpark.set(RightMotorLevel);
   }
 
   public double getRightMotorLevel() {
@@ -133,8 +138,8 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_lefttalon1.setSelectedSensorPosition(0, 0, 40);
-    m_righttalon2.setSelectedSensorPosition(0, 0, 40);
+    m_leftDriveEncoder.setPosition(0);
+    m_rightDriveEncoder.setPosition(0);
     if (gyro) {
       Gyro.getInstance();
       Gyro.reset();
@@ -161,18 +166,16 @@ public class DriveBase extends SubsystemBase {
     double lastRightPosition = m_loggingData.RightPosition;
     double lastRightVelocity = m_loggingData.RightVelocity;
 
-    m_loggingData.LeftMotorLevel = m_lefttalon1.get();
-    m_loggingData.LeftMotor1_SupplyCurrent = m_lefttalon1.getSupplyCurrent();
-    m_loggingData.LeftMotor1_StatorCurrent = m_lefttalon1.getStatorCurrent();
+    m_loggingData.LeftMotorLevel = m_leftSpark.get();
+    m_loggingData.LeftMotor1_SupplyCurrent = m_leftSpark.getOutputCurrent();
     m_loggingData.LeftMotor2_SupplyCurrent = Robot.getPDP().getCurrent(Constants.LeftVictor11PDP_Port);
     m_loggingData.LeftEncoderReading = getLeftEncoder();
     m_loggingData.LeftPosition = getLeftDistanceInches();
     m_loggingData.LeftVelocity = getRateOfChange(lastLeftPosition, m_loggingData.LeftPosition, m_lastLogTime, now);
     m_loggingData.LeftAcceleration = getRateOfChange(lastLeftVelocity, m_loggingData.LeftVelocity, m_lastLogTime, now);
 
-    m_loggingData.RightMotorLevel = m_righttalon2.get();
-    m_loggingData.RightMotor1_SupplyCurrent = m_righttalon2.getSupplyCurrent();
-    m_loggingData.RightMotor1_StatorCurrent = m_righttalon2.getStatorCurrent();
+    m_loggingData.RightMotorLevel = m_rightSpark.get();
+    m_loggingData.RightMotor1_SupplyCurrent = m_rightSpark.getOutputCurrent();
     m_loggingData.RightMotor2_SupplyCurrent = Robot.getPDP().getCurrent(Constants.RightVictor21PDP_Port);
     m_loggingData.RightEncoderReading = getRightEncoder();
     m_loggingData.RightPosition = getRightDistanceInches();
@@ -192,7 +195,7 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return 0;
     }
-    return -1 * m_lefttalon1.getSelectedSensorPosition(0);
+    return -1 * m_leftDriveEncoder.getPosition();
   }
 
   public double getLeftDistanceInches() {
@@ -203,7 +206,7 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return 0;
     }
-    return -1 * m_righttalon2.getSelectedSensorPosition(0);
+    return -1 * m_rightDriveEncoder.getPosition();
   }
 
   public double getRightDistanceInches() {

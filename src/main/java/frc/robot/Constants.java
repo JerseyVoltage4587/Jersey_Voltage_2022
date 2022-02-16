@@ -17,9 +17,9 @@ package frc.robot;
  */
 public final class Constants {
     //CAN Addresses
-    public static final int LeftTalon1CAN_Address = 1; //TBD
+    public static final int LeftSparkCAN_Address = 1; //TBD
     public static final int LeftVictor1CAN_Address = 11; //TBD
-    public static final int RightTalon2CAN_Address = 2; //TBD
+    public static final int RightSparkCAN_Address = 2; //TBD
     public static final int RightVictor21CAN_Address = 21; //TBD
     public static final int RightShooterMotorCAN_Address = 45;
     public static final int LeftShooterMotorCAN_Address = 46;
