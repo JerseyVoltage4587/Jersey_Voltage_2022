@@ -50,8 +50,8 @@ public class DriveBase extends SubsystemBase {
     m_rightSpark = new WPI_TalonSRX(Constants.RightSparkCAN_Address);
     m_leftvictor11 = new WPI_VictorSPX(Constants.LeftVictor1CAN_Address);
     m_rightvictor21 = new WPI_VictorSPX(Constants.RightVictor21CAN_Address); */
-    m_leftSpark = new CANSparkMax(Constants.LeftShooterMotorCAN_Address, MotorType.kBrushless);
-    m_rightSpark = new CANSparkMax(Constants.RightShooterMotorCAN_Address, MotorType.kBrushless);
+    m_leftSpark = new CANSparkMax(Constants.LeftSpark1CAN_Address, MotorType.kBrushless);
+    m_rightSpark = new CANSparkMax(Constants.RightSpark2CAN_Address, MotorType.kBrushless);
     m_leftSpark.follow(m_rightSpark, /*invert=*/ true);
     m_leftDriveEncoder = m_leftSpark.getEncoder();
     m_rightDriveEncoder = m_rightSpark.getEncoder();
@@ -61,8 +61,6 @@ public class DriveBase extends SubsystemBase {
     m_rightSpark.set(0);
     m_leftSpark.setIdleMode(IdleMode.kBrake);
     m_rightSpark.setIdleMode(IdleMode.kBrake);
-    m_leftSpark.setInverted(true);
-    m_rightSpark.setInverted(false);
     /*
     m_leftvictor11.configFactoryDefault();
     m_rightvictor21.configFactoryDefault();
@@ -168,7 +166,7 @@ public class DriveBase extends SubsystemBase {
 
     m_loggingData.LeftMotorLevel = m_leftSpark.get();
     m_loggingData.LeftMotor1_SupplyCurrent = m_leftSpark.getOutputCurrent();
-    m_loggingData.LeftMotor2_SupplyCurrent = Robot.getPDP().getCurrent(Constants.LeftVictor11PDP_Port);
+    m_loggingData.LeftMotor2_SupplyCurrent = Robot.getPDP().getCurrent(Constants.LeftSpark11PDP_Port);
     m_loggingData.LeftEncoderReading = getLeftEncoder();
     m_loggingData.LeftPosition = getLeftDistanceInches();
     m_loggingData.LeftVelocity = getRateOfChange(lastLeftPosition, m_loggingData.LeftPosition, m_lastLogTime, now);
@@ -176,7 +174,7 @@ public class DriveBase extends SubsystemBase {
 
     m_loggingData.RightMotorLevel = m_rightSpark.get();
     m_loggingData.RightMotor1_SupplyCurrent = m_rightSpark.getOutputCurrent();
-    m_loggingData.RightMotor2_SupplyCurrent = Robot.getPDP().getCurrent(Constants.RightVictor21PDP_Port);
+    m_loggingData.RightMotor2_SupplyCurrent = Robot.getPDP().getCurrent(Constants.RightSpark21PDP_Port);
     m_loggingData.RightEncoderReading = getRightEncoder();
     m_loggingData.RightPosition = getRightDistanceInches();
     m_loggingData.RightVelocity = getRateOfChange(lastRightPosition, m_loggingData.RightPosition, m_lastLogTime, now);
