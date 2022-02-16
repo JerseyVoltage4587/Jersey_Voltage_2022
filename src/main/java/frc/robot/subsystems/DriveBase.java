@@ -23,10 +23,12 @@ import frc.robot.util.Gyro;
 
 public class DriveBase extends SubsystemBase {
   private boolean m_isActive = true;
-  public DifferentialDrive m_drive = null;
+  private DifferentialDrive m_drive = null;
   static DriveBase m_Instance = null;
-  public CANSparkMax m_leftSpark;
-  public CANSparkMax m_rightSpark;
+  private CANSparkMax m_leftSpark;
+  private CANSparkMax m_leftSpark11;
+  private CANSparkMax m_rightSpark;
+  private CANSparkMax m_rightSpark21;
   private RelativeEncoder m_leftDriveEncoder;
   private RelativeEncoder m_rightDriveEncoder;
   private double LeftMotorLevel;
@@ -51,8 +53,11 @@ public class DriveBase extends SubsystemBase {
     m_leftvictor11 = new WPI_VictorSPX(Constants.LeftVictor1CAN_Address);
     m_rightvictor21 = new WPI_VictorSPX(Constants.RightVictor21CAN_Address); */
     m_leftSpark = new CANSparkMax(Constants.LeftSpark1CAN_Address, MotorType.kBrushless);
+    m_leftSpark11 = new CANSparkMax(Constants.LeftSpark11CAN_Address, MotorType.kBrushless);
     m_rightSpark = new CANSparkMax(Constants.RightSpark2CAN_Address, MotorType.kBrushless);
-    m_leftSpark.follow(m_rightSpark, /*invert=*/ true);
+    m_rightSpark21 = new CANSparkMax(Constants.RightSpark21CAN_Address, MotorType.kBrushless);
+    m_leftSpark11.follow(m_leftSpark, /*invert=*/ false);
+    m_rightSpark21.follow(m_rightSpark, /*invert=*/ false);
     m_leftDriveEncoder = m_leftSpark.getEncoder();
     m_rightDriveEncoder = m_rightSpark.getEncoder();
     m_leftSpark.restoreFactoryDefaults();
@@ -61,6 +66,9 @@ public class DriveBase extends SubsystemBase {
     m_rightSpark.set(0);
     m_leftSpark.setIdleMode(IdleMode.kBrake);
     m_rightSpark.setIdleMode(IdleMode.kBrake);
+    m_leftSpark.setInverted(true);
+    m_rightSpark.setInverted(false);
+    
     /*
     m_leftvictor11.configFactoryDefault();
     m_rightvictor21.configFactoryDefault();
