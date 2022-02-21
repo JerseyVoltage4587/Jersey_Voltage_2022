@@ -17,7 +17,7 @@ public class StopIntake extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().setIntakeMotorLevel(0);
+    Robot.getIntake().stopIntake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

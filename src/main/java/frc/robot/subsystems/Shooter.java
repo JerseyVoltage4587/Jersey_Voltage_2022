@@ -83,13 +83,12 @@ public class Shooter extends SubsystemBase {
     return m_rightShooterEncoder.getPosition();
   }
 
-  public void setShooterMotorLevel(double x) { //Positive will shoot forward
+  public void setShooterSetpoint(double setpoint) { //Positive will shoot forward
     if (m_isActive == false) {
       return;
     }
-    mLevel = x;
-    m_leftShooterMotor.set(-1 * mLevel);
-    m_rightShooterMotor.set(mLevel);
+    m_leftShooterMotor.set(shootController.calculate(m_leftShooterEncoder.getVelocity(), setpoint));
+    m_rightShooterMotor.set(shootController.calculate(m_rightShooterEncoder.getVelocity(), setpoint));
   }
 
   public double getShooterMotorLevel() { //Positive will shoot forward

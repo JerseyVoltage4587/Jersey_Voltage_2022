@@ -44,6 +44,18 @@ public class Intake extends SubsystemBase {
     return m_intakeMotor.get();
   }
 
+  public void runIntakeForward() {
+    setIntakeMotorLevel(Constants.IntakeMotorLevel);
+  }
+
+  public void runIntakeBackward() {
+    setIntakeMotorLevel(Constants.IntakeBackMotorLevel);
+  }
+
+  public void stopIntake() {
+    setIntakeMotorLevel(0);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

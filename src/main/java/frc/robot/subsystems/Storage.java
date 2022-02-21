@@ -42,6 +42,18 @@ public class Storage extends SubsystemBase {
     return m_storageMotor.get();
   }
 
+  public void runStorageForward() {
+    setStorageMotorLevel(Constants.StorageMotorLevel);
+  }
+
+  public void runStorageBackward() {
+    setStorageMotorLevel(Constants.StorageBackMotorLevel);
+  }
+
+  public void stopStorage() {
+    setStorageMotorLevel(0);
+  }
+
   //  0 = no
   //  1 = yes (forwards)
   //  2 = yes (backwards)
@@ -62,16 +74,18 @@ public class Storage extends SubsystemBase {
   public void updateStorageMotors() {
     int intakeRunning = isIntakeRunning();
 
-    if (intakeRunning == 2) {
-      setStorageMotorLevel(Constants.StorageBackMotorLevel);
-    }
+    switch (intakeRunning) {
+      case 2:
+        runStorageBackward();
+        break;
 
-    else if (intakeRunning == 1) {
-      setStorageMotorLevel(Constants.StorageMotorLevel);
-    }
+      case 1:
+        runStorageForward();
+        break;
 
-    else {
-      setStorageMotorLevel(0);
+      case 0:
+        stopStorage();
+        break;
     }
   }
 
