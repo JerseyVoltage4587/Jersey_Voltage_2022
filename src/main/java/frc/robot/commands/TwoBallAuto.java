@@ -14,6 +14,6 @@ public class TwoBallAuto extends SequentialCommandGroup {
   public TwoBallAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ForwardPID(8, 1, true), new ForwardPID(4, 1, false));
+    addCommands(new TrapezoidProfileMovement(8, 1, true), new TrapezoidProfileMovement(4, 1, false));
   }
 }

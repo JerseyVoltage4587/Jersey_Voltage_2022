@@ -14,7 +14,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.util.Gyro;
 
-public class ForwardPID extends CommandBase {
+public class TrapezoidProfileMovement extends CommandBase {
   private final DriveBase m_driveBase;
   private final double m_distance, m_tolerance;
   private final TrapezoidProfile m_profile;
@@ -23,7 +23,7 @@ public class ForwardPID extends CommandBase {
   private boolean m_forward;
   private double left_voltage, right_voltage, m_heading;
 
-public ForwardPID (double distance, double tolerance, boolean forward) {
+public TrapezoidProfileMovement (double distance, double tolerance, boolean forward) {
   m_driveBase = Robot.getDriveBase();
     m_distance   = Math.abs(Units.feetToMeters(distance));    // meters
     m_tolerance  = Units.inchesToMeters(tolerance);   // meters
