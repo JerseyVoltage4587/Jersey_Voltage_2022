@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.commands.RunIntakeBackwards;
 
 public class Intake extends SubsystemBase {
   public boolean m_isActive = true;
@@ -44,6 +45,7 @@ public class Intake extends SubsystemBase {
     return m_intakeMotor.get();
   }
 
+<<<<<<< HEAD
   public void runIntakeForward() {
     setIntakeMotorLevel(Constants.IntakeMotorLevel);
   }
@@ -56,6 +58,16 @@ public class Intake extends SubsystemBase {
     setIntakeMotorLevel(0);
   }
 
+=======
+  public void runIntakeForwards() {
+    setIntakeMotorLevel(Constants.IntakeMotorLevel);
+  }
+
+  public void runIntakeBackwards() {
+    setIntakeMotorLevel(Constants.IntakeBackMotorLevel);
+  }
+
+>>>>>>> 941f43c7ad16141214bf89d9bb7be51435d8d660
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
