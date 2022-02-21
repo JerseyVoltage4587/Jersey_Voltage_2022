@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.subsystems.*;
+import frc.robot.util.Gyro;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -44,6 +45,10 @@ public class Robot extends TimedRobot {
 
   public static Storage getStorage() {
     return Storage.getInstance();
+  }
+
+  public static Gyro getGyro() {
+    return Gyro.getInstance();
   }
   
   /**

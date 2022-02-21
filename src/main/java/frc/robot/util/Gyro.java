@@ -50,6 +50,7 @@ public class Gyro {
 	     	}
 	     	return roborio_channel;
 		}
+		
 	private static void initializeGyro() {
 		if (m_gyro == null) {
 			m_gyro = new AHRS(SPI.Port.kMXP);

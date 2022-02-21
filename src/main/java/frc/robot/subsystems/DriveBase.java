@@ -81,6 +81,14 @@ public class DriveBase extends SubsystemBase {
     return m_Instance;
   }
 
+  public void setLeftVolts(double v) {
+    m_leftSpark.setVoltage(v);
+  }
+
+  public void setRightVolts(double v) {
+    m_rightSpark.setVoltage(v);
+  }
+
   public void setLeftMotorLevel(double x) {
     if (m_isActive == false) {
       return;

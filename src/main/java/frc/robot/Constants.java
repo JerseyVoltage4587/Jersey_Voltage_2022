@@ -59,12 +59,14 @@ public final class Constants {
     //public static final double SystemTolerance = 20; //TBD
 
     //PID
-    public static final double IntakeArmKp = 0.0125;
-
-    public static final double SlowDownOffset = 0; //TBD
-    public static final double SlowBaseLevel = 0; //TBD
-    public static final double SlowKp = 0; //TBD
-    public static final double FastVelocity = 0; //TBD
-    public static final double FastBaseLevel = 0; //TBD
-    public static final double FastKp = 0; //TBD
+    public static final double kMaxSpeed = 0;
+    public static final double kMaxAcceleration = 0;
+    public static final double kSecondsPerCycle = 0;
+    public static final int ksVoltsLeft = 0;
+    public static final double kvVoltsLeft = 0;
+    public static final double kaVoltsLeft = 0;
+    public static final double kpDriveVel = 0;
+    public static final int ksVoltsRight = 0;
+    public static final double kvVoltsRight = 0;
+    public static final double kaVoltsRight = 0;
 }
