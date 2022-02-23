@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.subsystems.*;
+import frc.robot.util.AutoChoice;
 import frc.robot.util.Gyro;
 
 /**
@@ -22,7 +23,7 @@ import frc.robot.util.Gyro;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  private Command m_autonomousCommand = AutoChoice.getAutoChoice();
   private static PowerDistribution m_PDP;
   public static PowerDistribution getPDP() {
     if (m_PDP == null) {

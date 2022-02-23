@@ -15,7 +15,7 @@ import frc.robot.commands.TwoBallAuto;
 public class AutoChoice {
   /** Creates a new Auto. */
     static File file = (new File("frc.robot.AutoCommandChoice"));
-    static String autoChoice;
+    static String autoChoice = "";
     public static HashMap<String, Command> autoCommands = new HashMap<String, Command>();
 
   public AutoChoice() {
@@ -31,7 +31,7 @@ public class AutoChoice {
     }
   
     catch (FileNotFoundException e) {
-    System.out.println(e);
+      System.out.println(e);
     }
 
     return autoCommands.get(autoChoice);
