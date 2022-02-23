@@ -12,21 +12,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveBase;
-import frc.robot.util.Gyro;
 
 public class TrapezoidProfileMovement extends CommandBase {
-  private final DriveBase m_driveBase;
+  private final DriveBase m_drivetrain;
   private final double m_distance, m_tolerance;
   private final TrapezoidProfile m_profile;
   private double m_startTime, m_startLeftMeters, m_startRightMeters;
   private double m_leftTravel, m_rightTravel;
   private boolean m_forward;
-  private double left_voltage, right_voltage, m_heading;
-
-public TrapezoidProfileMovement (double distance, double tolerance, boolean forward) {
-  m_driveBase = Robot.getDriveBase();
+  private double left_voltage, right_voltage;
+public TrapezoidProfileMovement(double distance, double tolerance, boolean forward) {
     m_distance   = Math.abs(Units.feetToMeters(distance));    // meters
     m_tolerance  = Units.inchesToMeters(tolerance);   // meters
+    m_drivetrain = Robot.getDriveBase();
     m_forward = forward;
     m_profile = new TrapezoidProfile (
                     new TrapezoidProfile.Constraints(Constants.kMaxSpeed,
@@ -34,24 +32,24 @@ public TrapezoidProfileMovement (double distance, double tolerance, boolean forw
                     new TrapezoidProfile.State(m_distance,0),
                     new TrapezoidProfile.State(0,0)
                 );
-    addRequirements(m_driveBase);
+    addRequirements(m_drivetrain);
     System.out.println("m_distance="+m_distance+",m_tolerance="+m_tolerance+",m_profile.totalTime="+m_profile.totalTime());
   }
 
   @Override
   public void initialize() {
     m_startTime        = Timer.getFPGATimestamp(); // Get start time
-    m_startLeftMeters  = Units.inchesToMeters(m_driveBase.getLeftDistanceInches()); // get distance for left
-    m_startRightMeters = Units.inchesToMeters(m_driveBase.getRightDistanceInches()); // get distance for right
+    m_startLeftMeters  = Units.inchesToMeters(m_drivetrain.getLeftDistanceInches()); // get distance for left
+    m_startRightMeters = Units.inchesToMeters(m_drivetrain.getRightDistanceInches()); // get distance for right
     System.out.println("m_startTime="+m_startTime+",m_startLeft="+m_startLeftMeters+",m_startRight="+m_startRightMeters);
   }
 
   @Override
   public void execute() {
     double elapsed_time = Timer.getFPGATimestamp() - m_startTime; // subtracts startTime from timer to get more accurate time.
-    m_leftTravel  = Math.abs(Units.inchesToMeters(m_driveBase.getLeftDistanceInches())  - m_startLeftMeters);
+    m_leftTravel  = Math.abs(Units.inchesToMeters(m_drivetrain.getLeftDistanceInches())  - m_startLeftMeters);
       // subtracts starting distance from distance to get more accurate distance.
-    m_rightTravel = Math.abs(Units.inchesToMeters(m_driveBase.getRightDistanceInches()) - m_startRightMeters);
+    m_rightTravel = Math.abs(Units.inchesToMeters(m_drivetrain.getRightDistanceInches()) - m_startRightMeters);
       // subtracts starting distance from distance to get more accurate distance.
 
     double expected_distance, expected_velocity, expected_acceleration;
@@ -59,7 +57,6 @@ public TrapezoidProfileMovement (double distance, double tolerance, boolean forw
         expected_distance     = m_distance; // set expected distance to the distance inputted to travel
         expected_velocity     = 0; // set expected velocity to 0
         expected_acceleration = 0; // set expected acceleration to 0
-        System.out.println("end expected distance: " + expected_distance);
     }
     else {
         TrapezoidProfile.State expected_state = m_profile.calculate(elapsed_time); // calculated the current expected state
@@ -68,10 +65,7 @@ public TrapezoidProfileMovement (double distance, double tolerance, boolean forw
         expected_distance     = (expected_state.position); // set expected distance to the position of the current state
         expected_velocity     = expected_state.velocity; // set expected velocity to the velocity of the current state
         expected_acceleration = (next_state.velocity - expected_state.velocity) / Constants.kSecondsPerCycle; // 
-        System.out.println("expected distance: "+expected_state.position);
 
-        System.out.println("next expected distance: " + next_state.position);
-        System.out.println((m_leftTravel + m_rightTravel)/2);
 
     }
 
@@ -87,6 +81,7 @@ public TrapezoidProfileMovement (double distance, double tolerance, boolean forw
                                 + expected_velocity * Constants.kvVoltsRight
                                 + expected_acceleration * Constants.kaVoltsRight
                                 + right_error * Constants.kpDriveVel;
+      
     } 
     else {
       left_voltage = -1 * (Constants.ksVoltsLeft
@@ -100,31 +95,33 @@ public TrapezoidProfileMovement (double distance, double tolerance, boolean forw
                                 + right_error * Constants.kpDriveVel);
     }
 
-    double delta = Gyro.getYaw() - m_heading;
-
-    if (delta > 180) {
-      delta -= 360;
+    if (Math.abs(m_leftTravel - m_rightTravel) > m_tolerance) {
+        
     }
-
-    if (delta < -180) {
-      delta += 360;
-    }
-
-    if (Math.abs(delta) > 2) {
-      if (delta < 0) {
-        right_voltage -= 0.01;
-        m_driveBase.setRightVolts(right_voltage);
+    /*double delta = m_drivetrain.getGyroAngleZ() - m_heading;
+    if (delta != 0) {
+      if (delta > 180) {
+        delta -= 360;
       }
-      else if (delta > 0) {
-        right_voltage += 0.01;
-        m_driveBase.setRightVolts(right_voltage);
+
+      if (delta < -180) {
+        delta += 360;
       }
-    }
+
+      if (Math.abs(delta) > 1) {
+        if (delta < 0) {
+          right_voltage += 0.001;
+          m_drivetrain.setRightVolts(right_voltage);
+        }
+        else if (delta > 0) {
+          right_voltage -= 0.001;
+          m_drivetrain.setRightVolts(right_voltage);
+        }
+      }
+    }*/
     
-    else {
-      m_driveBase.setLeftVolts (left_voltage);
-      m_driveBase.setRightVolts(right_voltage);
-    }
+      m_drivetrain.setLeftVolts  (left_voltage);
+      m_drivetrain.setRightVolts (right_voltage);
 
 
     System.out.println("left voltage: " + left_voltage);
