@@ -17,7 +17,7 @@ public class RunShooterForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getShooter().setShooterSetpoint(45); //RPM TBD
+    Robot.getShooter().setShooterSetpoint(25); //RPM TBD
   }
 
   // Called every time the scheduler runs while the command is scheduled.
