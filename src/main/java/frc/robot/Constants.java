@@ -27,10 +27,10 @@ public final class Constants {
     public static final int IntakeMotorCAN_Address = 4;
 
     //PDP Ports
-    public static final int RightSpark2PDP_Port = 0; //TBD
-    public static final int RightSpark21PDP_Port = 1; //TBD
-    public static final int LeftSpark11PDP_Port = 14; //TBD
-    public static final int LeftSpark1PDP_Port = 15; //TBD
+    public static final int RightSpark2PDP_Port = 1; //TBD
+    public static final int RightSpark21PDP_Port = 0; //TBD
+    public static final int LeftSpark11PDP_Port = 15; //TBD
+    public static final int LeftSpark1PDP_Port = 14; //TBD
     public static final int LeftShooterMotorPDP_Port = 13;
     public static final int RightShooterMotorPDP_Port = 2;
     public static final int StoragePDP_Port = 10;
