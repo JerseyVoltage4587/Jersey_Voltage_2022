@@ -25,6 +25,7 @@ import frc.robot.util.Gyro;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand = AutoChoice.getAutoChoice();
   private static PowerDistribution m_PDP;
+
   public static PowerDistribution getPDP() {
     if (m_PDP == null) {
       m_PDP = new PowerDistribution();

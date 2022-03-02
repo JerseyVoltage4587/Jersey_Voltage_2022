@@ -115,7 +115,7 @@ public class OI extends CommandBase {
 
 	// Get the value of the "turn" stick.
 	public double getTurn() {
-    return m_joy1.getRawAxis(4);
+    return m_joy1.getRawAxis(2);
 	}
 
   // Called when the command is initially scheduled.

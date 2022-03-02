@@ -62,8 +62,8 @@ public class DriveBase extends SubsystemBase {
     m_rightSpark.set(0);
     m_leftSpark.setIdleMode(IdleMode.kBrake);
     m_rightSpark.setIdleMode(IdleMode.kBrake);
-    m_leftSpark.setInverted(true);
-    m_rightSpark.setInverted(false);
+    m_leftSpark.setInverted(false);
+    m_rightSpark.setInverted(true);
     m_drive = new DifferentialDrive(m_leftSpark, m_rightSpark);
     m_drive.setSafetyEnabled(false);
     m_loggingData = new DriveBaseLoggingData();
@@ -158,6 +158,7 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
+    SmartDashboard.putBoolean("Running", Math.abs(getLeftEncoder()) > 0);
 
     // This method will be called once per scheduler run
     long now = System.nanoTime();
@@ -186,6 +187,7 @@ public class DriveBase extends SubsystemBase {
     m_logger.queueData(m_loggingData);
     m_lastLogTime = now;
 
+    SmartDashboard.putNumber("Left Vel", m_loggingData.LeftEncoderReading);
     SmartDashboard.putNumber("Right Motor Level", getRightMotorLevel());
     SmartDashboard.putNumber("Left Motor Level", getLeftMotorLevel());
     SmartDashboard.putNumber("Left Encoder", getLeftEncoder());

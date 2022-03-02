@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.OI;
@@ -40,7 +41,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
 			turn = 0;
     }
 
-    Robot.getDriveBase().m_drive.arcadeDrive(forward, turn, true);
+    Robot.getDriveBase().arcadeDrive(forward, turn);
   }
 
   // Called once the command ends or is interrupted.
