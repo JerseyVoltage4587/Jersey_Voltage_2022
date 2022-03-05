@@ -17,24 +17,26 @@ package frc.robot;
  */
 public final class Constants {
     //CAN Addresses
-    public static final int RightSpark2CAN_Address = 2; //TBD
-    public static final int RightSpark21CAN_Address = 21; //TBD
-    public static final int LeftSpark1CAN_Address = 1; //TBD
-    public static final int LeftSpark11CAN_Address = 11; //TBD
-    public static final int RightShooterMotorCAN_Address = 45;
+    public static final int RightSpark2CAN_Address = 2; //final
+    public static final int RightSpark21CAN_Address = 21; //final
+    public static final int LeftSpark1CAN_Address = 1; //final
+    public static final int LeftSpark11CAN_Address = 11; //final
     public static final int LeftShooterMotorCAN_Address = 46;
-    public static final int StorageCAN_Address = 7;
+    public static final int RightShooterMotorCAN_Address = 45;
+    public static final int StorageCAN_Address = 3;
     public static final int IntakeMotorCAN_Address = 4;
+    public static final int KickerMotorCAN_Addres = 5;
 
     //PDP Ports
-    public static final int RightSpark2PDP_Port = 15; //TBD
-    public static final int RightSpark21PDP_Port = 14; //TBD
-    public static final int LeftSpark1PDP_Port = 0; //TBD
-    public static final int LeftSpark11PDP_Port = 1; //TBD
-    public static final int LeftShooterMotorPDP_Port = 13;
-    public static final int RightShooterMotorPDP_Port = 2;
-    public static final int StoragePDP_Port = 10;
-    public static final int IntakeMotorPDP_Port = 3;
+    public static final int RightSpark2PDP_Port = 15; //final
+    public static final int RightSpark21PDP_Port = 14; //final
+    public static final int LeftSpark1PDP_Port = 0; //final
+    public static final int LeftSpark11PDP_Port = 1; //final
+    public static final int LeftShooterMotorPDP_Port = 13; //final
+    public static final int RightShooterMotorPDP_Port = 3; //final
+    public static final int StoragePDP_Port = 4; //final
+    public static final int IntakeMotorPDP_Port = 12; //final
+    public static final int KickerMotorPDP_Port = 5; //final
     
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
