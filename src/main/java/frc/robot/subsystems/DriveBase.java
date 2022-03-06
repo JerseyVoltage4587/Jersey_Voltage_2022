@@ -158,7 +158,6 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    SmartDashboard.putBoolean("Running", Math.abs(getLeftEncoder()) > 0);
 
     // This method will be called once per scheduler run
     long now = System.nanoTime();
@@ -191,28 +190,30 @@ public class DriveBase extends SubsystemBase {
     SmartDashboard.putNumber("Right Motor Level", getRightMotorLevel());
     SmartDashboard.putNumber("Left Motor Level", getLeftMotorLevel());
     SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
+    SmartDashboard.putNumber("Left Distance", getLeftDistanceInches());
+    SmartDashboard.putNumber("Right Distance", getRightDistanceInches());
   }
 
   public double getLeftEncoder() {
     if (m_isActive == false) {
       return 0;
     }
-    return -1 * m_leftDriveEncoder.getPosition();
+    return m_leftDriveEncoder.getPosition();
   }
 
   public double getLeftDistanceInches() {
-    return getLeftEncoder() * Constants.DriveBaseWheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
+    return getLeftEncoder() * Constants.DriveBaseWheelDiameter * Math.PI;
   }
 
   public double getRightEncoder() {
     if (m_isActive == false) {
       return 0;
     }
-    return -1 * m_rightDriveEncoder.getPosition();
+    return m_rightDriveEncoder.getPosition();
   }
 
   public double getRightDistanceInches() {
-    return getRightEncoder() * Constants.DriveBaseWheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
+    return getRightEncoder() * Constants.DriveBaseWheelDiameter * Math.PI;
   }
 
   private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {

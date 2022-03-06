@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DefaultDriveBaseCommand;
+import frc.robot.commands.TwoBallAuto;
 import frc.robot.subsystems.*;
 import frc.robot.util.AutoChoice;
 import frc.robot.util.Gyro;
@@ -23,7 +24,7 @@ import frc.robot.util.Gyro;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = AutoChoice.getAutoChoice();
+  private Command m_autonomousCommand = new TwoBallAuto()/*AutoChoice.getAutoChoice()*/;
   private static PowerDistribution m_PDP;
 
   public static PowerDistribution getPDP() {
@@ -47,6 +48,10 @@ public class Robot extends TimedRobot {
 
   public static Storage getStorage() {
     return Storage.getInstance();
+  }
+
+  public static Kicker getKicker() {
+    return Kicker.getInstance();
   }
 
   public static Gyro getGyro() {
@@ -78,9 +83,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("tv", NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0));
-    SmartDashboard.putNumber("ty", NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0));
-    SmartDashboard.putNumber("tx", NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0));
+    // SmartDashboard.putNumber("tv", NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0));
+    // SmartDashboard.putNumber("ty", NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0));
+    // SmartDashboard.putNumber("tx", NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0));
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

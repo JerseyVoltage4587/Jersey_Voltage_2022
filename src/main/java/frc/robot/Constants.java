@@ -25,7 +25,7 @@ public final class Constants {
     public static final int RightShooterMotorCAN_Address = 45;
     public static final int StorageCAN_Address = 3;
     public static final int IntakeMotorCAN_Address = 4;
-    public static final int KickerMotorCAN_Addres = 5;
+    public static final int KickerMotorCAN_Address = 5;
 
     //PDP Ports
     public static final int RightSpark2PDP_Port = 15; //final
@@ -41,9 +41,13 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
     public static double IntakeBackMotorLevel = 0.5;
-    public static double ShooterMotorLevel = 0; //TBD
+    public static double ShooterMotorRPM = 5000; //TBD
+    public static double ShooterBackMotorRPM = -600; //TBD
     public static double StorageMotorLevel = 0.7;
     public static double StorageBackMotorLevel = -0.4;
+    public static double KickerMotorLevel = 0.8; //TBD
+    public static double KickerSlowBackMotorLevel = 0.4; //TBD
+    public static double KickerFastBackMotorLevel = 0.7; //TBD
     
     //Motor Stall Currents
     
@@ -51,7 +55,7 @@ public final class Constants {
     public static final int DriveBaseEncoderTics = 4096; //TBD
     
     //Wheel Diameters
-    public static final double DriveBaseWheelDiameter = 0; //Inches //TBD
+    public static final double DriveBaseWheelDiameter = 6; //Inches //TBD
     public static final double ShooterWheelDiameter = 0; //Inches //TBD
     
     //Degrees

@@ -4,8 +4,9 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -13,13 +14,13 @@ import frc.robot.Robot;
 public class Storage extends SubsystemBase {
   public boolean m_isActive = true;
   static Storage m_Instance = null;
-  public WPI_TalonSRX m_storageMotor;
+  public WPI_VictorSPX m_storageMotor;
 
   public Storage() {
     if (m_isActive == false) {
       return;
     }
-    m_storageMotor = new WPI_TalonSRX(Constants.StorageCAN_Address);
+    m_storageMotor = new WPI_VictorSPX(Constants.StorageCAN_Address);
     m_storageMotor.configFactoryDefault();
   }
 
@@ -92,5 +93,7 @@ public class Storage extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber(
+            "StorageMotorLevel", getStorageMotorLevel());
   }
 }
