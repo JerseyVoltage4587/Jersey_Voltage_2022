@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -16,12 +19,16 @@ public class Intake extends SubsystemBase {
   public boolean m_isActive = true;
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotor;
+  private Solenoid m_leftIntakeSolenoid, m_rightIntakeSolenoid;
+  private int m_mode = Constants.OFF_MODE;
 
   public Intake() {
     if (m_isActive == false) {
       return;
     }
     m_intakeMotor = new WPI_TalonSRX(Constants.IntakeMotorCAN_Address);
+    m_leftIntakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannel);
+    m_rightIntakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannel);
     m_intakeMotor.configFactoryDefault();
   }
 
@@ -36,10 +43,15 @@ public class Intake extends SubsystemBase {
 		return m_Instance;
   }
 
-  public final static int OFF_MODE = 0;
-  public final static int IN_MODE = 1;
-  public final static int OUT_MODE = 2;
-  private int m_mode = OFF_MODE;
+  public void deployIntake() {
+    m_leftIntakeSolenoid.set(true);
+    m_rightIntakeSolenoid.set(true);
+  }
+
+  public void retractIntake() {
+    m_leftIntakeSolenoid.set(false);
+    m_rightIntakeSolenoid.set(false);
+  }
 
   public void setIntakeMotorLevel(double mLevel) {
     m_intakeMotor.set(mLevel);
@@ -51,20 +63,20 @@ public class Intake extends SubsystemBase {
   }
 
   public void runIntakeForward() {
-    m_mode = IN_MODE;
+    m_mode = Constants.IN_MODE;
     setIntakeMotorLevel(Constants.IntakeMotorLevel);
     Robot.getKicker().runKickerBackwardSlow();
   }
 
   public void runIntakeBackward() {
-    m_mode = OUT_MODE;
+    m_mode = Constants.OUT_MODE;
     setIntakeMotorLevel(Constants.IntakeBackMotorLevel);
     Robot.getKicker().runKickerBackwardFast();
     Robot.getShooter().runShooterBackward();
   }
 
   public void stopIntake() {
-    m_mode = OFF_MODE;
+    m_mode = Constants.OFF_MODE;
     setIntakeMotorLevel(0);
     Robot.getKicker().stopKicker();
   }
@@ -74,17 +86,19 @@ public class Intake extends SubsystemBase {
   }
 
   public void ToggleIntakeForward() {
-    if(m_mode != IN_MODE) {
+    if (m_mode != Constants.IN_MODE) {
       runIntakeForward();
-    } else {
+    }
+    else {
       stopIntake();
     }
   }
 
   public void ToggleIntakeBackward() {
-    if(m_mode != OUT_MODE) {
+    if (m_mode != Constants.OUT_MODE) {
       runIntakeBackward();
-    } else {
+    }
+    else {
       stopIntake();
     }
   }
@@ -92,7 +106,6 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber(
-            "IntakeMotorLevel", getIntakeMotorLevel());
+    SmartDashboard.putNumber("IntakeMotorLevel", getIntakeMotorLevel());
   }
 }

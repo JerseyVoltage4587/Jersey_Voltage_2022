@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Solenoid;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -42,6 +44,14 @@ public final class Constants {
     public static final int LeftClimberMotorPDP_Port = 2; //final
     public static final int RightClimberMotorPDP_Port = 13; //final
     
+    //Solenoid IDs
+    public static final int LeftIntakeModule_ID = 0;
+    public static final int RightIntakeModule_ID = 1;
+
+    //Solenoid Channel
+    public static final int LeftIntakeChannel = 0;
+    public static final int RightIntakeChannel = 1;
+
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
     public static double IntakeBackMotorLevel = 0.5;
@@ -79,4 +89,9 @@ public final class Constants {
     public static final int ksVoltsRight = 0;
     public static final double kvVoltsRight = 0;
     public static final double kaVoltsRight = 0;
+
+    //Other
+    public final static int OFF_MODE = 0;
+    public final static int IN_MODE = 1;
+    public final static int OUT_MODE = 2;
 }
