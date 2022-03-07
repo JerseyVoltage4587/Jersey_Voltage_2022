@@ -51,6 +51,8 @@ public final class Constants {
     //Solenoid Channel
     public static final int LeftIntakeChannel = 0;
     public static final int RightIntakeChannel = 1;
+    public static final int LeftClimberChannel = 2;
+    public static final int RightClimberChannel = 3;
 
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
