@@ -7,17 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class ToggleEject extends CommandBase {
-  /** Creates a new ToggleEject. */
-  public ToggleEject() {
+public class RunIntakeForward extends CommandBase {
+  /** Creates a new RunIntakeForward. */
+  public RunIntakeForward() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getIntake(), Robot.getStorage(), Robot.getKicker(), Robot.getShooter());
+    addRequirements(Robot.getIntake(), Robot.getStorage(), Robot.getKicker());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().ToggleIntakeBackward();
+    Robot.getIntake().ToggleIntakeForward();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

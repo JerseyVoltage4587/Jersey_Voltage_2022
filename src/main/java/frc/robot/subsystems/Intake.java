@@ -102,6 +102,23 @@ public class Intake extends SubsystemBase {
       stopIntake();
     }
   }
+  
+  //  0 = no
+  //  1 = yes (forwards)
+  //  2 = yes (backwards)
+  public int isIntakeRunning() {
+    double intakeML = getIntakeMotorLevel();
+
+    if (intakeML > 0) {
+      return 2;
+    }
+
+    else if (intakeML < 0) {
+      return 1;
+    }
+
+    return 0;
+  }
 
   @Override
   public void periodic() {

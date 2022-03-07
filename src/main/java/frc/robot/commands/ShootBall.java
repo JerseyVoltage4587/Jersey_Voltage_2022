@@ -17,7 +17,9 @@ public class ShootBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getShooter().runShooterForward();
+    if (!Robot.getShooter().isRPMUpToSpeed()) {
+      Robot.getShooter().runShooterForward();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,14 +34,11 @@ public class ShootBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.getKicker().stopKicker();
-    Robot.getStorage().stopStorage();;
-    Robot.getShooter().stopShooter();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

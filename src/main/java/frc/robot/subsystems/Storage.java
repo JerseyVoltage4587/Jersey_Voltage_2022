@@ -55,25 +55,8 @@ public class Storage extends SubsystemBase {
     setStorageMotorLevel(0);
   }
 
-  //  0 = no
-  //  1 = yes (forwards)
-  //  2 = yes (backwards)
-  public int isIntakeRunning() {
-    double intakeML = Robot.getIntake().getIntakeMotorLevel();
-
-    if (intakeML > 0) {
-      return 2;
-    }
-
-    else if (intakeML < 0) {
-      return 1;
-    }
-
-    return 0;
-  }
-
   public void updateStorageMotors() {
-    int intakeRunning = isIntakeRunning();
+    int intakeRunning = Robot.getIntake().isIntakeRunning();
 
     switch (intakeRunning) {
       case 2:
