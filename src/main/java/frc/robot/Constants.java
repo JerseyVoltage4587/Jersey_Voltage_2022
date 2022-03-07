@@ -62,7 +62,7 @@ public final class Constants {
     //public static final double SystemDegrees = 0; //TBD
 
     //Tolerance
-    //public static final double SystemTolerance = 20; //TBD
+    public static final double TrapezoidProfileTolerance = 1; //final
 
     //PID //TBD
     public static final double kMaxSpeed = 0;
