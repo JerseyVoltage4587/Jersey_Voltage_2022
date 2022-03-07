@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotor;
   private Solenoid m_leftIntakeSolenoid, m_rightIntakeSolenoid;
-  private int m_mode = Constants.OFF_MODE;
+  private int m_mode = Constants.IntakeOFF_MODE;
 
   public Intake() {
     if (m_isActive == false) {
@@ -63,20 +63,20 @@ public class Intake extends SubsystemBase {
   }
 
   public void runIntakeForward() {
-    m_mode = Constants.IN_MODE;
+    m_mode = Constants.IntakeIN_MODE;
     setIntakeMotorLevel(Constants.IntakeMotorLevel);
     Robot.getKicker().runKickerBackwardSlow();
   }
 
   public void runIntakeBackward() {
-    m_mode = Constants.OUT_MODE;
+    m_mode = Constants.IntakeOUT_MODE;
     setIntakeMotorLevel(Constants.IntakeBackMotorLevel);
     Robot.getKicker().runKickerBackwardFast();
     Robot.getShooter().runShooterBackward();
   }
 
   public void stopIntake() {
-    m_mode = Constants.OFF_MODE;
+    m_mode = Constants.IntakeOFF_MODE;
     setIntakeMotorLevel(0);
     Robot.getKicker().stopKicker();
   }
@@ -86,7 +86,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void ToggleIntakeForward() {
-    if (m_mode != Constants.IN_MODE) {
+    if (m_mode != Constants.IntakeIN_MODE) {
       runIntakeForward();
     }
     else {
@@ -95,7 +95,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void ToggleIntakeBackward() {
-    if (m_mode != Constants.OUT_MODE) {
+    if (m_mode != Constants.IntakeOUT_MODE) {
       runIntakeBackward();
     }
     else {

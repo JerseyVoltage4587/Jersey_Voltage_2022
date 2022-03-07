@@ -90,8 +90,11 @@ public final class Constants {
     public static final double kvVoltsRight = 0;
     public static final double kaVoltsRight = 0;
 
-    //Other
-    public final static int OFF_MODE = 0;
-    public final static int IN_MODE = 1;
-    public final static int OUT_MODE = 2;
+    //Modes
+    public final static int IntakeOFF_MODE = 0;
+    public final static int IntakeIN_MODE = 1;
+    public final static int IntakeOUT_MODE = 2;
+    public final static int ShooterON_MODE = 0;
+    public final static int ShooterOFF_MODE = 1;
+    public final static int ShooterBACK_MODE = 2;
 }
