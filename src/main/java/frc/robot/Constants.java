@@ -21,11 +21,13 @@ public final class Constants {
     public static final int RightSpark21CAN_Address = 21; //final
     public static final int LeftSpark1CAN_Address = 1; //final
     public static final int LeftSpark11CAN_Address = 11; //final
-    public static final int LeftShooterMotorCAN_Address = 46;
-    public static final int RightShooterMotorCAN_Address = 45;
+    public static final int LeftShooterMotorCAN_Address = 45;
+    public static final int RightShooterMotorCAN_Address = 46;
     public static final int StorageCAN_Address = 3;
     public static final int IntakeMotorCAN_Address = 4;
     public static final int KickerMotorCAN_Address = 5;
+    public static final int LeftClimberMotorCAN_Address = 55; //final
+    public static final int RightClimberMotorCAN_Address = 56; //final
 
     //PDP Ports
     public static final int RightSpark2PDP_Port = 15; //final
@@ -37,6 +39,8 @@ public final class Constants {
     public static final int StoragePDP_Port = 4; //final
     public static final int IntakeMotorPDP_Port = 12; //final
     public static final int KickerMotorPDP_Port = 5; //final
+    public static final int LeftClimberMotorPDP_Port = 2; //final
+    public static final int RightClimberMotorPDP_Port = 13; //final
     
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
