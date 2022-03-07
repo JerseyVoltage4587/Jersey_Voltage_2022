@@ -46,10 +46,7 @@ public class Shooter extends SubsystemBase {
     shootController = new BangBangController(50);
   }
 
-  public final static int ON_MODE = 0;
-  public final static int OFF_MODE = 1;
-  public final static int BACK_MODE = 2;
-  private int m_mode = OFF_MODE;
+  private int m_mode = Constants.ShooterOFF_MODE;
 
   public static Shooter getInstance() {
     if(m_Instance == null) {
@@ -97,17 +94,17 @@ public class Shooter extends SubsystemBase {
   }
 
   public void runShooterForward() {
-    m_mode = ON_MODE;
+    m_mode = Constants.ShooterON_MODE;
     setShooterSetpoint(Constants.ShooterMotorRPM);
   }
 
   public void runShooterBackward() {
-    m_mode = BACK_MODE;
+    m_mode = Constants.ShooterBACK_MODE;
     setShooterSetpoint(Constants.ShooterBackMotorRPM);
   }
 
   public void stopShooter() {
-    m_mode = OFF_MODE;
+    m_mode = Constants.ShooterOFF_MODE;
     setShooterSetpoint(0);
   }
 
@@ -126,7 +123,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void ToggleShooter() {
-    if(m_mode != ON_MODE){
+    if(m_mode != Constants.ShooterON_MODE){
       runShooterForward();
     } else {
       stopShooter();
@@ -142,10 +139,10 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    SmartDashboard.putNumber("Shooter RPM", m_rightShooterMotor.getSelectedSensorVelocity(0) * (60000.0/1024));
+    SmartDashboard.putNumber("Shooter RPM", m_rightShooterMotor.getSelectedSensorVelocity(0) * (600.0/4096));
     SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorLevel());
-    SmartDashboard.putBoolean("Shooter On", m_mode == ON_MODE);
+    SmartDashboard.putBoolean("Shooter On", m_mode == Constants.ShooterON_MODE);
     SmartDashboard.putBoolean("Shooter Ready", isRPMUpToSpeed());
-    m_rightShooterMotor.set(shootController.calculate(m_rightShooterMotor.getSelectedSensorVelocity(0) * (60000.0/1024), m_setpoint));
+    m_rightShooterMotor.set(shootController.calculate(m_rightShooterMotor.getSelectedSensorVelocity(0) * (600.0/4096), m_setpoint));
   }
 }
