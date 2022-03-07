@@ -3,25 +3,23 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import frc.robot.Constants;
 
 public class Kicker extends SubsystemBase {
   public boolean m_isActive = true;
   static Kicker m_Instance = null;
-  private WPI_VictorSPX m_KickerMotor;
+  private WPI_VictorSPX m_kickerMotor;
 
   public Kicker() {
     if (m_isActive == false) {
       return;
     }
-    m_KickerMotor = new WPI_VictorSPX(Constants.KickerMotorCAN_Address);
-    m_KickerMotor.configFactoryDefault();
+    m_kickerMotor = new WPI_VictorSPX(Constants.KickerMotorCAN_Address);
+    m_kickerMotor.configFactoryDefault();
   }
 
   public static Kicker getInstance() {
@@ -35,12 +33,12 @@ public class Kicker extends SubsystemBase {
 		return m_Instance;
   }
 
-  public void setKickerMotorLevel(double mLevel) {
-    m_KickerMotor.set(mLevel);
+  public void setKickerMotorLevel(double mL) {
+    m_kickerMotor.set(mL);
   }
 
   public double getKickerMotorLevel() {
-    return m_KickerMotor.get();
+    return m_kickerMotor.get();
   }
 
   public void runKickerForward() {
@@ -62,7 +60,6 @@ public class Kicker extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber(
-            "KickerMotorLevel", getKickerMotorLevel());
+    SmartDashboard.putNumber("KickerMotorLevel", getKickerMotorLevel());
   }
 }

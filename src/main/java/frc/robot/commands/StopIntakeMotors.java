@@ -5,19 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Robot;
 
-public class ToggleIntake extends CommandBase {
-  /** Creates a new ToggleIntake. */
-  public ToggleIntake() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getIntake(), Robot.getStorage(), Robot.getKicker());
+public class StopIntakeMotors extends CommandBase {
+  /** Creates a new StopIntakeMotors. */
+  public StopIntakeMotors() {
+    addRequirements(Robot.getIntake());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().ToggleIntakeForward();
+    Robot.getIntake().stopIntake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
