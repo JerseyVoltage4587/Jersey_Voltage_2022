@@ -1,0 +1,4 @@
+Step 1: Unspool set amount of rotations ><
+Step 2: Driver drives forward
+Step 3: Engage 2 pistons on hooks. ><
+Step 4: after closing pistons, start winching up again. Disengage pistons.
