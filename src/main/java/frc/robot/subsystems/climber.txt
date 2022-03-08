@@ -1,3 +1,4 @@
 Step 1: Unspool set amount of rotations ><
-Step 2: Engage 2 pistons on hooks. ><
-Step 3: after closing pistons, start winching up again (PID Loop). Disengage pistons.
+Step 2: Extend pistons. ><
+Step 3: Spool set amount of rotations (PID Loop).
+Step 4: Retract pistons.
