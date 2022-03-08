@@ -2,23 +2,23 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Robot;
 
-public class EjectBall extends CommandBase {
-  /** Creates a new RunIntake. */
-  public EjectBall() {
-    addRequirements(Robot.getIntake(), Robot.getKicker(), Robot.getStorage(), Robot.getShooter());
+public class ToggleShooter extends CommandBase {
+  /** Creates a new ToggleShooter. */
+  public ToggleShooter() {
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.getShooter());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().runIntakeBackward();
-    Robot.getKicker().runKickerBackwardFast();
-    Robot.getShooter().runShooterBackward();
+    CommandScheduler.getInstance().schedule(new PrepareShooter());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -28,6 +28,7 @@ public class EjectBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    CommandScheduler.getInstance().schedule(new StopShooter());
   }
 
   // Returns true when the command should end.

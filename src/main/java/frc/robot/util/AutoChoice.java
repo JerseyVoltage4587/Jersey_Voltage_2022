@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.TwoBallAuto;
+import frc.robot.commands.Auto.TwoBallAuto;
 
 public class AutoChoice {
   /** Creates a new Auto. */

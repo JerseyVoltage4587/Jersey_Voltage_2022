@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.EjectBall;
-import frc.robot.commands.IntakeBall;
-import frc.robot.commands.ShootBall;
-import frc.robot.commands.StopIntakeMotors;
-import frc.robot.commands.ToggleEject;
-import frc.robot.commands.ToggleIntake;
-import frc.robot.commands.ToggleShooter;
+import frc.robot.commands.Intake.EjectBall;
+import frc.robot.commands.Intake.IntakeBall;
+import frc.robot.commands.Intake.StopIntakeMotors;
+import frc.robot.commands.Intake.ToggleEject;
+import frc.robot.commands.Intake.ToggleIntake;
+import frc.robot.commands.Shooter.ShootBall;
+import frc.robot.commands.Shooter.ToggleShooter;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;

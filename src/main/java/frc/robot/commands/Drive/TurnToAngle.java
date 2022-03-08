@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import frc.robot.util.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

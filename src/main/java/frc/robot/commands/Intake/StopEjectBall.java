@@ -2,23 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class StopShootBall extends CommandBase {
-  /** Creates a new StopShootBall. */
-  public StopShootBall() {
+public class StopEjectBall extends CommandBase {
+  /** Creates a new StopEjectBall. */
+  public StopEjectBall() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.getIntake(), Robot.getKicker(), Robot.getStorage(), Robot.getShooter());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getKicker().stopKicker();
-    Robot.getStorage().stopStorage();;
+    Robot.getIntake().stopIntake();
     Robot.getShooter().stopShooter();
+    Robot.getKicker().stopKicker();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
