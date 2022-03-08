@@ -91,17 +91,6 @@ public class OI extends CommandBase {
      rightBumper1.whenPressed(new ToggleShooter());
      buttonB1.whenPressed(new ToggleEject());
 
-     /*
-     * Non-toggle code   Untested
-     * leftBumper1.whenPressed(new IntakeBall());
-     * leftBumper1.whenReleased(new StopIntakeBall());
-     * buttonB1.whenPresssed(new EjectBall());
-     * buttonB1.whenReleased(new StopEjectBall());
-     * rightBumper1.whenPressed(new PrepareShooter());
-     * rightBumper1.whenReleased(new StopShooter());
-
-     */
-
     //buttonA2.whenPressed();
     //buttonA2.whenReleased();
     //buttonB2.whenPressed();
