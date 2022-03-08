@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ShootBall;
-import frc.robot.commands.StopIntakeBall;
-import frc.robot.commands.StopIntakeMotors;
-import frc.robot.commands.StopShootBall;
 import frc.robot.commands.EjectBall;
 import frc.robot.commands.IntakeBall;
-import frc.robot.commands.PrepareShooter;
+import frc.robot.commands.ShootBall;
+import frc.robot.commands.StopIntakeMotors;
+import frc.robot.commands.ToggleEject;
+import frc.robot.commands.ToggleIntake;
+import frc.robot.commands.ToggleShooter;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -83,13 +83,13 @@ public class OI extends CommandBase {
     //backButton1.whenPressed();
     //leftStickButton1.whenPressed();
     //rightStickButton1.whenPressed();
-    leftTrigger1.whenPressed(new EjectBall());
-    leftTrigger1.whenReleased(new StopIntakeMotors());
-    rightTrigger1.whileHeld(new IntakeBall());
-    rightTrigger1.whenReleased(new StopIntakeBall());
-    leftBumper1.whenPressed(new PrepareShooter());
-    rightBumper1.whenPressed(new ShootBall());
-    rightBumper1.whenReleased(new StopShootBall());
+    //leftTrigger1.whenPressed();
+    //leftTrigger1.whenReleased();
+    //rightTrigger1.whenReleased();
+    // rightTrigger1.whileHeld(new ShootBall());
+    // leftBumper1.whenPressed(new ToggleIntake());
+    // rightBumper1.whenPressed(new ToggleShooter());
+    // buttonB1.whenPressed(new ToggleEject());
 
 
     //buttonA2.whenPressed();
