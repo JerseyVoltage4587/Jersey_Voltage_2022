@@ -15,25 +15,23 @@ import frc.robot.Constants;
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   public boolean m_isActive = true;
-  static Shooter m_Instance = null;
+  static Climber m_Instance = null;
   private static WPI_TalonSRX m_leftClimberMotor;
   private static WPI_TalonSRX m_rightClimberMotor;
   private Solenoid m_leftClimberSolenoid;
   private Solenoid m_rightClimberSolenoid;
-  private int numRotations;
-  public Climber(int rotations) {
+  public Climber() {
     if (m_isActive == false) {
       return;
     }
-    numRotations = rotations;
     m_leftClimberSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftClimberChannel);
     m_rightClimberSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightClimberChannel);
   }
 
-  public static Shooter getInstance() {
+  public static Climber getInstance() {
     if(m_Instance == null) {
-			synchronized (Shooter.class) {
-				m_Instance = new Shooter();
+			synchronized (Climber.class) {
+				m_Instance = new Climber();
 			}
 		}
 		return m_Instance;
@@ -43,6 +41,22 @@ public class Climber extends SubsystemBase {
   public void climbStep1(double rotations) {
     //m_leftClimberMotor
     //m_rightClimberMotor
+  }
+
+  public double getLeftEncoder() {
+    return m_leftClimberMotor.getSelectedSensorPosition();
+  }
+
+  public double getRightEncoder() {
+    return m_rightClimberMotor.getSelectedSensorPosition();
+  }
+
+  public void setRightMotorVolts(double volts) {
+    m_rightClimberMotor.setVoltage(volts);
+  }
+
+  public void setLeftMotorVolts(double volts) {
+    m_leftClimberMotor.setVoltage(volts);
   }
 
   //Deploy pistons to lock

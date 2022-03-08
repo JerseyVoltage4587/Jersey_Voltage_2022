@@ -23,11 +23,11 @@ public final class Constants {
     public static final int RightSpark21CAN_Address = 21; //final
     public static final int LeftSpark1CAN_Address = 1; //final
     public static final int LeftSpark11CAN_Address = 11; //final
-    public static final int LeftShooterMotorCAN_Address = 45;
-    public static final int RightShooterMotorCAN_Address = 46;
-    public static final int StorageCAN_Address = 3;
-    public static final int IntakeMotorCAN_Address = 4;
-    public static final int KickerMotorCAN_Address = 5;
+    public static final int LeftShooterMotorCAN_Address = 45; //final
+    public static final int RightShooterMotorCAN_Address = 46; //final
+    public static final int StorageCAN_Address = 3; //final
+    public static final int IntakeMotorCAN_Address = 4; //final
+    public static final int KickerMotorCAN_Address = 5; //final
     public static final int LeftClimberMotorCAN_Address = 55; //final
     public static final int RightClimberMotorCAN_Address = 56; //final
 
@@ -45,8 +45,7 @@ public final class Constants {
     public static final int RightClimberMotorPDP_Port = 13; //final
     
     //Solenoid IDs
-    public static final int LeftIntakeModule_ID = 0;
-    public static final int RightIntakeModule_ID = 1;
+    //public static final int Module_ID = 0;
 
     //Solenoid Channel
     public static final int LeftIntakeChannel = 0;
@@ -57,40 +56,42 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
     public static double IntakeBackMotorLevel = 0.5;
-    public static double ShooterMotorRPM = 5000; //TBD
-    public static double ShooterBackMotorRPM = -600; //TBD
+    public static double ShooterMotorRPM = 5000; //not final
+    public static double ShooterBackMotorRPM = -600; //not final
     public static double StorageMotorLevel = 0.7;
     public static double StorageBackMotorLevel = -0.4;
-    public static double KickerMotorLevel = 0.8; //TBD
-    public static double KickerSlowBackMotorLevel = 0.4; //TBD
-    public static double KickerFastBackMotorLevel = 0.7; //TBD
+    public static double KickerMotorLevel = 0.8; //not final
+    public static double KickerSlowBackMotorLevel = 0.4; //not final
+    public static double KickerFastBackMotorLevel = 0.7; //not final
     
     //Motor Stall Currents
     
     //Encoder Tics
-    public static final int DriveBaseEncoderTics = 4096; //TBD
+    public static final int DriveBaseEncoderTics = 4096; //final
     
     //Wheel Diameters
-    public static final double DriveBaseWheelDiameter = 6; //Inches //TBD
+    public static final double DriveBaseWheelDiameter = 6; //Inches //final
     public static final double ShooterWheelDiameter = 0; //Inches //TBD
     
-    //Degrees
-    //public static final double SystemDegrees = 0; //TBD
+    //Rotations
+    public static final double ClimberForwardRotations = 0; //TBD
+    public static final double ClimberBackwardRotations = 0; //TBD
 
     //Tolerance
     public static final double TrapezoidProfileTolerance = 1; //final
 
-    //PID //TBD
-    public static final double kMaxSpeed = 0;
-    public static final double kMaxAcceleration = 0;
-    public static final double kSecondsPerCycle = 0;
-    public static final int ksVoltsLeft = 0;
-    public static final double kvVoltsLeft = 0;
-    public static final double kaVoltsLeft = 0;
-    public static final double kpDriveVel = 0;
-    public static final int ksVoltsRight = 0;
-    public static final double kvVoltsRight = 0;
-    public static final double kaVoltsRight = 0;
+    //PID
+        //Shooter
+        public static final double kMaxSpeed = 0;
+        public static final double kMaxAcceleration = 0;
+        public static final double kSecondsPerCycle = 0;
+        public static final int ksVoltsLeft = 0;
+        public static final double kvVoltsLeft = 0;
+        public static final double kaVoltsLeft = 0;
+        public static final double kpDriveVel = 0;
+        public static final int ksVoltsRight = 0;
+        public static final double kvVoltsRight = 0;
+        public static final double kaVoltsRight = 0;
 
     //Modes
     public final static int IntakeOFF_MODE = 0;

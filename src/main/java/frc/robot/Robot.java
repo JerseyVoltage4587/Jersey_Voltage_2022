@@ -52,6 +52,10 @@ public class Robot extends TimedRobot {
   public static Kicker getKicker() {
     return Kicker.getInstance();
   }
+  
+  public static Climber getClimber() {
+    return Climber.getInstance();
+  }
 
   public static Gyro getGyro() {
     return Gyro.getInstance();
