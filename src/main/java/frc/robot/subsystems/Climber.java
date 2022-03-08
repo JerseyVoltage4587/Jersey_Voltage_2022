@@ -16,8 +16,8 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   public boolean m_isActive = true;
   static Shooter m_Instance = null;
-  private static WPI_TalonSRX m_leftClimberMotor = null;
-  private static WPI_TalonSRX m_rightClimberMotor = null;
+  private static WPI_TalonSRX m_leftClimberMotor;
+  private static WPI_TalonSRX m_rightClimberMotor;
   private Solenoid m_leftClimberSolenoid;
   private Solenoid m_rightClimberSolenoid;
   private int numRotations;
