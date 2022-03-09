@@ -12,11 +12,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Intake.EjectBall;
-import frc.robot.commands.Intake.IntakeBall;
-import frc.robot.commands.Intake.StopIntakeMotors;
-import frc.robot.commands.Intake.ToggleEject;
-import frc.robot.commands.Intake.ToggleIntake;
+import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.ShootBall;
 import frc.robot.commands.Shooter.ToggleShooter;
 
