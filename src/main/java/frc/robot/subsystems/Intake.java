@@ -19,7 +19,8 @@ public class Intake extends SubsystemBase {
   public boolean m_isActive = true;
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotor;
-  private Solenoid m_leftIntakeSolenoid, m_rightIntakeSolenoid;
+  private Solenoid m_leftIntakeSolenoidDeploy, m_rightIntakeSolenoidDeploy;
+  private Solenoid m_leftIntakeSolenoidRetract, m_rightIntakeSolenoidRetract;
   private int m_mode = Constants.IntakeOFF_MODE;
 
   public Intake() {
@@ -27,8 +28,10 @@ public class Intake extends SubsystemBase {
       return;
     }
     m_intakeMotor = new WPI_TalonSRX(Constants.IntakeMotorCAN_Address);
-    m_leftIntakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannel);
-    m_rightIntakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannel);
+    m_leftIntakeSolenoidDeploy = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannelDeploy);
+    m_rightIntakeSolenoidDeploy = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannelDeploy);
+    m_leftIntakeSolenoidRetract = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannelRetract);
+    m_rightIntakeSolenoidRetract = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannelRetract);
     m_intakeMotor.configFactoryDefault();
   }
 
@@ -44,13 +47,17 @@ public class Intake extends SubsystemBase {
   }
 
   public void deployIntake() {
-    m_leftIntakeSolenoid.set(true);
-    m_rightIntakeSolenoid.set(true);
+    m_leftIntakeSolenoidRetract.set(false);
+    m_rightIntakeSolenoidRetract.set(false);
+    m_leftIntakeSolenoidDeploy.set(true);
+    m_rightIntakeSolenoidDeploy.set(true);
   }
 
   public void retractIntake() {
-    m_leftIntakeSolenoid.set(false);
-    m_rightIntakeSolenoid.set(false);
+    m_leftIntakeSolenoidDeploy.set(false);
+    m_rightIntakeSolenoidDeploy.set(false);
+    m_leftIntakeSolenoidRetract.set(true);
+    m_rightIntakeSolenoidRetract.set(true);
   }
 
   public void setIntakeMotorLevel(double mLevel) {

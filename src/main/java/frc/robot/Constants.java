@@ -48,10 +48,14 @@ public final class Constants {
     //public static final int Module_ID = 0;
 
     //Solenoid Channel
-    public static final int LeftIntakeChannel = 0;
-    public static final int RightIntakeChannel = 1;
-    public static final int LeftClimberChannel = 2;
-    public static final int RightClimberChannel = 3;
+    public static final int LeftIntakeChannelDeploy = 0;
+    public static final int RightIntakeChannelDeploy = 1;
+    public static final int LeftIntakeChannelRetract = 2;
+    public static final int RightIntakeChannelRetract = 3;
+    public static final int LeftClimberChannelDeploy = 4;
+    public static final int RightClimberChannelDeploy = 5;
+    public static final int LeftClimberChannelRetract = 6;
+    public static final int RightClimberChannelRetract = 7;
 
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
