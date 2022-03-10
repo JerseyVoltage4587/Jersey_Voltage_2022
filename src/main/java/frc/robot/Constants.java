@@ -30,7 +30,7 @@ public final class Constants {
     public static final int KickerMotorCAN_Address = 5; //final
     public static final int LeftClimberMotorCAN_Address = 55; //final
     public static final int RightClimberMotorCAN_Address = 56; //final
-    public static final int PCMCAN_Address = 14 //CHANGE THIS IS TEMPORARY 
+    public static final int PCMCAN_Address = 14; //CHANGE THIS IS TEMPORARY 
 
     //PDP Ports
     public static final int RightSpark2PDP_Port = 15; //final

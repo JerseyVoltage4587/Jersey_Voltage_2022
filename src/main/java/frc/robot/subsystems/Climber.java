@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.OI;
 
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
@@ -25,8 +26,8 @@ public class Climber extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_leftClimberSolenoid= new Solenoid(PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.LeftClimberChannelDeploy);
-    m_rightClimberSolenoid = new Solenoid(PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.RightClimberChannelDeploy);
+    m_leftClimberSolenoid= new Solenoid(Constants.PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.LeftClimberChannel);
+    m_rightClimberSolenoid = new Solenoid(Constants.PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.RightClimberChannel);
   }
 
   public static Climber getInstance() {

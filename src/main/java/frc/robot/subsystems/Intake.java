@@ -19,8 +19,7 @@ public class Intake extends SubsystemBase {
   public boolean m_isActive = true;
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotor;
-  private Solenoid m_leftIntakeSolenoidDeploy, m_rightIntakeSolenoidDeploy;
-  private Solenoid m_leftIntakeSolenoidRetract, m_rightIntakeSolenoidRetract;
+  private Solenoid m_leftIntakeSolenoid, m_rightIntakeSolenoid;
   private int m_mode = Constants.IntakeOFF_MODE;
   private boolean deployed = false;
 
@@ -29,8 +28,8 @@ public class Intake extends SubsystemBase {
       return;
     }
     m_intakeMotor = new WPI_TalonSRX(Constants.IntakeMotorCAN_Address);
-    m_leftIntakeSolenoid = new Solenoid(PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannelDeploy);
-    m_rightIntakeSolenoid = new Solenoid(PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannelDeploy);
+    m_leftIntakeSolenoid = new Solenoid(Constants.PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannel);
+    m_rightIntakeSolenoid = new Solenoid(Constants.PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannel);
     m_intakeMotor.configFactoryDefault();
   }
 
@@ -129,7 +128,7 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("IntakeMotorLevel", getIntakeMotorLevel());
 
-    if((climbing_Status)&&(!deployed)){
+    if ((climbing_Status) && (!deployed)){
       deployIntake();  //If climber is active and the intake is not deployed, deploy intake
 
     }

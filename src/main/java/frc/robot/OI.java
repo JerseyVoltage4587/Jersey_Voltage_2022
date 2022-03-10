@@ -87,13 +87,13 @@ public class OI extends CommandBase {
     rightBumper1.whileHeld(new ToggleShooter());
     buttonB1.whenPressed(new ToggleEject());
 
-    buttonA2.whenPressed(new ToggleClimbMode());
+    buttonA2.whenPressed(new ToggleClimbMode()); //Can't call a method, must call a command
     //buttonA2.whenReleased();
     //buttonB2.whenPressed();
     //buttonX2.whenPressed();
     //buttonY2.whenPressed();
     //buttonY2.whenReleased();
-    rightTrigger2.whenPressed(new toggleClimbPistons());
+    rightTrigger2.whenPressed(new toggleClimbPistons()); //Can't call a method, must call a command
     //rightTrigger2.whenReleased();
     //rightBumper2.whenPressed();
     //rightBumper2.whenReleased();
