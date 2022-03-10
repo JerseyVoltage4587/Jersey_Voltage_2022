@@ -82,18 +82,18 @@ public class OI extends CommandBase {
     //leftTrigger1.whenPressed();
     //leftTrigger1.whenReleased();
     //rightTrigger1.whenReleased();
-     rightTrigger1.whileHeld(new ShootBall());
-     leftBumper1.whileHeld(new ToggleIntake());
-     rightBumper1.whileHeld(new ToggleShooter());
-     buttonB1.whenPressed(new ToggleEject());
+    rightTrigger1.whileHeld(new ShootBall());
+    leftBumper1.whileHeld(new ToggleIntake());
+    rightBumper1.whileHeld(new ToggleShooter());
+    buttonB1.whenPressed(new ToggleEject());
 
-    //buttonA2.whenPressed();
+    buttonA2.whenPressed(new ToggleClimbMode());
     //buttonA2.whenReleased();
     //buttonB2.whenPressed();
     //buttonX2.whenPressed();
     //buttonY2.whenPressed();
     //buttonY2.whenReleased();
-    //rightTrigger2.whenPressed();
+    rightTrigger2.whenPressed(new toggleClimbPistons());
     //rightTrigger2.whenReleased();
     //rightBumper2.whenPressed();
     //rightBumper2.whenReleased();
@@ -117,7 +117,10 @@ public class OI extends CommandBase {
 	public double getTurn() {
     return m_joy1.getRawAxis(4);
 	}
-
+  // Get vlue of the "climb" stick.
+  public double getClimb(){
+    return m_joy2.getRawAxis(1);
+  }
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {

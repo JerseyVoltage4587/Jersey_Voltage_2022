@@ -16,20 +16,17 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   public boolean m_isActive = true;
   static Climber m_Instance = null;
+  public static boolean climbing_Status = false;
   private static WPI_TalonSRX m_leftClimberMotor;
   private static WPI_TalonSRX m_rightClimberMotor;
-  private Solenoid m_leftClimberSolenoidDeploy;
-  private Solenoid m_rightClimberSolenoidDeploy;
-  private Solenoid m_leftClimberSolenoidRetract;
-  private Solenoid m_rightClimberSolenoidRetract;
+  private Solenoid m_leftClimberSolenoid;
+  private Solenoid m_rightClimberSolenoid;
   public Climber() {
     if (m_isActive == false) {
       return;
     }
-    m_leftClimberSolenoidDeploy = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftClimberChannelDeploy);
-    m_rightClimberSolenoidDeploy = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightClimberChannelDeploy);
-    m_leftClimberSolenoidRetract = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftClimberChannelRetract);
-    m_rightClimberSolenoidRetract = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightClimberChannelRetract);
+    m_leftClimberSolenoid= new Solenoid(PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.LeftClimberChannelDeploy);
+    m_rightClimberSolenoid = new Solenoid(PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.RightClimberChannelDeploy);
   }
 
   public static Climber getInstance() {
@@ -65,27 +62,42 @@ public class Climber extends SubsystemBase {
 
   //Deploy pistons to lock
   public void climbStep2() {
-    m_leftClimberSolenoidRetract.set(false);
-    m_rightClimberSolenoidRetract.set(false);
-    m_leftClimberSolenoidDeploy.set(true);
-    m_rightClimberSolenoidDeploy.set(true);
-  }
-
-  //Reel in the winches
-  public void climbStep3() {
-    
+    m_leftClimberSolenoid.set(true);
+    m_rightClimberSolenoid.set(true);
   }
 
   //Retract pistons
   public void climbStep4() {
-    m_leftClimberSolenoidDeploy.set(false);
-    m_rightClimberSolenoidDeploy.set(false);
-    m_leftClimberSolenoidRetract.set(true);
-    m_rightClimberSolenoidRetract.set(true);
+    m_leftClimberSolenoid.set(false);
+    m_rightClimberSolenoid.set(false);
+
   }
+
+  public void toggleClimbPistons(){
+    m_leftClimberSolenoid.set(!LeftClimberState); //Sets the pistons to the opposite state of what they were
+    LeftClimberState = !LeftClimberState; //Reflects this change in a constant so we know where the piston is
+    m_rightClimberSolenoid.set(!RightClimberState);
+    RightClimberState = !RightClimberState;
+
+  }
+
+  public void ToggleClimbMode(){
+    climbing_Status = !climbing_Status;
+  }
+
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if(climbing_Status){
+      System.out.println("CLIMBER ARMED");
+      double climbDirection = OI.getInstance().getClimb();
+      //use climbDirection to drive motors, and do yaw correction here
+
+    }
+    else{
+      System.out.println("climber deactivated");
+    }
   }
 }

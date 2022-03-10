@@ -104,6 +104,8 @@ public ClimberMotors(double distance, double tolerance, boolean forward) {
         
     }
     
+
+    
     Robot.getGyro();
     double delta = Gyro.getYaw() - m_yaw;
 
@@ -116,13 +118,15 @@ public ClimberMotors(double distance, double tolerance, boolean forward) {
         delta += 360;
       }
 
-      if (Math.abs(delta) > 1) {
+      if (Math.abs(delta) > 1) { //I think we should not only alter right motor voltage but also left so the case doesn't happen where one side is increased as it can get and stuff still isn't fixed
         if (delta < 0) {
-          right_voltage += 0.001;
+          right_voltage += 0.001; //0.001 should be a constant
+          left_voltage -= 0.001;
           m_climber.setRightMotorVolts(right_voltage);
         }
         else if (delta > 0) {
           right_voltage -= 0.001;
+          left_voltage += 0.001;
           m_climber.setRightMotorVolts(right_voltage);
         }
       }

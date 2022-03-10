@@ -30,6 +30,7 @@ public final class Constants {
     public static final int KickerMotorCAN_Address = 5; //final
     public static final int LeftClimberMotorCAN_Address = 55; //final
     public static final int RightClimberMotorCAN_Address = 56; //final
+    public static final int PCMCAN_Address = 14 //CHANGE THIS IS TEMPORARY 
 
     //PDP Ports
     public static final int RightSpark2PDP_Port = 15; //final
@@ -48,14 +49,14 @@ public final class Constants {
     //public static final int Module_ID = 0;
 
     //Solenoid Channel
-    public static final int LeftIntakeChannelDeploy = 0;
-    public static final int RightIntakeChannelDeploy = 1;
-    public static final int LeftIntakeChannelRetract = 2;
-    public static final int RightIntakeChannelRetract = 3;
-    public static final int LeftClimberChannelDeploy = 4;
-    public static final int RightClimberChannelDeploy = 5;
-    public static final int LeftClimberChannelRetract = 6;
-    public static final int RightClimberChannelRetract = 7;
+    public static final int LeftIntakeChannel = 4; //CHANGE THIS IS TEMPORARY 
+    public static final int RightIntakeChannel = 5; //CHANGE THIS IS TEMPORARY 
+
+    public static final int LeftClimberChannel = 2; //CHANGE THIS IS TEMPORARY 
+    public static final int RightClimberChannel = 3; //CHANGE THIS IS TEMPORARY 
+
+    public static final boolean LeftClimberState = false;
+    public static final boolean RightClimberState = false;
 
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;

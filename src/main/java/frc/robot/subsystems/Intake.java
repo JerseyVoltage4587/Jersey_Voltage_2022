@@ -22,16 +22,15 @@ public class Intake extends SubsystemBase {
   private Solenoid m_leftIntakeSolenoidDeploy, m_rightIntakeSolenoidDeploy;
   private Solenoid m_leftIntakeSolenoidRetract, m_rightIntakeSolenoidRetract;
   private int m_mode = Constants.IntakeOFF_MODE;
+  private boolean deployed = false;
 
   public Intake() {
     if (m_isActive == false) {
       return;
     }
     m_intakeMotor = new WPI_TalonSRX(Constants.IntakeMotorCAN_Address);
-    m_leftIntakeSolenoidDeploy = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannelDeploy);
-    m_rightIntakeSolenoidDeploy = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannelDeploy);
-    m_leftIntakeSolenoidRetract = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannelRetract);
-    m_rightIntakeSolenoidRetract = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannelRetract);
+    m_leftIntakeSolenoid = new Solenoid(PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.LeftIntakeChannelDeploy);
+    m_rightIntakeSolenoid = new Solenoid(PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.RightIntakeChannelDeploy);
     m_intakeMotor.configFactoryDefault();
   }
 
@@ -47,17 +46,15 @@ public class Intake extends SubsystemBase {
   }
 
   public void deployIntake() {
-    m_leftIntakeSolenoidRetract.set(false);
-    m_rightIntakeSolenoidRetract.set(false);
-    m_leftIntakeSolenoidDeploy.set(true);
-    m_rightIntakeSolenoidDeploy.set(true);
+    m_leftIntakeSolenoid.set(true);
+    m_rightIntakeSolenoid.set(true);
+    deployed = true;
   }
 
   public void retractIntake() {
-    m_leftIntakeSolenoidDeploy.set(false);
-    m_rightIntakeSolenoidDeploy.set(false);
-    m_leftIntakeSolenoidRetract.set(true);
-    m_rightIntakeSolenoidRetract.set(true);
+    m_leftIntakeSolenoid.set(false);
+    m_rightIntakeSolenoid.set(false);
+    deployed = false;
   }
 
   public void setIntakeMotorLevel(double mLevel) {
@@ -131,5 +128,10 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("IntakeMotorLevel", getIntakeMotorLevel());
+
+    if((climbing_Status)&&(!deployed)){
+      deployIntake();  //If climber is active and the intake is not deployed, deploy intake
+
+    }
   }
 }
