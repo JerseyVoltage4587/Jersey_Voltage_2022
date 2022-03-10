@@ -17,17 +17,20 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   public boolean m_isActive = true;
   static Climber m_Instance = null;
-  public static boolean climbing_Status = false;
+  public static boolean climbingStatus = false;
   private static WPI_TalonSRX m_leftClimberMotor;
   private static WPI_TalonSRX m_rightClimberMotor;
   private Solenoid m_leftClimberSolenoid;
   private Solenoid m_rightClimberSolenoid;
+  public static boolean leftClimberState,  rightClimberState;
   public Climber() {
     if (m_isActive == false) {
       return;
     }
     m_leftClimberSolenoid= new Solenoid(Constants.PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.LeftClimberChannel);
     m_rightClimberSolenoid = new Solenoid(Constants.PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.RightClimberChannel);
+    leftClimberState = false;
+    rightClimberState = false;
   }
 
   public static Climber getInstance() {
@@ -75,15 +78,19 @@ public class Climber extends SubsystemBase {
   }
 
   public void toggleClimbPistons(){
-    m_leftClimberSolenoid.set(!LeftClimberState); //Sets the pistons to the opposite state of what they were
-    LeftClimberState = !LeftClimberState; //Reflects this change in a constant so we know where the piston is
-    m_rightClimberSolenoid.set(!RightClimberState);
-    RightClimberState = !RightClimberState;
+    m_leftClimberSolenoid.set(!leftClimberState); //Sets the pistons to the opposite state of what they were
+    leftClimberState = !leftClimberState; //Reflects this change in a constant so we know where the piston is
+    m_rightClimberSolenoid.set(!rightClimberState);
+    rightClimberState = !rightClimberState;
 
   }
 
-  public void ToggleClimbMode(){
-    climbing_Status = !climbing_Status;
+  public boolean getClimbingStatus() {
+    return climbingStatus;
+  }
+
+  public void toggleClimbMotors(){
+    climbingStatus = !climbingStatus;
   }
 
 
@@ -91,7 +98,7 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(climbing_Status){
+    if(climbingStatus){
       System.out.println("CLIMBER ARMED");
       double climbDirection = OI.getInstance().getClimb();
       //use climbDirection to drive motors, and do yaw correction here

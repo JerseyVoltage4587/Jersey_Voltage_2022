@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Climber.ToggleClimbMotors;
+import frc.robot.commands.Climber.ToggleClimbPistons;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.ShootBall;
 import frc.robot.commands.Shooter.ToggleShooter;
@@ -87,13 +89,13 @@ public class OI extends CommandBase {
     rightBumper1.whileHeld(new ToggleShooter());
     buttonB1.whenPressed(new ToggleEject());
 
-    buttonA2.whenPressed(new ToggleClimbMode()); //Can't call a method, must call a command
+    buttonA2.whenPressed(new ToggleClimbMotors());
     //buttonA2.whenReleased();
     //buttonB2.whenPressed();
     //buttonX2.whenPressed();
     //buttonY2.whenPressed();
     //buttonY2.whenReleased();
-    rightTrigger2.whenPressed(new toggleClimbPistons()); //Can't call a method, must call a command
+    rightTrigger2.whenPressed(new ToggleClimbPistons());
     //rightTrigger2.whenReleased();
     //rightBumper2.whenPressed();
     //rightBumper2.whenReleased();

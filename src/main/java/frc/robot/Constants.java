@@ -55,9 +55,6 @@ public final class Constants {
     public static final int LeftClimberChannel = 2; //CHANGE THIS IS TEMPORARY 
     public static final int RightClimberChannel = 3; //CHANGE THIS IS TEMPORARY 
 
-    public static final boolean LeftClimberState = false;
-    public static final boolean RightClimberState = false;
-
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
     public static double IntakeBackMotorLevel = 0.5;
