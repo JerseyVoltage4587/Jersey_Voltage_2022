@@ -10,13 +10,12 @@ import frc.robot.Robot;
 public class EjectBall extends CommandBase {
   /** Creates a new RunIntake. */
   public EjectBall() {
-    addRequirements(Robot.getIntake(), Robot.getKicker(), Robot.getStorage(), Robot.getShooter());
+    addRequirements(Robot.getKicker(), Robot.getStorage(), Robot.getShooter());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().runIntakeBackward();
     Robot.getKicker().runKickerBackwardFast();
     Robot.getShooter().runShooterBackward();
   }
