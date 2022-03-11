@@ -114,7 +114,7 @@ public class OI extends CommandBase {
 	public double getTurn() {
     return m_joy1.getRawAxis(4);
 	}
-  // Get vlue of the "climb" stick.
+  // Get value of the "climb" stick.
   public double getClimb(){
     return m_joy2.getRawAxis(1);
   }
