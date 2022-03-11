@@ -74,40 +74,30 @@ public class OI extends CommandBase {
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
     //buttonA1.whenPressed();
-    //buttonB1.whenPressed();
-    //xbuttonX1.whenPressed();
+    buttonB1.whileHeld(new ToggleEject());
+    buttonX1.whenPressed(new ToggleShooter());
     //buttonY1.whenPressed();
     //startButton1.whenPressed();
     //backButton1.whenPressed();
     //leftStickButton1.whenPressed();
     //rightStickButton1.whenPressed();
     //leftTrigger1.whenPressed();
-    //leftTrigger1.whenReleased();
-    //rightTrigger1.whenReleased();
     rightTrigger1.whileHeld(new ShootBall());
     leftBumper1.whileHeld(new ToggleIntake());
-    rightBumper1.whileHeld(new ToggleShooter());
-    buttonB1.whileHeld(new ToggleEject());
+    //rightBumper1.whileHeld();
 
     buttonA2.whenPressed(new ToggleClimbMotors());
-    //buttonA2.whenReleased();
     //buttonB2.whenPressed();
     //buttonX2.whenPressed();
     //buttonY2.whenPressed();
-    //buttonY2.whenReleased();
-    rightTrigger2.whenPressed(new ToggleClimbPistons());
-    //rightTrigger2.whenReleased();
-    //rightBumper2.whenPressed();
-    //rightBumper2.whenReleased();
-    //leftBumper2.whenPressed();
-    //leftBumper2.whenReleased();
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();
     //rightStickButton2.whenPressed();
     //leftTrigger2.whenPressed();
-    //leftTrigger2.whenReleased();
-    //rightTrigger2.whenPressed();
+    rightTrigger2.whenPressed(new ToggleClimbPistons());
+    //rightBumper2.whenPressed();
+    //leftBumper2.whenPressed();
   }
 
   // Get the value of the "drive" stick.
