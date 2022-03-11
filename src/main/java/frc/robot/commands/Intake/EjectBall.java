@@ -4,34 +4,35 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.subsystems.Kicker;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Storage;
 
-public class EjectBall extends CommandBase {
-  /** Creates a new RunIntake. */
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class EjectBall extends InstantCommand {
+  private Kicker m_kicker;
+  private Storage m_storage;
+  private Shooter m_shooter;
+
   public EjectBall() {
-    addRequirements(Robot.getKicker(), Robot.getStorage(), Robot.getShooter());
+    // Use addRequirements() here to declare subsystem dependencies.
+    m_kicker = Robot.getKicker();
+    m_storage = Robot.getStorage();
+    m_shooter = Robot.getShooter();
+    addRequirements(m_kicker, m_storage, m_shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getKicker().runKickerBackwardFast();
-    Robot.getShooter().runShooterBackward();
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
+    m_kicker.runKickerBackwardFast();
+    m_shooter.runShooterBackward();
+    m_storage.runStorageBackward();
   }
 }
+
+

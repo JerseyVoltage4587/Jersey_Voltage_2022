@@ -18,6 +18,7 @@ import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
+import frc.robot.commands.Shooter.StopShooter;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
