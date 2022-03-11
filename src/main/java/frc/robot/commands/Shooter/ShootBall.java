@@ -5,6 +5,7 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Robot;
 
 public class ShootBall extends CommandBase {
@@ -18,7 +19,7 @@ public class ShootBall extends CommandBase {
   @Override
   public void initialize() {
     if (!Robot.getShooter().isRPMUpToSpeed()) {
-      Robot.getShooter().runShooterForward();
+      CommandScheduler.getInstance().schedule(new PrepareShooter());
     }
   }
 
@@ -39,6 +40,6 @@ public class ShootBall extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

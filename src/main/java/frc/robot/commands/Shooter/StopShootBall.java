@@ -4,34 +4,32 @@
 
 package frc.robot.commands.Shooter;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.subsystems.Kicker;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Storage;
 
-public class StopShootBall extends CommandBase {
-  /** Creates a new StopShootBall. */
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class StopShootBall extends InstantCommand {
+  private Kicker m_kicker;
+  private Storage m_storage;
+  private Shooter m_shooter;
   public StopShootBall() {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_kicker = Robot.getKicker();
+    m_storage = Robot.getStorage();
+    m_shooter = Robot.getShooter();
+    addRequirements(m_kicker, m_storage, m_shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getKicker().stopKicker();
-    Robot.getStorage().stopStorage();;
-    Robot.getShooter().stopShooter();
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+    m_kicker.stopKicker();
+    m_storage.stopStorage();
+    m_shooter.stopShooter();
   }
 }

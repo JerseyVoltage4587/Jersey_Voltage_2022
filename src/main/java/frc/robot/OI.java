@@ -15,10 +15,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Climber.ToggleClimbMotors;
 import frc.robot.commands.Climber.ToggleClimbPistons;
 import frc.robot.commands.Intake.*;
+import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
-import frc.robot.commands.Shooter.StopShooter;
-import frc.robot.commands.Shooter.ToggleShooter;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -76,9 +75,9 @@ public class OI extends CommandBase {
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
     //buttonA1.whenPressed();
-    buttonB1.whenPressed(new ToggleEject());
+    buttonB1.whenPressed(new EjectBall());
     buttonB1.whenReleased(new StopEjectBall());
-    buttonX1.whenPressed(new ToggleShooter());
+    buttonX1.whenPressed(new PrepareShooter());
     //buttonY1.whenPressed();
     //startButton1.whenPressed();
     //backButton1.whenPressed();
@@ -87,7 +86,7 @@ public class OI extends CommandBase {
     //leftTrigger1.whenPressed();
     rightTrigger1.whenPressed(new ShootBall());
     rightTrigger1.whenReleased(new StopShootBall());
-    leftBumper1.whenPressed(new ToggleIntake());
+    leftBumper1.whenPressed(new IntakeBall());
     leftBumper1.whenReleased(new StopIntakeBall());
     //rightBumper1.whileHeld();
 
