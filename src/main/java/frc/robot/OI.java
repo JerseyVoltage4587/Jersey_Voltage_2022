@@ -77,8 +77,6 @@ public class OI extends CommandBase {
     //buttonA1.whenPressed();
     buttonB1.whenPressed(new EjectBall());
     buttonB1.whenReleased(new StopEjectBall());
-    buttonX1.whenPressed(new PrepareShooter());
-    buttonX1.whenReleased(new StopShooter());
     //buttonY1.whenPressed();
     //startButton1.whenPressed();
     //backButton1.whenPressed();
@@ -93,7 +91,8 @@ public class OI extends CommandBase {
 
     buttonA2.whenPressed(new ToggleClimbMotors());
     //buttonB2.whenPressed();
-    //buttonX2.whenPressed();
+    buttonX2.whenPressed(new PrepareShooter());
+    buttonX2.whenReleased(new StopShooter());
     //buttonY2.whenPressed();
     //startButton2.whenPressed();
     //backButton2.whenPressed();
