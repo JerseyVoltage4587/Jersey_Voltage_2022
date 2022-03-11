@@ -17,6 +17,7 @@ public class StopShootBall extends InstantCommand {
   private Kicker m_kicker;
   private Storage m_storage;
   private Shooter m_shooter;
+  
   public StopShootBall() {
     // Use addRequirements() here to declare subsystem dependencies.
     m_kicker = Robot.getKicker();

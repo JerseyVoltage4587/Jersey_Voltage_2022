@@ -4,35 +4,33 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Kicker;
+import frc.robot.subsystems.Shooter;
 
-public class StopEjectBall extends CommandBase {
-  /** Creates a new StopEjectBall. */
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class StopEjectBall extends InstantCommand {
+  private Shooter m_shooter;
+  private Kicker m_kicker;
+  private Intake m_intake;
+  
   public StopEjectBall() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getIntake(), Robot.getKicker(), Robot.getStorage(), Robot.getShooter());
+    m_kicker = Robot.getKicker();
+    m_intake = Robot.getIntake();
+    m_shooter = Robot.getShooter();
+    addRequirements(m_kicker, m_intake, m_shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().stopIntake();
-    Robot.getShooter().stopShooter();
-    Robot.getKicker().stopKicker();
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+    m_intake.stopIntake();
+    m_shooter.stopShooter();
+    m_kicker.stopKicker();
   }
 }

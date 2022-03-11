@@ -9,7 +9,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 
 public class Storage extends SubsystemBase {
   public boolean m_isActive = true;
@@ -53,24 +52,6 @@ public class Storage extends SubsystemBase {
 
   public void stopStorage() {
     setStorageMotorLevel(0);
-  }
-
-  public void updateStorageMotors() {
-    int intakeRunning = Robot.getIntake().isIntakeRunning();
-
-    switch (intakeRunning) {
-      case 2:
-        runStorageBackward();
-        break;
-
-      case 1:
-        runStorageForward();
-        break;
-
-      case 0:
-        stopStorage();
-        break;
-    }
   }
 
   @Override

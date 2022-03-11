@@ -4,33 +4,24 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
+import frc.robot.subsystems.Intake;
 
-public class StopIntakeMotors extends CommandBase {
-  /** Creates a new StopIntakeMotors. */
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class StopIntakeMotors extends InstantCommand {
+  private Intake m_intake;
   public StopIntakeMotors() {
-    addRequirements(Robot.getIntake());
+    // Use addRequirements() here to declare subsystem dependencies.
+    m_intake = Robot.getIntake();
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().stopIntake();
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
+    m_intake.stopIntake();
   }
 }

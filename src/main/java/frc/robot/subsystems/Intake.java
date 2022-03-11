@@ -55,9 +55,11 @@ public class Intake extends SubsystemBase {
     deployed = false;
   }
 
-  public void setIntakeMotorLevel(double mLevel) {
+  public void setIntakeMotorLevel(double mLevel) { //runs storage if intaking
     m_intakeMotor.set(mLevel);
-    Robot.getStorage().updateStorageMotors();
+    if (isIntakeRunning()) {
+      Robot.getStorage().runStorageForward();
+    }
   }
 
   public double getIntakeMotorLevel() {
@@ -68,13 +70,6 @@ public class Intake extends SubsystemBase {
     m_mode = Constants.IntakeIN_MODE;
     setIntakeMotorLevel(Constants.IntakeMotorLevel);
     Robot.getKicker().runKickerBackwardSlow();
-  }
-
-  public void runIntakeBackward() {
-    m_mode = Constants.IntakeOUT_MODE;
-    setIntakeMotorLevel(Constants.IntakeBackMotorLevel);
-    Robot.getKicker().runKickerBackwardFast();
-    Robot.getShooter().runShooterBackward();
   }
 
   public void stopIntake() {
@@ -95,31 +90,12 @@ public class Intake extends SubsystemBase {
       stopIntake();
     }
   }
-
-  public void ToggleIntakeBackward() {
-    if (m_mode != Constants.IntakeOUT_MODE) {
-      runIntakeBackward();
-    }
-    else {
-      stopIntake();
-    }
-  }
   
   //  0 = no
   //  1 = yes (forwards)
-  //  2 = yes (backwards)
-  public int isIntakeRunning() {
+  public boolean isIntakeRunning() {
     double intakeML = getIntakeMotorLevel();
-
-    if (intakeML > 0) {
-      return 2;
-    }
-
-    else if (intakeML < 0) {
-      return 1;
-    }
-
-    return 0;
+    return (intakeML < 0);
   }
 
   @Override
@@ -129,7 +105,6 @@ public class Intake extends SubsystemBase {
 
     if ((Robot.getClimber().getClimbingStatus()) && (!deployed)){
       deployIntake();  //If climber is active and the intake is not deployed, deploy intake
-
     }
   }
 }
