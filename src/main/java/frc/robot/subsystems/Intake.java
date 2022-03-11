@@ -45,14 +45,14 @@ public class Intake extends SubsystemBase {
   }
 
   public void deployIntake() {
-    m_leftIntakeSolenoid.set(false);
-    m_rightIntakeSolenoid.set(false);
+    m_leftIntakeSolenoid.set(true);
+    m_rightIntakeSolenoid.set(true);
     deployed = true;
   }
 
   public void retractIntake() {
-    m_leftIntakeSolenoid.set(true);
-    m_rightIntakeSolenoid.set(true);
+    m_leftIntakeSolenoid.set(false);
+    m_rightIntakeSolenoid.set(false);
     deployed = false;
   }
 

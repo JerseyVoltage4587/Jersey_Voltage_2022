@@ -87,7 +87,7 @@ public class OI extends CommandBase {
     rightTrigger1.whileHeld(new ShootBall());
     leftBumper1.whileHeld(new ToggleIntake());
     rightBumper1.whileHeld(new ToggleShooter());
-    buttonB1.whenPressed(new ToggleEject());
+    buttonB1.whileHeld(new ToggleEject());
 
     buttonA2.whenPressed(new ToggleClimbMotors());
     //buttonA2.whenReleased();
