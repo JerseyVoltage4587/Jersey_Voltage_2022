@@ -65,9 +65,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
+    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getDriveBase().zeroDriveSensors(true);
+    CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
   }
 
   /**
@@ -103,6 +104,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
     CommandScheduler.getInstance().schedule(m_autonomousCommand);
   }
 
@@ -119,6 +121,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
   }
 
   /** This function is called periodically during operator control. */
