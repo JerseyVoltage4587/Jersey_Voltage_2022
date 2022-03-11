@@ -99,13 +99,9 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     if(climbingStatus){
-      System.out.println("CLIMBER ARMED");
       double climbDirection = OI.getInstance().getClimb();
       //use climbDirection to drive motors, and do yaw correction here
 
-    }
-    else{
-      System.out.println("climber deactivated");
     }
   }
 }
