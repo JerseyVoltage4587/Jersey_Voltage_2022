@@ -58,7 +58,7 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = -0.85;
     public static double IntakeBackMotorLevel = 0.5;
-    public static double ShooterMotorRPM = 5000; //not final
+    public static double ShooterMotorRPM = 1500; //not final
     public static double ShooterBackMotorRPM = -600; //not final
     public static double StorageMotorLevel = 0.7;
     public static double StorageBackMotorLevel = -0.4;
