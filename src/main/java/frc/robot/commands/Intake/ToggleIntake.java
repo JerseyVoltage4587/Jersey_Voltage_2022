@@ -17,9 +17,7 @@ public class ToggleIntake extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    CommandScheduler.getInstance().schedule(new IntakeBall());
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
