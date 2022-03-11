@@ -100,4 +100,6 @@ public final class Constants {
     public final static int ShooterON_MODE = 0;
     public final static int ShooterOFF_MODE = 1;
     public final static int ShooterBACK_MODE = 2;
+
+    public final static double climberVoltageChange = 0.001;
 }

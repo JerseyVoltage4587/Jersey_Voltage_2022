@@ -7,10 +7,13 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.OI;
+import frc.robot.Robot;
+import frc.robot.util.Gyro;
 
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
@@ -22,6 +25,8 @@ public class Climber extends SubsystemBase {
   private Solenoid m_leftClimberSolenoid;
   private Solenoid m_rightClimberSolenoid;
   public static boolean leftClimberState,  rightClimberState;
+  private static double rightVoltage, leftVoltage, m_yaw;
+
   public Climber() {
     if (m_isActive == false) {
       return;
@@ -97,10 +102,42 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(climbingStatus){
+    Robot.getGyro();
+    m_yaw = Gyro.getYaw();
+    if (climbingStatus) {
       double climbDirection = OI.getInstance().getClimb();
-      //use climbDirection to drive motors, and do yaw correction here
+      leftVoltage = climbDirection * RobotController.getBatteryVoltage();
+      rightVoltage = climbDirection * RobotController.getBatteryVoltage();
+        
+      double delta = Gyro.getYaw() - m_yaw;
 
+      if (delta != 0) {
+        if (delta > 180) {
+          delta -= 360;
+        }
+
+        if (delta < -180) {
+          delta += 360;
+        }
+
+        if (Math.abs(delta) > 1) {
+          /* "I think we should not only alter right motor voltage but also left
+          so the case doesn't happen where one side is as increased as it can get and stuff still isn't fixed" */
+          if (delta < 0) {
+            rightVoltage += Constants.climberVoltageChange;
+            leftVoltage -= Constants.climberVoltageChange;
+            setRightMotorVolts(rightVoltage);
+          }
+          else if (delta > 0) {
+            rightVoltage -= Constants.climberVoltageChange;
+            leftVoltage += Constants.climberVoltageChange;
+            setRightMotorVolts(rightVoltage);
+          }
+        }
+      }
+      
+        setLeftMotorVolts(leftVoltage);
+        setRightMotorVolts(rightVoltage);
     }
   }
 }
