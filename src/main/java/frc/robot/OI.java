@@ -78,6 +78,7 @@ public class OI extends CommandBase {
     buttonB1.whenPressed(new EjectBall());
     buttonB1.whenReleased(new StopEjectBall());
     buttonX1.whenPressed(new PrepareShooter());
+    buttonX1.whenReleased(new StopShooter());
     //buttonY1.whenPressed();
     //startButton1.whenPressed();
     //backButton1.whenPressed();
