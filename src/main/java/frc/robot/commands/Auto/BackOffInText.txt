@@ -1,0 +1,28 @@
+class BackOff extends Commandbase {
+	private double m_leftdistance, m_rightdistance;
+	private Drivebase m_drivetrain;
+	public BackOff() {
+		m_drivetrain = Robot.getDrivebase();
+		m_leftdistance = 0;
+		m_rightdistance = 0;
+	}
+	init() {
+		m_drivetrain.setLeftMotorLevel(0.7);
+		m_drivetrain.setRightMotorLevel(0.7);
+		m_leftdistance = m_drivetrain.getLeftDistanceInches();
+		m_rightdistance = m_drivetrain.getRightDistanceInches();
+	}
+	execute() {
+		m_drivetrain.setLeftMotorLevel(0.7);
+		m_drivetrain.setRightMotorLevel(0.7);
+		m_leftdistance = m_drivetrain.getLeftDistanceInches();
+		m_rightdistance = m_drivetrain.getRightDistanceInches();
+	}
+	end (boolean interrupted) {
+		m_drivetrain.setLeftMotorLevel(0);
+		m_drivetrain.setRightMotorLevel(0);
+	}
+	isFinished() {
+		m_leftdistance > 84 && m_rightdistance > 84;
+	}
+}
