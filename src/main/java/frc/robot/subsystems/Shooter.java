@@ -38,18 +38,18 @@ public class Shooter extends SubsystemBase {
     }
     m_leftShooterMotor = new WPI_TalonSRX(Constants.LeftShooterMotorCAN_Address);
     m_rightShooterMotor = new WPI_TalonSRX(Constants.RightShooterMotorCAN_Address);
-    m_leftShooterMotor.follow(m_rightShooterMotor);
+    shootController = new BangBangController(50);
     m_leftShooterMotor.setInverted(InvertType.OpposeMaster);
     m_leftShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_rightShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_leftShooterMotor.configFactoryDefault();
+    m_rightShooterMotor.configFactoryDefault();
     m_rightShooterMotor.setNeutralMode(NeutralMode.Coast);
     m_leftShooterMotor.setNeutralMode(NeutralMode.Coast);
-    m_rightShooterMotor.configFactoryDefault();
+    m_leftShooterMotor.follow(m_rightShooterMotor);
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
     m_mode = Constants.ShooterOFF_MODE;
-    shootController = new BangBangController(50);
   }
 
   public static Shooter getInstance() {
@@ -136,7 +136,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isRPMUpToSpeed() {
-    return getShooterMotorRPM() >= (0.98 * Constants.ShooterMotorRPM);
+    return getShooterMotorRPM() >= Math.abs(0.98 * Constants.ShooterMotorRPM);
   }
 
   @Override 
@@ -148,6 +148,14 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorLevel());
     SmartDashboard.putBoolean("Shooter On", m_mode == Constants.ShooterON_MODE);
     SmartDashboard.putBoolean("Shooter Ready", isRPMUpToSpeed());
-    m_rightShooterMotor.set(shootController.calculate(getShooterMotorRPM(), m_setpoint));
+    SmartDashboard.putNumber("Shooter Encoder Position", m_rightShooterMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Shooter set point", m_setpoint);
+    SmartDashboard.putNumber("Shooter Motor Level", m_rightShooterMotor.get());
+    if (m_setpoint == 0) {
+      m_rightShooterMotor.set(0);
+    }
+    else {
+      m_rightShooterMotor.set(shootController.calculate(getShooterMotorRPM(), m_setpoint));
+    }
   }
 }
