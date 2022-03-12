@@ -136,7 +136,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isRPMUpToSpeed() {
-    return getShooterMotorRPM() >= (0.98 * Constants.ShooterMotorRPM);
+    return getShooterMotorRPM() >= Math.abs(0.98 * Constants.ShooterMotorRPM);
   }
 
   @Override 
