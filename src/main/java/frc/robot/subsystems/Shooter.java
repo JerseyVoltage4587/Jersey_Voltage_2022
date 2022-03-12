@@ -123,7 +123,7 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return 0;
     }
-    return m_rightShooterMotor.getSelectedSensorVelocity(0) * (60000.0/1024);
+    return m_rightShooterMotor.getSelectedSensorVelocity(0) * (600.0/4096);
   }
 
   public void ToggleShooter() {
@@ -144,12 +144,10 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    SmartDashboard.putNumber("Shooter RPM", m_rightShooterMotor.getSelectedSensorVelocity(0) * (60000.0/1024));
+    SmartDashboard.putNumber("Shooter RPM", getShooterMotorRPM());
     SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorLevel());
     SmartDashboard.putBoolean("Shooter On", m_mode == Constants.ShooterON_MODE);
     SmartDashboard.putBoolean("Shooter Ready", isRPMUpToSpeed());
-    if (m_setpoint != 0) {
-      m_rightShooterMotor.set(shootController.calculate(m_rightShooterMotor.getSelectedSensorVelocity(0) * (60000.0/1024), m_setpoint));
-    }
+    m_rightShooterMotor.set(shootController.calculate(getShooterMotorRPM(), m_setpoint));
   }
 }
