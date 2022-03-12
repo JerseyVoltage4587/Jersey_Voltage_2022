@@ -4,18 +4,18 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.StopKicker;
-import frc.robot.commands.StopStorage;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.Kicker.StopKicker;
+import frc.robot.commands.Storage.StopStorage;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class StopIntakeBall extends SequentialCommandGroup {
+public class StopIntakeBall extends ParallelCommandGroup {
   /** Creates a new StopIntakeBall. */
   public StopIntakeBall() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new StopIntakeMotors(), new RetractIntake(), new StopKicker(), new StopStorage());
+    addCommands(new StopStorage(), new StopKicker(), new StopIntakeMotors(), new RetractIntake());
   }
 }

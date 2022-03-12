@@ -7,21 +7,19 @@ package frc.robot.commands.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Robot;
+import frc.robot.commands.Kicker.RunKicker;
+import frc.robot.commands.Storage.RunStorage;
 import frc.robot.subsystems.Kicker;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
 
 public class ShootBall extends CommandBase {
   private Shooter m_shooter;
-  private Kicker m_kicker;
-  private Storage m_storage;
   
   public ShootBall() {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_kicker = Robot.getKicker();
-    m_storage = Robot.getStorage();
     m_shooter = Robot.getShooter();
-    addRequirements(m_kicker, m_storage, m_shooter);
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -36,8 +34,8 @@ public class ShootBall extends CommandBase {
   @Override
   public void execute() {
     if (m_shooter.isRPMUpToSpeed()) {
-      m_kicker.runKickerForward();
-      m_storage.runStorageForward();
+      CommandScheduler.getInstance().schedule(new RunKicker());
+      CommandScheduler.getInstance().schedule(new RunStorage());
     } 
   }
 

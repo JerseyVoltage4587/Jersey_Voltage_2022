@@ -13,6 +13,7 @@ import frc.robot.subsystems.Shooter;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepareShooter extends InstantCommand {
   Shooter m_shooter;
+
   public PrepareShooter() {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = Robot.getShooter();
