@@ -93,7 +93,8 @@ public class OI extends CommandBase {
 
     buttonA2.whenPressed(new ToggleClimbMotors());
     //buttonB2.whenPressed();
-    buttonX2.whenPressed(new ToggleShooter());
+    buttonX2.whenPressed(new PrepareShooter());
+    buttonX2.whenReleased(new StopShooter());
     //buttonY2.whenPressed();
     //startButton2.whenPressed();
     //backButton2.whenPressed();
