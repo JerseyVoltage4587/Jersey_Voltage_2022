@@ -11,12 +11,13 @@ import frc.robot.subsystems.DriveBase;
 public class BackOff extends CommandBase {
   /** Creates a new BackOff. */
   private DriveBase m_drivetrain;
-  private double m_leftdistance, m_rightdistance;
+  private double m_leftDistance, m_rightDistance;
   public BackOff() {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drivetrain = Robot.getDriveBase();
-    m_leftdistance = 0;
-    m_rightdistance = 0;
+    addRequirements(m_drivetrain);
+    m_leftDistance = 0;
+    m_rightDistance = 0;
   }
 
   // Called when the command is initially scheduled.
@@ -24,8 +25,8 @@ public class BackOff extends CommandBase {
   public void initialize() {
     m_drivetrain.setLeftMotorLevel(0.7);
 		m_drivetrain.setRightMotorLevel(0.7);
-		m_leftdistance = m_drivetrain.getLeftDistanceInches();
-		m_rightdistance = m_drivetrain.getRightDistanceInches();
+		m_leftDistance = m_drivetrain.getLeftDistanceInches();
+		m_rightDistance = m_drivetrain.getRightDistanceInches();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,8 +34,8 @@ public class BackOff extends CommandBase {
   public void execute() {
     m_drivetrain.setLeftMotorLevel(0.7);
 		m_drivetrain.setRightMotorLevel(0.7);
-		m_leftdistance = m_drivetrain.getLeftDistanceInches();
-		m_rightdistance = m_drivetrain.getRightDistanceInches();
+		m_leftDistance = m_drivetrain.getLeftDistanceInches();
+		m_rightDistance = m_drivetrain.getRightDistanceInches();
   }
  
   // Called once the command ends or is interrupted.
@@ -47,8 +48,6 @@ public class BackOff extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_leftdistance > 84 
-    &&
-    m_rightdistance > 84;
+    return ((m_leftDistance + m_rightDistance) / 2) > 60;
   }
 }
