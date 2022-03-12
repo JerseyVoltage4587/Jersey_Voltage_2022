@@ -5,6 +5,8 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.StopKicker;
+import frc.robot.commands.StopStorage;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -14,6 +16,6 @@ public class StopIntakeBall extends SequentialCommandGroup {
   public StopIntakeBall() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new StopIntakeMotors(), new RetractIntake());
+    addCommands(new StopIntakeMotors(), new RetractIntake(), new StopKicker(), new StopStorage());
   }
 }
