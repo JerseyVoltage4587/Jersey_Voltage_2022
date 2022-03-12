@@ -19,6 +19,7 @@ import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
 import frc.robot.commands.Shooter.StopShooter;
+import frc.robot.commands.Shooter.ToggleShooter;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -92,8 +93,7 @@ public class OI extends CommandBase {
 
     buttonA2.whenPressed(new ToggleClimbMotors());
     //buttonB2.whenPressed();
-    buttonX2.whenPressed(new PrepareShooter());
-    buttonX2.whenReleased(new StopShooter());
+    buttonX2.whenPressed(new ToggleShooter());
     //buttonY2.whenPressed();
     //startButton2.whenPressed();
     //backButton2.whenPressed();

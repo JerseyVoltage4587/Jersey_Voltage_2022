@@ -1,4 +1,3 @@
-
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -27,8 +26,6 @@ public class Shooter extends SubsystemBase {
   private double mLevel;
   private BangBangController shootController;
   private double m_setpoint = 0;
-  private int m_mode;
-  
   /**
    * Creates a new Shooter.
    */
@@ -38,19 +35,23 @@ public class Shooter extends SubsystemBase {
     }
     m_leftShooterMotor = new WPI_TalonSRX(Constants.LeftShooterMotorCAN_Address);
     m_rightShooterMotor = new WPI_TalonSRX(Constants.RightShooterMotorCAN_Address);
+    shootController = new BangBangController(50);
     m_leftShooterMotor.follow(m_rightShooterMotor);
     m_leftShooterMotor.setInverted(InvertType.OpposeMaster);
     m_leftShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_rightShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_leftShooterMotor.configFactoryDefault();
+    m_rightShooterMotor.configFactoryDefault();
     m_rightShooterMotor.setNeutralMode(NeutralMode.Coast);
     m_leftShooterMotor.setNeutralMode(NeutralMode.Coast);
-    m_rightShooterMotor.configFactoryDefault();
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
-    m_mode = Constants.ShooterOFF_MODE;
-    shootController = new BangBangController(50);
   }
+
+  public final static int ON_MODE = 0;
+  public final static int OFF_MODE = 1;
+  public final static int BACK_MODE = 2;
+  private int m_mode = OFF_MODE;
 
   public static Shooter getInstance() {
     if(m_Instance == null) {
@@ -98,17 +99,17 @@ public class Shooter extends SubsystemBase {
   }
 
   public void runShooterForward() {
-    m_mode = Constants.ShooterON_MODE;
+    //m_mode = ON_MODE;
     setShooterSetpoint(Constants.ShooterMotorRPM);
   }
 
   public void runShooterBackward() {
-    m_mode = Constants.ShooterBACK_MODE;
+    //m_mode = BACK_MODE;
     setShooterSetpoint(Constants.ShooterBackMotorRPM);
   }
 
   public void stopShooter() {
-    m_mode = Constants.ShooterOFF_MODE;
+    //m_mode = OFF_MODE;
     setShooterSetpoint(0);
   }
 
@@ -126,8 +127,9 @@ public class Shooter extends SubsystemBase {
     return m_rightShooterMotor.getSelectedSensorVelocity(0) * (60000.0/1024);
   }
 
+
   public void ToggleShooter() {
-    if(m_mode != Constants.ShooterON_MODE){
+    if (m_mode != ON_MODE){
       runShooterForward();
     }
     else {
@@ -136,7 +138,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isRPMUpToSpeed() {
-    return getShooterMotorRPM() >= (0.98 * Constants.ShooterMotorRPM);
+    return getShooterMotorRPM() >= Math.abs((0.98 * Constants.ShooterMotorRPM));
   }
 
   @Override 
@@ -144,12 +146,11 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    SmartDashboard.putNumber("Shooter RPM", m_rightShooterMotor.getSelectedSensorVelocity(0) * (60000.0/1024));
+    SmartDashboard.putNumber("Shooter RPM", getShooterMotorRPM());
     SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorLevel());
-    SmartDashboard.putBoolean("Shooter On", m_mode == Constants.ShooterON_MODE);
+    //SmartDashboard.putBoolean("Shooter On", m_mode == ON_MODE);
     SmartDashboard.putBoolean("Shooter Ready", isRPMUpToSpeed());
-    if (m_setpoint != 0) {
-      m_rightShooterMotor.set(shootController.calculate(m_rightShooterMotor.getSelectedSensorVelocity(0) * (60000.0/1024), m_setpoint));
-    }
+    m_rightShooterMotor.set(shootController.calculate(getShooterMotorRPM(), m_setpoint));
   }
 }
+
