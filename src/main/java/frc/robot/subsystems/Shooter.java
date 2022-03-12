@@ -101,8 +101,8 @@ public class Shooter extends SubsystemBase {
   public void runShooterForward() {
     m_mode = ON_MODE;
     //setShooterSetpoint(Constants.ShooterMotorRPM);
-    m_leftShooterMotor.set(0.8);
-    m_rightShooterMotor.set(-0.8);
+    m_leftShooterMotor.set(0.4);
+    m_rightShooterMotor.set(-0.4);
   }
 
   public void runShooterBackward() {
