@@ -154,6 +154,10 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorLevel());
     SmartDashboard.putBoolean("Shooter On", m_mode == ON_MODE);
     SmartDashboard.putBoolean("Shooter Ready", isRPMUpToSpeed());
+    if(m_mode == OFF_MODE) {
+      m_leftShooterMotor.set(0);
+      m_rightShooterMotor.set(0);
+    }
     //m_rightShooterMotor.set(shootController.calculate(getShooterMotorRPM(), m_setpoint));
   }
 }
