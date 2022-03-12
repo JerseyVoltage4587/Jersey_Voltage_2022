@@ -99,12 +99,14 @@ public class Shooter extends SubsystemBase {
 
   public void runShooterForward() {
     m_mode = Constants.ShooterON_MODE;
-    setShooterSetpoint(Constants.ShooterMotorRPM);
+    //setShooterSetpoint(Constants.ShooterMotorRPM);
+    m_rightShooterMotor.set(0.8);
   }
 
   public void runShooterBackward() {
     m_mode = Constants.ShooterBACK_MODE;
-    setShooterSetpoint(Constants.ShooterBackMotorRPM);
+    //setShooterSetpoint(Constants.ShooterBackMotorRPM);
+    m_rightShooterMotor.set(-0.5);
   }
 
   public void stopShooter() {
@@ -151,11 +153,11 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("Shooter Encoder Position", m_rightShooterMotor.getSelectedSensorPosition());
     SmartDashboard.putNumber("Shooter set point", m_setpoint);
     SmartDashboard.putNumber("Shooter Motor Level", m_rightShooterMotor.get());
-    if (m_setpoint == 0) {
-      m_rightShooterMotor.set(0);
-    }
-    else {
-      m_rightShooterMotor.set(shootController.calculate(getShooterMotorRPM(), m_setpoint));
-    }
+    // if (m_setpoint == 0) {
+    //   m_rightShooterMotor.set(0);
+    // }
+    // else {
+    //   m_rightShooterMotor.set(shootController.calculate(getShooterMotorRPM(), m_setpoint));
+    // }
   }
 }
