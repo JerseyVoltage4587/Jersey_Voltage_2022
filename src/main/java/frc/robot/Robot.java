@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Auto.SimpleAuto;
 import frc.robot.commands.Auto.TwoBallAuto;
 import frc.robot.commands.Drive.DefaultDriveBaseCommand;
 import frc.robot.subsystems.*;
@@ -21,7 +22,7 @@ import frc.robot.util.Gyro;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = new TwoBallAuto()/*AutoChoice.getAutoChoice()*/;
+  private Command m_autonomousCommand = new SimpleAuto(36, 0)/*AutoChoice.getAutoChoice()*/;
   private static PowerDistribution m_PDP;
 
   public static PowerDistribution getPDP() {
@@ -58,6 +59,10 @@ public class Robot extends TimedRobot {
   public static Gyro getGyro() {
     return Gyro.getInstance();
   }
+
+  public static OI getOI() {
+    return OI.getInstance();
+  }
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -68,6 +73,8 @@ public class Robot extends TimedRobot {
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getDriveBase().zeroDriveSensors(true);
+    getGyro();
+    Gyro.reset();
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
   }
 
