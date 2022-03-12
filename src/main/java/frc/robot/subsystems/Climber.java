@@ -36,9 +36,7 @@ public class Climber extends SubsystemBase {
     m_rightClimberMotor = new WPI_TalonSRX(Constants.RightClimberMotorCAN_Address);
     m_leftClimberMotor = new WPI_TalonSRX(Constants.LeftClimberMotorCAN_Address);
     m_rightClimberMotor.setNeutralMode(NeutralMode.Brake);
-    SmartDashboard.putString("right brake", "right");
     m_leftClimberMotor.setNeutralMode(NeutralMode.Brake);
-    SmartDashboard.putString("left brake", "left");
     leftClimberState = false;
     rightClimberState = false;
   }
@@ -67,31 +65,30 @@ public class Climber extends SubsystemBase {
   }
 
   public void setRightMotorVolts(double volts) {
-    /* m_rightClimberMotor.setVoltage(volts); */
+    m_rightClimberMotor.setVoltage(volts);
   }
 
   public void setLeftMotorVolts(double volts) {
-    /* m_leftClimberMotor.setVoltage(volts); */
+    m_leftClimberMotor.setVoltage(volts);
   }
 
   //Deploy pistons to lock
   public void climbStep2() {
-    /* m_leftClimberSolenoid.set(true);
-    m_rightClimberSolenoid.set(true); */
+    m_leftClimberSolenoid.set(true);
+    m_rightClimberSolenoid.set(true);
   }
 
   //Retract pistons
   public void climbStep4() {
-    /* m_leftClimberSolenoid.set(false);
-    m_rightClimberSolenoid.set(false); */
+    m_leftClimberSolenoid.set(false);
+    m_rightClimberSolenoid.set(false);
   }
 
   public void toggleClimbPistons() {
-    return;
-    /* leftClimberState = !leftClimberState; //Reflects this change in a constant so we know where the piston is
+    leftClimberState = !leftClimberState; //Reflects this change in a constant so we know where the piston is
     rightClimberState = !rightClimberState;
     m_leftClimberSolenoid.set(leftClimberState); //Sets the pistons to the opposite state of what they were
-    m_rightClimberSolenoid.set(rightClimberState); */
+    m_rightClimberSolenoid.set(rightClimberState);
   }
 
   public boolean getClimbingStatus() {
@@ -99,8 +96,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void toggleClimbMotors() {
-    return;
-    /* climbingStatus = !climbingStatus; */
+    climbingStatus = !climbingStatus;
   }
 
 
@@ -112,7 +108,7 @@ public class Climber extends SubsystemBase {
     m_yaw = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftEncoder());
     SmartDashboard.putNumber("right climber", getRightEncoder());
-    /* if (climbingStatus) {
+    if (climbingStatus) {
       double climbDirection = OI.getInstance().getClimb();
       leftVoltage = climbDirection * RobotController.getBatteryVoltage();
       rightVoltage = climbDirection * RobotController.getBatteryVoltage();
@@ -146,6 +142,6 @@ public class Climber extends SubsystemBase {
       
         setLeftMotorVolts(leftVoltage);
         setRightMotorVolts(rightVoltage);
-    } */
+    }
   }
 }
