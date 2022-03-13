@@ -100,10 +100,10 @@ public class OI extends CommandBase {
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();
     //rightStickButton2.whenPressed();
-    //leftTrigger2.whenPressed();
+    leftTrigger2.whenPressed(new DeployIntake());
     rightTrigger2.whenPressed(new ToggleClimbPistons());
     //rightBumper2.whenPressed();
-    //leftBumper2.whenPressed();
+    leftBumper2.whenPressed(new RetractIntake());
   }
 
   // Get the value of the "drive" stick.
