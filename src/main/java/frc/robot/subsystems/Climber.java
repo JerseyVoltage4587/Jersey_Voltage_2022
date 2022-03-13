@@ -118,6 +118,7 @@ public class Climber extends SubsystemBase {
     m_yaw = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftEncoder());
     SmartDashboard.putNumber("right climber", getRightEncoder());
+    
     if (climbingStatus) {
       double climbDirection = OI.getInstance().getClimbStick();
       leftVoltage = climbDirection * RobotController.getBatteryVoltage();

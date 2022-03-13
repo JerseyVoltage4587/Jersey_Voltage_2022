@@ -7,41 +7,50 @@
 
 package frc.robot.commands.Drive;
 
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DriveBase;
 
 public class DefaultDriveBaseCommand extends CommandBase {
   /**
    * Creates a new DefaultDriveBase.
    */
-Climber m_climber;
+  private DriveBase m_drivebase;
+  private Climber m_climber;
+  private OI m_OI;
 
   public DefaultDriveBaseCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getDriveBase());
+    m_drivebase = Robot.getDriveBase();
+    m_climber = Robot.getClimber();
+    m_OI = Robot.getOI();
+    addRequirements(m_drivebase, m_climber);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getDriveBase().setSafetyEnabled(true);
-    m_climber = Robot.getClimber();
+    m_drivebase.setSafetyEnabled(true);
+  }
+
+  public double motorLevelToVoltage(double motorLevel) {
+    return motorLevel * RobotController.getBatteryVoltage();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double forward = OI.getInstance().getDrive();
-    double turn = OI.getInstance().getTurn();
+    double forward = m_OI.getDrive();
+    double turn = m_OI.getTurn();
+    double climb = m_OI.getClimbStick();
 
-
-    double climb = OI.getInstance().getClimbStick();
-    m_climber.setLeftMotorLevel(climb * -0.8);
-    m_climber.setRightMotorLevel(climb * 0.8);
+    m_climber.setLeftMotorVolts(motorLevelToVoltage(climb * -0.8));
+    m_climber.setRightMotorVolts(motorLevelToVoltage(climb * 0.8));
 
     if (Math.abs(forward) < 0.05) {
 			forward = 0;
@@ -50,13 +59,13 @@ Climber m_climber;
 			turn = 0;
     }
 
-    Robot.getDriveBase().arcadeDrive(forward, turn);
+    m_drivebase.arcadeDrive(forward, turn);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.getDriveBase().setSafetyEnabled(false);
+    m_drivebase.setSafetyEnabled(false);
   }
 
   // Returns true when the command should end.
