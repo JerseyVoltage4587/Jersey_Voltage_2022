@@ -13,6 +13,7 @@ import frc.robot.subsystems.Intake;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class RunIntakeForward extends InstantCommand {
   private Intake m_intake;
+  
   public RunIntakeForward() {
     // Use addRequirements() here to declare subsystem dependencies.
     m_intake = Robot.getIntake();

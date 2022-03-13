@@ -4,34 +4,19 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.Robot;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Kicker;
-import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.Kicker.StopKicker;
+import frc.robot.commands.Shooter.StopShooter;
+import frc.robot.commands.Storage.StopStorage;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class StopEjectBall extends InstantCommand {
-  private Shooter m_shooter;
-  private Kicker m_kicker;
-  private Intake m_intake;
-  
+public class StopEjectBall extends ParallelCommandGroup {
+  /** Creates a new StopEjectBall. */
   public StopEjectBall() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_kicker = Robot.getKicker();
-    m_intake = Robot.getIntake();
-    m_shooter = Robot.getShooter();
-    addRequirements(m_kicker, m_intake, m_shooter);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    m_intake.stopIntake();
-    m_shooter.stopShooter();
-    m_kicker.stopKicker();
-    Robot.getStorage().stopStorage();
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(new StopStorage(), new StopKicker(), new StopShooter());
   }
 }

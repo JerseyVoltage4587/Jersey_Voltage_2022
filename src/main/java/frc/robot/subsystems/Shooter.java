@@ -48,10 +48,7 @@ public class Shooter extends SubsystemBase {
     m_rightShooterMotor.set(0);
   }
 
-  public final static int ON_MODE = 0;
-  public final static int OFF_MODE = 1;
-  public final static int BACK_MODE = 2;
-  private int m_mode = OFF_MODE;
+  private int m_mode = Constants.ShooterOFF_MODE;
 
   public static Shooter getInstance() {
     if(m_Instance == null) {
@@ -99,22 +96,22 @@ public class Shooter extends SubsystemBase {
   }
 
   public void runShooterForward() {
-    m_mode = ON_MODE;
+    m_mode = Constants.ShooterON_MODE;
     //setShooterSetpoint(Constants.ShooterMotorRPM);
     m_leftShooterMotor.set(0.4);
     m_rightShooterMotor.set(-0.4);
   }
 
   public void runShooterBackward() {
-    m_mode = BACK_MODE;
-    setShooterSetpoint(Constants.ShooterBackMotorRPM);
+    m_mode = Constants.ShooterBACK_MODE;
+    //setShooterSetpoint(Constants.ShooterBackMotorRPM);
+    m_leftShooterMotor.set(-0.4);
+    m_rightShooterMotor.set(-0.4);
   }
 
   public void stopShooter() {
-    m_mode = OFF_MODE;
-    m_leftShooterMotor.set(0);
-    m_rightShooterMotor.set(0);
-    //setShooterSetpoint(0);
+    m_mode = Constants.ShooterOFF_MODE;
+    setShooterSetpoint(0);
   }
 
   public double getShooterMotorLevel() { //Positive will shoot forward
@@ -133,7 +130,7 @@ public class Shooter extends SubsystemBase {
 
 
   public void ToggleShooter() {
-    if (m_mode != ON_MODE){
+    if (m_mode != Constants.ShooterON_MODE){
       runShooterForward();
     }
     else {
@@ -152,9 +149,12 @@ public class Shooter extends SubsystemBase {
     }
     SmartDashboard.putNumber("Shooter RPM", getShooterMotorRPM());
     SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorLevel());
-    SmartDashboard.putBoolean("Shooter On", m_mode == ON_MODE);
+    SmartDashboard.putBoolean("Shooter On", m_mode == Constants.ShooterON_MODE);
     SmartDashboard.putBoolean("Shooter Ready", isRPMUpToSpeed());
-    //m_rightShooterMotor.set(shootController.calculate(getShooterMotorRPM(), m_setpoint));
+    if(m_mode == Constants.ShooterOFF_MODE) {
+      setShooterSetpoint(0);
+    }
+    setShooterSetpoint(shootController.calculate(getShooterMotorRPM(), m_setpoint));
   }
 }
 

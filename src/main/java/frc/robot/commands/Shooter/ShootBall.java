@@ -7,6 +7,8 @@ package frc.robot.commands.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Robot;
+import frc.robot.commands.Kicker.RunKicker;
+import frc.robot.commands.Storage.RunStorage;
 import frc.robot.subsystems.Kicker;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
