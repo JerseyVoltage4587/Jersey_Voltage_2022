@@ -59,8 +59,8 @@ public final class Constants {
     public static double ShooterMotorRPM = -1500; //not final
     public static double ShooterBackMotorRPM = -600; //not final
     public static double StorageMotorLevel = 0.7;
-    public static double StorageBackMotorLevel = -0.4;
-    public static double KickerMotorLevel = 0.8; //not final
+    public static double StorageBackMotorLevel = -0.5;
+    public static double KickerMotorLevel = -0.8; //not final
     public static double KickerSlowBackMotorLevel = 0.4; //not final
     public static double KickerFastBackMotorLevel = 0.7; //not final
     

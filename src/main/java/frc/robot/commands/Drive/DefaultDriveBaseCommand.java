@@ -11,20 +11,25 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.subsystems.Climber;
 
 public class DefaultDriveBaseCommand extends CommandBase {
   /**
    * Creates a new DefaultDriveBase.
    */
+Climber m_climber;
+
   public DefaultDriveBaseCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getDriveBase());
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     Robot.getDriveBase().setSafetyEnabled(true);
+    m_climber = Robot.getClimber();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,6 +37,11 @@ public class DefaultDriveBaseCommand extends CommandBase {
   public void execute() {
     double forward = OI.getInstance().getDrive();
     double turn = OI.getInstance().getTurn();
+
+
+    double climb = OI.getInstance().getClimbStick();
+    m_climber.setLeftMotorLevel(climb * -0.8);
+    m_climber.setRightMotorLevel(climb * 0.8);
 
     if (Math.abs(forward) < 0.05) {
 			forward = 0;

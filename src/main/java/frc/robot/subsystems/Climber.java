@@ -66,12 +66,20 @@ public class Climber extends SubsystemBase {
     return m_rightClimberMotor.getSelectedSensorPosition();
   }
 
+  public void setRightMotorLevel(double mL) {
+    m_rightClimberMotor.set(mL);
+  }
+
+  public void setLeftMotorLevel(double mL) {
+    m_leftClimberMotor.set(mL);
+  }
+
   public void setRightMotorVolts(double volts) {
-    /* m_rightClimberMotor.setVoltage(volts); */
+    m_rightClimberMotor.setVoltage(volts);
   }
 
   public void setLeftMotorVolts(double volts) {
-    /* m_leftClimberMotor.setVoltage(volts); */
+    m_leftClimberMotor.setVoltage(volts);
   }
 
   //Deploy pistons to lock
@@ -87,11 +95,12 @@ public class Climber extends SubsystemBase {
   }
 
   public void toggleClimbPistons() {
+    //return;
+    //leftClimberState = !leftClimberState; //Reflects this change in a constant so we know where the piston is
+    //rightClimberState = !rightClimberState;
+    m_leftClimberSolenoid.toggle(); //Sets the pistons to the opposite state of what they were
+    m_rightClimberSolenoid.toggle();
     return;
-    /* leftClimberState = !leftClimberState; //Reflects this change in a constant so we know where the piston is
-    rightClimberState = !rightClimberState;
-    m_leftClimberSolenoid.set(leftClimberState); //Sets the pistons to the opposite state of what they were
-    m_rightClimberSolenoid.set(rightClimberState); */
   }
 
   public boolean getClimbingStatus() {

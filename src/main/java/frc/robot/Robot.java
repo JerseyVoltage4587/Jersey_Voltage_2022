@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -21,6 +23,7 @@ import frc.robot.util.Gyro;
  * project.
  */
 public class Robot extends TimedRobot {
+  
   private Command m_autonomousCommand = new TwoBallAuto()/*AutoChoice.getAutoChoice()*/;
   private static PowerDistribution m_PDP;
 
@@ -58,6 +61,21 @@ public class Robot extends TimedRobot {
   public static Gyro getGyro() {
     return Gyro.getInstance();
   }
+
+  
+  public void runLimeLight() {
+    Table = NetworkTableInstance.getDefault();
+    limelight = Table.getTable("limelight");
+    
+    camMode = limelight.getEntry("camMode");
+    stream = limelight.getEntry("stream");
+    
+    camMode.setNumber(1);
+    stream.setNumber(0);
+  }
+  private NetworkTableInstance Table;
+  private NetworkTable limelight;
+  private NetworkTableEntry camMode, stream;
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -65,7 +83,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
+    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
+    //runLimeLight();
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getDriveBase().zeroDriveSensors(true);
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
@@ -105,7 +124,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
-    CommandScheduler.getInstance().schedule(m_autonomousCommand);
+    //CommandScheduler.getInstance().schedule(m_autonomousCommand);
   }
 
   /** This function is called periodically during autonomous. */

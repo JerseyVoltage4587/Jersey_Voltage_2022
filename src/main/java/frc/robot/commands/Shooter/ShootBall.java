@@ -12,7 +12,6 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
 
 public class ShootBall extends CommandBase {
-  private Shooter m_shooter;
   private Kicker m_kicker;
   private Storage m_storage;
   
@@ -20,25 +19,19 @@ public class ShootBall extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     m_kicker = Robot.getKicker();
     m_storage = Robot.getStorage();
-    m_shooter = Robot.getShooter();
-    addRequirements(m_kicker, m_storage, m_shooter);
+    addRequirements(m_kicker, m_storage);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (!m_shooter.isRPMUpToSpeed()) {
-      CommandScheduler.getInstance().schedule(new PrepareShooter());
-    }
+    m_kicker.runKickerForward();
+    m_storage.runStorageForward();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_shooter.isRPMUpToSpeed()) {
-      m_kicker.runKickerForward();
-      m_storage.runStorageForward();
-    } 
   }
 
   // Called once the command ends or is interrupted.

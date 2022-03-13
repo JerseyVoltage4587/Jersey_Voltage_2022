@@ -122,18 +122,18 @@ public ClimberMotors(double distance, double tolerance, boolean forward) {
         if (delta < 0) {
           right_voltage += 0.001; //0.001 should be a constant
           left_voltage -= 0.001;
-          m_climber.setRightMotorVolts(right_voltage);
+          //m_climber.setRightMotorVolts(right_voltage);
         }
         else if (delta > 0) {
           right_voltage -= 0.001;
           left_voltage += 0.001;
-          m_climber.setRightMotorVolts(right_voltage);
+          //m_climber.setRightMotorVolts(right_voltage);
         }
       }
     }
     
-      m_climber.setLeftMotorVolts(left_voltage);
-      m_climber.setRightMotorVolts(right_voltage);
+      //m_climber.setLeftMotorVolts(left_voltage);
+      //m_climber.setRightMotorVolts(right_voltage);
 
 
     System.out.println("left voltage: " + left_voltage);

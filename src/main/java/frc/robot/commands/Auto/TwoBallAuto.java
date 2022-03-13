@@ -15,6 +15,6 @@ public class TwoBallAuto extends SequentialCommandGroup {
   public TwoBallAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new TrapezoidProfileMovement(8, Constants.TrapezoidProfileTolerance, true)/*, new TrapezoidProfileMovement(4, 1, false)*/);
+    //addCommands(new TrapezoidProfileMovement(8, Constants.TrapezoidProfileTolerance, true)/*, new TrapezoidProfileMovement(4, 1, false)*/);
   }
 }

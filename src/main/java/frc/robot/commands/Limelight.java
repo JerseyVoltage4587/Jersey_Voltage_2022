@@ -2,25 +2,36 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Climber;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.subsystems.Climber;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class ToggleClimbPistons extends CommandBase {
-  /** Creates a new ToggleClimbPistons. */
-  public Climber m_climber;
-  public ToggleClimbPistons() {
+public class Limelight extends CommandBase {
+  /** Creates a new Limelight. */
+  private NetworkTableInstance Table;
+  private NetworkTable limelight;
+  private NetworkTableEntry camMode, stream;
+
+  public Limelight() {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_climber = Robot.getClimber();
-    addRequirements(m_climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climber.toggleClimbPistons();
+    Table = NetworkTableInstance.getDefault();
+    limelight = Table.getTable("limelight");
+
+    camMode = limelight.getEntry("camMode");
+    stream = limelight.getEntry("stream");
+
+    camMode.setNumber(1);
+    stream.setNumber(0);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,6 +45,6 @@ public class ToggleClimbPistons extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
