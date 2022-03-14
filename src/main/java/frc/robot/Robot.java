@@ -128,7 +128,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
     getDriveBase().zeroDriveSensors(true);
-    CommandScheduler.getInstance().schedule(m_autonomousCommand); //!!!!!!NO AUTONONOMUS AT ALL!!!!!!
+    CommandScheduler.getInstance().schedule(m_autonomousCommand);
   }
 
   /** This function is called periodically during autonomous. */

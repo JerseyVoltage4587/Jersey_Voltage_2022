@@ -4,25 +4,17 @@
 
 package frc.robot.commands.Intake;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.Robot;
-import frc.robot.subsystems.Intake;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.Storage.RunStorage;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class IntakeBall extends InstantCommand {
-  Intake m_intake;
-
+public class IntakeBall extends ParallelCommandGroup {
+  /** Creates a new IntakeBall. */
   public IntakeBall() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_intake = Robot.getIntake();
-    addRequirements(m_intake);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    m_intake.intakeBall();
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(new StartIntake(), new RunStorage());
   }
 }
