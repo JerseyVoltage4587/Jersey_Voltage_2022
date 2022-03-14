@@ -44,7 +44,7 @@ public class SimpleAuto extends CommandBase {
   public void initialize() {
     System.out.println("Move " + setDistance + " S T A R T");
     m_drivebase.setSafetyEnabled(false);
-    m_drivebase.zeroDriveSensors(false);
+    m_drivebase.zeroDriveSensors(true);
     System.out.println("Move " + ((m_drivebase.getLeftDistanceInches() + m_drivebase.getRightDistanceInches()) / 2) + " Z E R O");
     m_drivebase.setRightMotorLevel(0.3);
     m_drivebase.setLeftMotorLevel(0.3);
