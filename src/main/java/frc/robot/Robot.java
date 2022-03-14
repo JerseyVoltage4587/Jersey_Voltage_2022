@@ -73,8 +73,6 @@ public class Robot extends TimedRobot {
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getDriveBase().zeroDriveSensors(true);
-    getGyro();
-    Gyro.reset();
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
   }
 
@@ -112,6 +110,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
+    getDriveBase().zeroDriveSensors(true);
     CommandScheduler.getInstance().schedule(m_autonomousCommand); //!!!!!!NO AUTONONOMUS AT ALL!!!!!!
   }
 

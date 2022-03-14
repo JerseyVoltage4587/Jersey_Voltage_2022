@@ -14,24 +14,29 @@ import frc.robot.util.*;
 
 public class SimpleAuto extends CommandBase {
   DriveBase m_drivebase;
-  int setDistance = 0;
-  double rightMotorLevelChange = 0.36;
-  double leftInches = 0;
-  double startLeftInches = 0;
-  double startRightInches = 0;
-  double rightInches = 0;
-  double averageInches = 0;
-  double m_heading = 0;
-  boolean first = true;
+  int setDistance;
+  double m_heading;
+  double rightMotorLevelChange, leftMotorLevelChange;
+  double leftInches, rightInches, averageInches;
+  double startLeftInches, startRightInches;
+  boolean first;
   /**
    * Creates a new AutoMoveFoward.
    */
   public SimpleAuto(int distance, double heading) {
+    // Use addRequirements() here to declare subsystem dependencies.
     setDistance = distance;
     m_heading = heading;
     m_drivebase = Robot.getDriveBase();
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_drivebase);
+    rightMotorLevelChange = 0.3;
+    leftMotorLevelChange = 0.3;
+    leftInches = 0;
+    rightInches = 0;
+    startLeftInches = 0;
+    startRightInches = 0;
+    averageInches = 0;
+    first = true;
   }
 
   // Called when the command is initially scheduled.
@@ -41,8 +46,8 @@ public class SimpleAuto extends CommandBase {
     m_drivebase.setSafetyEnabled(false);
     m_drivebase.zeroDriveSensors(false);
     System.out.println("Move " + ((m_drivebase.getLeftDistanceInches() + m_drivebase.getRightDistanceInches()) / 2) + " Z E R O");
-    m_drivebase.setRightMotorLevel(0.36);
-    m_drivebase.setLeftMotorLevel(0.4);
+    m_drivebase.setRightMotorLevel(0.3);
+    m_drivebase.setLeftMotorLevel(0.3);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -67,17 +72,23 @@ public class SimpleAuto extends CommandBase {
     if (Math.abs(delta) > 2) {
       if (delta < 0) {
         rightMotorLevelChange -= 0.01;
+        leftMotorLevelChange += 0.01;
         m_drivebase.setRightMotorLevel(rightMotorLevelChange);
+        m_drivebase.setLeftMotorLevel(leftMotorLevelChange);
       }
       else if (delta > 0) {
         rightMotorLevelChange += 0.01;
+        leftMotorLevelChange -= 0.01;
         m_drivebase.setRightMotorLevel(rightMotorLevelChange);
+        m_drivebase.setLeftMotorLevel(leftMotorLevelChange);
       }
     }
     
     else {
-      rightMotorLevelChange = 0.36;
+      rightMotorLevelChange = 0.3;
+      leftMotorLevelChange = 0.3;
       m_drivebase.setRightMotorLevel(rightMotorLevelChange);
+      m_drivebase.setLeftMotorLevel(leftMotorLevelChange);
     }
   }
 
