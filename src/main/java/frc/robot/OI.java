@@ -91,7 +91,7 @@ public class OI extends CommandBase {
     leftBumper1.whenReleased(new StopIntakeBall());
     //rightBumper1.whileHeld();
 
-    buttonA2.whenPressed(new ToggleClimbMotors());
+    //buttonA2.whenPressed(new ToggleClimbMotors());
     //buttonB2.whenPressed();
     buttonX2.whenPressed(new PrepareShooter());
     buttonX2.whenReleased(new StopShooter());
@@ -100,10 +100,10 @@ public class OI extends CommandBase {
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();
     //rightStickButton2.whenPressed();
-    //leftTrigger2.whenPressed();
+    leftTrigger2.whenPressed(new DeployIntake());
     rightTrigger2.whenPressed(new ToggleClimbPistons());
     //rightBumper2.whenPressed();
-    //leftBumper2.whenPressed();
+    leftBumper2.whenPressed(new RetractIntake());
   }
 
   // Get the value of the "drive" stick.
@@ -116,7 +116,7 @@ public class OI extends CommandBase {
     return m_joy1.getRawAxis(4);
 	}
   // Get value of the "climb" stick.
-  public double getClimb(){
+  public double getClimbStick() {
     return m_joy2.getRawAxis(1);
   }
   // Called when the command is initially scheduled.

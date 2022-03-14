@@ -64,6 +64,14 @@ public class Climber extends SubsystemBase {
     return m_rightClimberMotor.getSelectedSensorPosition();
   }
 
+  public void setRightMotorLevel(double mL) {
+    m_rightClimberMotor.set(mL);
+  }
+
+  public void setLeftMotorLevel(double mL) {
+    m_leftClimberMotor.set(mL);
+  }
+
   public void setRightMotorVolts(double volts) {
     m_rightClimberMotor.setVoltage(volts);
   }
@@ -85,10 +93,12 @@ public class Climber extends SubsystemBase {
   }
 
   public void toggleClimbPistons() {
-    leftClimberState = !leftClimberState; //Reflects this change in a constant so we know where the piston is
-    rightClimberState = !rightClimberState;
-    m_leftClimberSolenoid.set(leftClimberState); //Sets the pistons to the opposite state of what they were
-    m_rightClimberSolenoid.set(rightClimberState);
+    //return;
+    //leftClimberState = !leftClimberState; //Reflects this change in a constant so we know where the piston is
+    //rightClimberState = !rightClimberState;
+    m_leftClimberSolenoid.toggle(); //Sets the pistons to the opposite state of what they were
+    m_rightClimberSolenoid.toggle();
+    return;
   }
 
   public boolean getClimbingStatus() {
@@ -108,8 +118,9 @@ public class Climber extends SubsystemBase {
     m_roll = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftEncoder());
     SmartDashboard.putNumber("right climber", getRightEncoder());
+    
     if (climbingStatus) {
-      double climbDirection = OI.getInstance().getClimb();
+      double climbDirection = OI.getInstance().getClimbStick();
       leftVoltage = climbDirection * RobotController.getBatteryVoltage();
       rightVoltage = climbDirection * RobotController.getBatteryVoltage();
         

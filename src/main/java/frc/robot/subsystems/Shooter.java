@@ -97,12 +97,16 @@ public class Shooter extends SubsystemBase {
 
   public void runShooterForward() {
     m_mode = Constants.ShooterON_MODE;
-    setShooterSetpoint(Constants.ShooterMotorRPM);
+    //setShooterSetpoint(Constants.ShooterMotorRPM);
+    m_leftShooterMotor.set(0.4);
+    m_rightShooterMotor.set(-0.4);
   }
 
   public void runShooterBackward() {
     m_mode = Constants.ShooterBACK_MODE;
-    setShooterSetpoint(Constants.ShooterBackMotorRPM);
+    //setShooterSetpoint(Constants.ShooterBackMotorRPM);
+    m_leftShooterMotor.set(-0.4);
+    m_rightShooterMotor.set(-0.4);
   }
 
   public void stopShooter() {
