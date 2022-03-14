@@ -35,8 +35,8 @@ public class Climber extends SubsystemBase {
     m_rightClimberSolenoid = new Solenoid(Constants.PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.RightClimberChannel);
     m_rightClimberMotor = new WPI_TalonSRX(Constants.RightClimberMotorCAN_Address);
     m_leftClimberMotor = new WPI_TalonSRX(Constants.LeftClimberMotorCAN_Address);
-    m_rightClimberMotor.setNeutralMode(NeutralMode.Brake);
     m_leftClimberMotor.setNeutralMode(NeutralMode.Brake);
+    m_rightClimberMotor.setNeutralMode(NeutralMode.Brake);
     leftClimberState = false;
     rightClimberState = false;
   }
@@ -118,7 +118,7 @@ public class Climber extends SubsystemBase {
     m_yaw = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftEncoder());
     SmartDashboard.putNumber("right climber", getRightEncoder());
-    
+
     if (climbingStatus) {
       double climbDirection = OI.getInstance().getClimbStick();
       leftVoltage = climbDirection * RobotController.getBatteryVoltage();

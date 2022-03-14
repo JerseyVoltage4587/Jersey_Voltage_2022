@@ -43,6 +43,16 @@ public class Intake extends SubsystemBase {
 		return m_Instance;
   }
 
+  public void intakeBall() {
+    deployIntake();
+    runIntakeForward();
+  }
+
+  public void stopIntakeBall() {
+    retractIntake();
+    stopIntake();
+  }
+
   public void deployIntake() {
     m_leftIntakeSolenoid.set(true);
     m_rightIntakeSolenoid.set(true);

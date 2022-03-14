@@ -54,7 +54,7 @@ public final class Constants {
     public static final int RightClimberChannel = 3; //CHANGE THIS IS TEMPORARY 
 
     //Motor Levels
-    public static double IntakeMotorLevel = -0.85;
+    public static double IntakeMotorLevel = 0.85;
     public static double IntakeBackMotorLevel = 0.5;
     public static double ShooterMotorRPM = -1500; //not final
     public static double ShooterBackMotorRPM = -600; //not final

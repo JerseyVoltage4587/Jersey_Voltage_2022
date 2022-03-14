@@ -98,8 +98,8 @@ public class Shooter extends SubsystemBase {
   public void runShooterForward() {
     m_mode = Constants.ShooterON_MODE;
     //setShooterSetpoint(Constants.ShooterMotorRPM);
-    m_leftShooterMotor.set(0.4);
-    m_rightShooterMotor.set(-0.4);
+    m_leftShooterMotor.set(-0.4);
+    m_rightShooterMotor.set(0.4);
   }
 
   public void runShooterBackward() {
@@ -111,7 +111,9 @@ public class Shooter extends SubsystemBase {
 
   public void stopShooter() {
     m_mode = Constants.ShooterOFF_MODE;
-    setShooterSetpoint(0);
+    //setShooterSetpoint(0);
+    m_leftShooterMotor.set(0);
+    m_rightShooterMotor.set(0);
   }
 
   public double getShooterMotorLevel() { //Positive will shoot forward
@@ -157,4 +159,3 @@ public class Shooter extends SubsystemBase {
     setShooterSetpoint(shootController.calculate(getShooterMotorRPM(), m_setpoint));
   }
 }
-

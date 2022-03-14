@@ -16,6 +16,6 @@ public class StopIntakeBall extends ParallelCommandGroup {
   public StopIntakeBall() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new StopStorage(), new StopKicker(), new StopIntakeMotors(), new RetractIntake());
+    addCommands(new StopStorage(), new StopKicker(), new StopIntake());
   }
 }

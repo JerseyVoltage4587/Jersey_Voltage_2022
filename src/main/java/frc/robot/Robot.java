@@ -129,7 +129,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
-    //CommandScheduler.getInstance().schedule(m_autonomousCommand);
+    CommandScheduler.getInstance().schedule(m_autonomousCommand);
   }
 
   /** This function is called periodically during autonomous. */
