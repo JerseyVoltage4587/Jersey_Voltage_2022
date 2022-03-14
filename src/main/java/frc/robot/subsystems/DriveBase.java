@@ -198,7 +198,7 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return 0;
     }
-    return m_leftDriveEncoder.getPosition();
+    return m_leftDriveEncoder.getPosition() / 10.75;
   }
 
   public double getLeftDistanceInches() {
@@ -209,7 +209,7 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return 0;
     }
-    return m_rightDriveEncoder.getPosition();
+    return m_rightDriveEncoder.getPosition() / 10.75;
   }
 
   public double getRightDistanceInches() {

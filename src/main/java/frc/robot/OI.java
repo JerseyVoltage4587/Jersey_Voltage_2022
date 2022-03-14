@@ -84,11 +84,11 @@ public class OI extends CommandBase {
     //backButton1.whenPressed();
     //leftStickButton1.whenPressed();
     //rightStickButton1.whenPressed();
-    //leftTrigger1.whenPressed();
+    leftTrigger1.whenPressed(new IntakeBall());
+    leftTrigger1.whenReleased(new StopIntakeBall());
     rightTrigger1.whenPressed(new ShootBall());
     rightTrigger1.whenReleased(new StopShootBall());
-    leftBumper1.whenPressed(new IntakeBall());
-    leftBumper1.whenReleased(new StopIntakeBall());
+    //leftBumper1.whenPressed(new IntakeBall());
     //rightBumper1.whileHeld();
 
     //buttonA2.whenPressed(new ToggleClimbMotors());

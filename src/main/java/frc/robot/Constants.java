@@ -21,8 +21,8 @@ public final class Constants {
     public static final int RightSpark21CAN_Address = 21; //final
     public static final int LeftSpark1CAN_Address = 1; //final
     public static final int LeftSpark11CAN_Address = 11; //final
-    public static final int LeftShooterMotorCAN_Address = 46; //final
-    public static final int RightShooterMotorCAN_Address = 45; //final
+    public static final int LeftShooterMotorCAN_Address = 45; //final
+    public static final int RightShooterMotorCAN_Address = 46; //final
     public static final int StorageCAN_Address = 3; //final
     public static final int IntakeMotorCAN_Address = 4; //final
     public static final int KickerMotorCAN_Address = 5; //final
@@ -56,7 +56,7 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = 0.85;
     public static double IntakeBackMotorLevel = 0.5;
-    public static double ShooterMotorRPM = -1500; //not final
+    public static double ShooterMotorRPM = 300; //not final
     public static double ShooterBackMotorRPM = -600; //not final
     public static double StorageMotorLevel = 0.7;
     public static double StorageBackMotorLevel = -0.5;

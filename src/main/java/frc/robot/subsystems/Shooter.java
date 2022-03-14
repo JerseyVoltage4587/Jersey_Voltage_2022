@@ -35,8 +35,7 @@ public class Shooter extends SubsystemBase {
     }
     m_leftShooterMotor = new WPI_TalonSRX(Constants.LeftShooterMotorCAN_Address);
     m_rightShooterMotor = new WPI_TalonSRX(Constants.RightShooterMotorCAN_Address);
-    shootController = new BangBangController(50);
-    m_leftShooterMotor.follow(m_rightShooterMotor);
+    //m_leftShooterMotor.follow(m_rightShooterMotor);
     m_leftShooterMotor.setInverted(InvertType.OpposeMaster);
     m_leftShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_rightShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
@@ -46,6 +45,7 @@ public class Shooter extends SubsystemBase {
     m_leftShooterMotor.setNeutralMode(NeutralMode.Coast);
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
+    shootController = new BangBangController(50);
   }
 
   private int m_mode = Constants.ShooterOFF_MODE;
@@ -97,16 +97,16 @@ public class Shooter extends SubsystemBase {
 
   public void runShooterForward() {
     m_mode = Constants.ShooterON_MODE;
-    //setShooterSetpoint(Constants.ShooterMotorRPM);
-    m_leftShooterMotor.set(-0.4);
-    m_rightShooterMotor.set(0.4);
+    setShooterSetpoint(Constants.ShooterMotorRPM);
+    //m_leftShooterMotor.set(-0.4);
+    //m_rightShooterMotor.set(-0.4);
   }
 
   public void runShooterBackward() {
     m_mode = Constants.ShooterBACK_MODE;
-    //setShooterSetpoint(Constants.ShooterBackMotorRPM);
-    m_leftShooterMotor.set(-0.4);
-    m_rightShooterMotor.set(-0.4);
+    setShooterSetpoint(Constants.ShooterBackMotorRPM);
+    //m_leftShooterMotor.set(0.4);
+    //m_rightShooterMotor.set(0.4);
   }
 
   public void stopShooter() {
@@ -156,6 +156,6 @@ public class Shooter extends SubsystemBase {
     if(m_mode == Constants.ShooterOFF_MODE) {
       setShooterSetpoint(0);
     }
-    setShooterSetpoint(shootController.calculate(getShooterMotorRPM(), m_setpoint));
+    m_leftShooterMotor.set(-1 * (shootController.calculate(getShooterMotorRPM(), m_setpoint)));
   }
 }

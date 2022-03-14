@@ -24,7 +24,7 @@ import frc.robot.util.Gyro;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = new SimpleAuto(36, 0)/*AutoChoice.getAutoChoice()*/;
+  private Command m_autonomousCommand = new SimpleAuto(60, 0)/*AutoChoice.getAutoChoice()*/;
   private static PowerDistribution m_PDP;
 
   public static PowerDistribution getPDP() {
@@ -126,7 +126,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
+    //CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
     getDriveBase().zeroDriveSensors(true);
     CommandScheduler.getInstance().schedule(m_autonomousCommand);
   }
