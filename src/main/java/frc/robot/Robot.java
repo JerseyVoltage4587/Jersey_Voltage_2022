@@ -90,8 +90,6 @@ public class Robot extends TimedRobot {
     //runLimeLight();
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getDriveBase().zeroDriveSensors(true);
-    getGyro();
-    Gyro.reset();
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
   }
 
@@ -129,7 +127,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
-    CommandScheduler.getInstance().schedule(m_autonomousCommand);
+    getDriveBase().zeroDriveSensors(true);
+    CommandScheduler.getInstance().schedule(m_autonomousCommand); //!!!!!!NO AUTONONOMUS AT ALL!!!!!!
   }
 
   /** This function is called periodically during autonomous. */

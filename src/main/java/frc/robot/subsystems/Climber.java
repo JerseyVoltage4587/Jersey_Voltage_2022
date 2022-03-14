@@ -25,7 +25,7 @@ public class Climber extends SubsystemBase {
   private static WPI_TalonSRX m_leftClimberMotor, m_rightClimberMotor;
   private Solenoid m_leftClimberSolenoid, m_rightClimberSolenoid;
   public static boolean leftClimberState,  rightClimberState;
-  private static double rightVoltage, leftVoltage, m_yaw;
+  private static double rightVoltage, leftVoltage, m_roll;
 
   public Climber() {
     if (m_isActive == false) {
@@ -115,7 +115,7 @@ public class Climber extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     Robot.getGyro();
-    m_yaw = Gyro.getYaw();
+    m_roll = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftEncoder());
     SmartDashboard.putNumber("right climber", getRightEncoder());
 
@@ -124,7 +124,7 @@ public class Climber extends SubsystemBase {
       leftVoltage = climbDirection * RobotController.getBatteryVoltage();
       rightVoltage = climbDirection * RobotController.getBatteryVoltage();
         
-      double delta = Gyro.getYaw() - m_yaw;
+      double delta = Gyro.getRoll() - m_roll;
 
       if (delta != 0) {
         if (delta > 180) {
