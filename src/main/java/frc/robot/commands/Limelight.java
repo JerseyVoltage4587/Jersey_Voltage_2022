@@ -31,7 +31,6 @@ public class Limelight extends CommandBase {
 
     camMode.setNumber(1);
     stream.setNumber(0);
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.

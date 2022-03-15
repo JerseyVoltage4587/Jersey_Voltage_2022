@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.controller.BangBangController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -25,7 +26,9 @@ public class Shooter extends SubsystemBase {
   private static WPI_TalonSRX m_rightShooterMotor = null;
   private double mLevel;
   private BangBangController shootController;
+  private SimpleMotorFeedforward feedforward;
   private double m_setpoint = 0;
+
   /**
    * Creates a new Shooter.
    */
@@ -46,6 +49,7 @@ public class Shooter extends SubsystemBase {
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
     shootController = new BangBangController(50);
+    //feedforward = new SimpleMotorFeedforward(kS, kV, kA);
   }
 
   private int m_mode = Constants.ShooterOFF_MODE;
@@ -154,8 +158,8 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putBoolean("Shooter On", m_mode == Constants.ShooterON_MODE);
     SmartDashboard.putBoolean("Shooter Ready", isRPMUpToSpeed());
     if(m_setpoint != 0) {
-      m_leftShooterMotor.set(-1 * (shootController.calculate(getShooterMotorRPM(), m_setpoint)));
-      m_rightShooterMotor.set(-1 * (shootController.calculate(getShooterMotorRPM(), m_setpoint)));
+      m_leftShooterMotor.setVoltage(-1 * (shootController.calculate(getShooterMotorRPM(), m_setpoint) * 12.0 + 0.9 * feedforward.calculate(m_setpoint)));
+      m_rightShooterMotor.setVoltage(-1 * (shootController.calculate(getShooterMotorRPM(), m_setpoint) * 12.0 + 0.9 * feedforward.calculate(m_setpoint)));
     }
   }
 }
