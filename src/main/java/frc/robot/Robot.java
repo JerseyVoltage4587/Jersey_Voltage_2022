@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Auto.Auto;
 import frc.robot.commands.Auto.SimpleAuto;
-import frc.robot.commands.Auto.TwoBallAuto;
+import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.Drive.DefaultDriveBaseCommand;
 import frc.robot.subsystems.*;
 import frc.robot.util.Gyro;
@@ -24,7 +25,7 @@ import frc.robot.util.Gyro;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = new SimpleAuto(60, 0)/*AutoChoice.getAutoChoice()*/;
+  private Command m_autonomousCommand = new Auto(75, 0)/*AutoChoice.getAutoChoice()*/;
   private static PowerDistribution m_PDP;
 
   public static PowerDistribution getPDP() {
@@ -88,6 +89,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
     //runLimeLight();
+    CameraServer.startAutomaticCapture();
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getDriveBase().zeroDriveSensors(true);
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
