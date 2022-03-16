@@ -49,8 +49,8 @@ public class DefaultDriveBaseCommand extends CommandBase {
     double turn = m_OI.getTurn();
     double climb = m_OI.getClimbStick();
 
-    m_climber.setLeftMotorVolts(motorLevelToVoltage(climb * 0.8));
-    m_climber.setRightMotorVolts(motorLevelToVoltage(climb * 0.8));
+    m_climber.setLeftFrontMotorVolts(motorLevelToVoltage(climb * 0.8));
+    m_climber.setRightFrontMotorVolts(motorLevelToVoltage(climb * 0.8));
 
     if (Math.abs(forward) < 0.05) {
 			forward = 0;

@@ -1,4 +1,4 @@
-Step 1: Unspool set amount of rotations ><
-Step 2: Extend pistons. ><
-Step 3: Spool set amount of rotations (PID Loop).
-Step 4: Retract pistons.
+Step 1: Pull up with Back motors by set amount of rotations
+Step 2: Extend Pistons
+Step 3: Pull down Front Motors until it hits high bar
+Step 4: Retract Pistons

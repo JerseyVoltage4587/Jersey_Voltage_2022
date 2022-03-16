@@ -42,8 +42,8 @@ public ClimberMotors(double distance, double tolerance, boolean forward) {
   @Override
   public void initialize() {
     m_startTime        = Timer.getFPGATimestamp(); // Get start time
-    m_startLeftRotations  = Units.inchesToMeters(m_climber.getLeftEncoder()); // get distance for left
-    m_startRightRotations = Units.inchesToMeters(m_climber.getRightEncoder()); // get distance for right
+    m_startLeftRotations  = Units.inchesToMeters(m_climber.getLeftFrontEncoder()); // get distance for left
+    m_startRightRotations = Units.inchesToMeters(m_climber.getRightFrontEncoder()); // get distance for right
     Robot.getGyro();
     m_yaw = Gyro.getYaw();
     System.out.println("m_startTime="+m_startTime+",m_startLeft="+m_startLeftRotations+",m_startRight="+m_startRightRotations);
@@ -52,9 +52,9 @@ public ClimberMotors(double distance, double tolerance, boolean forward) {
   @Override
   public void execute() {
     double elapsed_time = Timer.getFPGATimestamp() - m_startTime; // subtracts startTime from timer to get more accurate time.
-    m_leftRotations  = Math.abs(Units.inchesToMeters(m_climber.getLeftEncoder())  - m_startLeftRotations);
+    m_leftRotations  = Math.abs(Units.inchesToMeters(m_climber.getLeftFrontEncoder())  - m_startLeftRotations);
       // subtracts starting distance from distance to get more accurate distance.
-    m_rightRotations = Math.abs(Units.inchesToMeters(m_climber.getRightEncoder()) - m_startRightRotations);
+    m_rightRotations = Math.abs(Units.inchesToMeters(m_climber.getRightFrontEncoder()) - m_startRightRotations);
       // subtracts starting distance from distance to get more accurate distance.
 
     double expected_distance, expected_velocity, expected_acceleration;
