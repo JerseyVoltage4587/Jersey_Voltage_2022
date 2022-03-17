@@ -22,7 +22,7 @@ public class Climber extends SubsystemBase {
   public boolean m_isActive = true;
   static Climber m_Instance = null;
   public static boolean climbingStatus = false;
-  private static WPI_TalonSRX m_leftFrontClimberMotor, m_rightFrontClimberMotor/* , m_leftBackClimberMotor, m_rightBackClimberMotor */;
+  private static WPI_TalonSRX m_leftFrontClimberMotor, m_rightFrontClimberMotor , m_leftBackClimberMotor, m_rightBackClimberMotor;
   private Solenoid m_leftClimberSolenoid, m_rightClimberSolenoid;
   public static boolean leftClimberState,  rightClimberState;
   private static double rightVoltage, leftVoltage, m_roll;
@@ -35,12 +35,12 @@ public class Climber extends SubsystemBase {
     /* Left Solenoid Set */ m_leftClimberSolenoid = new Solenoid(Constants.PCMCAN_Address, PneumaticsModuleType.CTREPCM, Constants.LeftClimberChannel);
     /* Right Front Motor Set */ m_rightFrontClimberMotor = new WPI_TalonSRX(Constants.RightFrontClimberMotorCAN_Address);
     /* Left Front Motor Set */ m_leftFrontClimberMotor = new WPI_TalonSRX(Constants.LeftFrontClimberMotorCAN_Address);
-    // /* Right Back Motor Set */ m_rightBackClimberMotor = new WPI_TalonSRX(Constants.RightBackClimberMotorCAN_Address);
-    // /* Left Back Motor Set */ m_leftBackClimberMotor = new WPI_TalonSRX(Constants.LeftBackClimberMotorCAN_Address);
+    /* Right Back Motor Set */ m_rightBackClimberMotor = new WPI_TalonSRX(Constants.RightWinchMotorCAN_Address);
+    /* Left Back Motor Set */ m_leftBackClimberMotor = new WPI_TalonSRX(Constants.LeftWinchMotorCAN_Address);
     /* Right Front Motor Set Brake Mode */ m_rightFrontClimberMotor.setNeutralMode(NeutralMode.Brake);
     /* Left Front Motor Set Brake Mode */ m_leftFrontClimberMotor.setNeutralMode(NeutralMode.Brake);
-    // /* Right Back Motor Set Brake Mode */ m_rightBackClimberMotor.setNeutralMode(NeutralMode.Brake);
-    // /* Left Back Motor Set Brake Mode */ m_leftBackClimberMotor.setNeutralMode(NeutralMode.Brake);
+    /* Right Back Motor Set Brake Mode */ m_rightBackClimberMotor.setNeutralMode(NeutralMode.Brake);
+    /* Left Back Motor Set Brake Mode */ m_leftBackClimberMotor.setNeutralMode(NeutralMode.Brake);
     leftClimberState = false;
     rightClimberState = false;
     m_roll = Gyro.getRoll();
@@ -134,6 +134,21 @@ public class Climber extends SubsystemBase {
     return m_rightFrontClimberMotor.getBusVoltage();
   }
 
+  public void winchUp() {
+    m_leftBackClimberMotor.set(0.75);
+    m_rightBackClimberMotor.set(-0.75);
+  }
+
+  public void winchDown() {
+    m_leftBackClimberMotor.set(-0.75);
+    m_rightBackClimberMotor.set(0.75);
+  }
+
+  public void winchStop() {
+    m_leftBackClimberMotor.set(0);
+    m_rightBackClimberMotor.set(0);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -141,6 +156,7 @@ public class Climber extends SubsystemBase {
     m_roll = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftFrontEncoder());
     SmartDashboard.putNumber("right climber", getRightFrontEncoder());
+    SmartDashboard.putBoolean("Pistons Extended", leftClimberState && rightClimberState);
 
     if (climbingStatus) {
       System.out.println("roll control");

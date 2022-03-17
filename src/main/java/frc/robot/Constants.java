@@ -30,7 +30,11 @@ public final class Constants {
     public static final int RightFrontClimberMotorCAN_Address = 56; //final
     public static final int LeftBackClimberMotorCAN_Address = 35; //final
     public static final int RightBackClimberMotorCAN_Address = 36; //final
-    public static final int PCMCAN_Address = 12; //CHANGE THIS IS TEMPORARY 
+    public static final int PCMCAN_Address = 12; //final
+    public static final int LeftWinchMotorCAN_Address = 17;
+    public static final int RightWinchMotorCAN_Address = 18;
+
+
 
     //PDP Ports
     public static final int RightSpark2PDP_Port = 15; //final
@@ -44,6 +48,8 @@ public final class Constants {
     public static final int KickerMotorPDP_Port = 5; //final
     public static final int LeftFrontClimberMotorPDP_Port = 2; //final
     public static final int RightFrontClimberMotorPDP_Port = 13; //final
+    public static final int LeftWinchMotorPDP_Port = 9;
+    public static final int RightWinchMotorPDP_Port = 10;
     // public static final int LeftBackClimberMotorPDP_Port = ; //TBD
     // public static final int RightBackClimberMotorPDP_Port = ; //TBD
     
@@ -62,7 +68,8 @@ public final class Constants {
     public static double IntakeBackMotorLevel = 0.5;
     public static double ShooterMotorRPM = 7000; //HIGH GOAL RPM
     public static double ShooterBackMotorRPM = -60; //TBD
-    public static double StorageMotorLevel = 0.7;
+    public static double StorageMotorLevel = 0.75;
+    public static double StorageMotorLevelShooting = 0.5;
     public static double StorageBackMotorLevel = -0.5;
     public static double KickerMotorLevel = -0.8; //TBD
     public static double KickerSlowBackMotorLevel = 0.4; //TBD

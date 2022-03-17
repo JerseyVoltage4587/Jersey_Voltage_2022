@@ -22,7 +22,11 @@ public class DefaultClimberCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  public void initialize() {}
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
     double climbLeft = m_OI.getLeftClimbStick();
     double climbRight = m_OI.getRightClimbStick();
     
@@ -38,10 +42,6 @@ public class DefaultClimberCommand extends CommandBase {
     SmartDashboard.putNumber("Left Volts", m_climber.getLeftVolts());
     SmartDashboard.putNumber("Right Volts", m_climber.getRightVolts());
   }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

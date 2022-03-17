@@ -12,8 +12,13 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.Auto.SimpleAuto;
 import frc.robot.commands.Climber.ToggleClimbMotors;
 import frc.robot.commands.Climber.ToggleClimbPistons;
+import frc.robot.commands.Climber.WinchDown;
+import frc.robot.commands.Climber.WinchStop;
+import frc.robot.commands.Climber.WinchUp;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.PrepareShooterHigh;
@@ -62,7 +67,7 @@ public class OI extends CommandBase {
     rightStickButton1 = new JoystickButton(m_joy1, 10);
     leftTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 2);
     rightTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 3);
-
+    
     m_joy2 = new Joystick(1);
     buttonA2 = new JoystickButton(m_joy2, 1);
     buttonB2 = new JoystickButton(m_joy2, 2);
@@ -76,8 +81,10 @@ public class OI extends CommandBase {
     rightStickButton2 = new JoystickButton(m_joy2, 10);
     leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
+    //upArrow2 = new POVButton(m_joy2, 0);
+    //downArrow2 = new POVButton(m_joy2, 180);
 
-    //buttonA1.whenPressed();
+    buttonA1.whenPressed(new SimpleAuto(30,0));
     buttonB1.whenPressed(new EjectBall());
     buttonB1.whenReleased(new StopEjectBall());
     //buttonY1.whenPressed();
@@ -94,9 +101,16 @@ public class OI extends CommandBase {
 
     buttonA2.whenPressed(new PrepareShooter());
     buttonA2.whenReleased(new StopShooter());
-    //buttonB2.whenPressed();
-    //buttonX2.whenPressed(new PrepareShooter());
-    //buttonX2.whenReleased();
+    buttonB2.whenPressed(new WinchDown());
+    buttonB2.whenReleased(new WinchStop());
+    buttonX2.whenPressed(new WinchUp());
+    buttonX2.whenReleased(new WinchStop());
+    /*
+    upArrow2.whenPressed(new WinchUp());
+    upArrow2.whenReleased(new WinchStop());
+    downArrow2.whenPressed(new WinchDown());
+    downArrow2.whenReleased(new WinchStop());
+    */
     buttonY2.whenPressed(new PrepareShooterHigh());
     buttonY2.whenReleased(new StopShooter());
     //startButton2.whenPressed();

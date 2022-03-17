@@ -49,6 +49,10 @@ public class Storage extends SubsystemBase {
   public void runStorageBackward() {
     setStorageMotorLevel(Constants.StorageBackMotorLevel);
   }
+  public void runStorageShoot(){
+    setStorageMotorLevel(Constants.StorageMotorLevelShooting);
+
+  }
 
   public void stopStorage() {
     setStorageMotorLevel(0);
