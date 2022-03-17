@@ -72,26 +72,26 @@ public TrapezoidProfileMovement(double distance, double tolerance, boolean forwa
     double left_error  = Math.abs(expected_distance - m_leftTravel);
     double right_error = Math.abs(expected_distance - m_rightTravel);
     if (m_forward == true) {
-      left_voltage = Constants.ksVoltsLeft
-                                + expected_velocity * Constants.kvVoltsLeft
-                                + expected_acceleration * Constants.kaVoltsLeft
+      left_voltage = Constants.ksVolts
+                                + expected_velocity * Constants.kvVolts
+                                + expected_acceleration * Constants.kaVolts
                                 + left_error * Constants.kpDriveVel;
 
-      right_voltage = Constants.ksVoltsRight
-                                + expected_velocity * Constants.kvVoltsRight
-                                + expected_acceleration * Constants.kaVoltsRight
+      right_voltage = Constants.ksVolts
+                                + expected_velocity * Constants.kvVolts
+                                + expected_acceleration * Constants.kaVolts
                                 + right_error * Constants.kpDriveVel;
       
     } 
     else {
-      left_voltage = -1 * (Constants.ksVoltsLeft
-                                + expected_velocity * Constants.kvVoltsLeft
-                                + expected_acceleration * Constants.kaVoltsLeft
+      left_voltage = -1 * (Constants.ksVolts
+                                + expected_velocity * Constants.kvVolts
+                                + expected_acceleration * Constants.kaVolts
                                 + left_error * Constants.kpDriveVel);
 
-      right_voltage = -1 * (Constants.ksVoltsRight
-                                + expected_velocity * Constants.kvVoltsRight
-                                + expected_acceleration * Constants.kaVoltsRight
+      right_voltage = -1 * (Constants.ksVolts
+                                + expected_velocity * Constants.kvVolts
+                                + expected_acceleration * Constants.kaVolts
                                 + right_error * Constants.kpDriveVel);
     }
 

@@ -56,13 +56,13 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = 0.85;
     public static double IntakeBackMotorLevel = 0.5;
-    public static double ShooterMotorRPM = 1000; //not final
-    public static double ShooterBackMotorRPM = -60; //not final
+    public static double ShooterMotorRPM = 7000; //HIGH GOAL RPM
+    public static double ShooterBackMotorRPM = -60; //TBD
     public static double StorageMotorLevel = 0.7;
     public static double StorageBackMotorLevel = -0.5;
-    public static double KickerMotorLevel = -0.8; //not final
-    public static double KickerSlowBackMotorLevel = 0.4; //not final
-    public static double KickerFastBackMotorLevel = 0.7; //not final
+    public static double KickerMotorLevel = -0.8; //TBD
+    public static double KickerSlowBackMotorLevel = 0.4; //TBD
+    public static double KickerFastBackMotorLevel = 0.7; //TBD
     
     //Motor Stall Currents
     
@@ -85,13 +85,20 @@ public final class Constants {
         public static final double kMaxSpeed = 0;
         public static final double kMaxAcceleration = 0;
         public static final double kSecondsPerCycle = 0;
-        public static final int ksVoltsLeft = 0;
+/*        public static final double ksVoltsLeft = 0;
         public static final double kvVoltsLeft = 0;
-        public static final double kaVoltsLeft = 0;
+        public static final double kaVoltsLeft = 0;*/
         public static final double kpDriveVel = 0;
-        public static final int ksVoltsRight = 0;
+/*        public static final double ksVoltsRight = 0;
         public static final double kvVoltsRight = 0;
-        public static final double kaVoltsRight = 0;
+        public static final double kaVoltsRight = 0;*/
+        // Unit of gain uncertain - likely meter, possibly rotations.
+        public static final double ksVoltsShooter = 0.5;//0.89343;
+        public static final double kvVoltsShooter = 0.001;//0.13196;
+        public static final double kaVoltsShooter = 0.0016662;
+    public final static double ksVolts = 0; //TBD
+    public final static double kvVolts = 0; //TBD
+    public final static double kaVolts = 0; //TBD
 
     //Modes
     public final static int IntakeOFF_MODE = 0;

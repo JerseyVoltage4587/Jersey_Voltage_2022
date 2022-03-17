@@ -5,6 +5,7 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
 
@@ -16,6 +17,6 @@ public class AutoShoot extends SequentialCommandGroup {
   public AutoShoot() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PrepareShooter(), new ShootBall());
+    addCommands(new PrepareShooter(), new WaitCommand(3), new ShootBall());
   }
 }

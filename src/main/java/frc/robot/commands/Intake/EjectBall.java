@@ -17,6 +17,6 @@ public class EjectBall extends ParallelCommandGroup {
   public EjectBall() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new RunStorageBackward(), new RunKickerBackwardFast(), new RunShooterBackward());
+    addCommands(new RunStorageBackward(), new RunKickerBackwardFast()/*, new RunShooterBackward()*/);
   }
 }

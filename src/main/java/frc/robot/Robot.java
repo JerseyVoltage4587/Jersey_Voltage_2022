@@ -25,7 +25,7 @@ import frc.robot.util.Gyro;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = new Auto(75, 0)/*AutoChoice.getAutoChoice()*/;
+  private Command m_autonomousCommand = new Auto(85, 0)/*AutoChoice.getAutoChoice()*/;
   private static PowerDistribution m_PDP;
 
   public static PowerDistribution getPDP() {

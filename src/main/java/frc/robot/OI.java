@@ -16,6 +16,7 @@ import frc.robot.commands.Climber.ToggleClimbMotors;
 import frc.robot.commands.Climber.ToggleClimbPistons;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.PrepareShooter;
+import frc.robot.commands.Shooter.PrepareShooterHigh;
 import frc.robot.commands.Shooter.ShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
 import frc.robot.commands.Shooter.StopShooter;
@@ -91,11 +92,13 @@ public class OI extends CommandBase {
     //leftBumper1.whenPressed(new IntakeBall());
     //rightBumper1.whileHeld();
 
-    //buttonA2.whenPressed(new ToggleClimbMotors());
+    buttonA2.whenPressed(new PrepareShooter());
+    buttonA2.whenReleased(new StopShooter());
     //buttonB2.whenPressed();
-    buttonX2.whenPressed(new PrepareShooter());
-    buttonX2.whenReleased(new StopShooter());
-    //buttonY2.whenPressed();
+    //buttonX2.whenPressed(new PrepareShooter());
+    //buttonX2.whenReleased();
+    buttonY2.whenPressed(new PrepareShooterHigh());
+    buttonY2.whenReleased(new StopShooter());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();
@@ -116,8 +119,11 @@ public class OI extends CommandBase {
     return m_joy1.getRawAxis(4);
 	}
   // Get value of the "climb" stick.
-  public double getClimbStick() {
+  public double getLeftClimbStick() {
     return m_joy2.getRawAxis(1);
+  }
+  public double getRightClimbStick(){
+    return m_joy2.getRawAxis(5);
   }
   // Called when the command is initially scheduled.
   @Override

@@ -39,6 +39,7 @@ public class Climber extends SubsystemBase {
     m_rightClimberMotor.setNeutralMode(NeutralMode.Brake);
     leftClimberState = false;
     rightClimberState = false;
+    m_roll = Gyro.getRoll();
   }
 
   public static Climber getInstance() {
@@ -109,18 +110,24 @@ public class Climber extends SubsystemBase {
     climbingStatus = !climbingStatus;
   }
 
+  public double getLeftVolts() {
+    return m_leftClimberMotor.getBusVoltage();
+  }
 
+  public double getRightVolts() {
+    return m_rightClimberMotor.getBusVoltage();
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     Robot.getGyro();
-    m_roll = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftEncoder());
     SmartDashboard.putNumber("right climber", getRightEncoder());
 
     if (climbingStatus) {
-      double climbDirection = OI.getInstance().getClimbStick();
+      System.out.println("roll control");
+      double climbDirection = OI.getInstance().getLeftClimbStick();
       leftVoltage = climbDirection * RobotController.getBatteryVoltage();
       rightVoltage = climbDirection * RobotController.getBatteryVoltage();
         
@@ -141,12 +148,10 @@ public class Climber extends SubsystemBase {
           if (delta < 0) {
             rightVoltage += Constants.climberVoltageChange;
             leftVoltage -= Constants.climberVoltageChange;
-            setRightMotorVolts(rightVoltage);
           }
           else if (delta > 0) {
             rightVoltage -= Constants.climberVoltageChange;
             leftVoltage += Constants.climberVoltageChange;
-            setRightMotorVolts(rightVoltage);
           }
         }
       }

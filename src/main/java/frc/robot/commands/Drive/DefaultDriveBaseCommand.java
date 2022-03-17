@@ -8,6 +8,7 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.OI;
@@ -47,10 +48,19 @@ public class DefaultDriveBaseCommand extends CommandBase {
   public void execute() {
     double forward = m_OI.getDrive();
     double turn = m_OI.getTurn();
-    double climb = m_OI.getClimbStick();
+    double climbLeft = m_OI.getLeftClimbStick();
+    double climbRight = m_OI.getRightClimbStick();
+    if (Math.abs(climbLeft)<0.05){
+      climbLeft = 0;
+    }
+    if (Math.abs(climbRight)<0.05){
+      climbRight = 0;
+    }
+    m_climber.setLeftMotorLevel(climbLeft * 0.8);
+    m_climber.setRightMotorLevel(climbRight * 0.8);
 
-    m_climber.setLeftMotorVolts(motorLevelToVoltage(climb * 0.8));
-    m_climber.setRightMotorVolts(motorLevelToVoltage(climb * 0.8));
+    SmartDashboard.putNumber("Left Volts", m_climber.getLeftVolts());
+    SmartDashboard.putNumber("Right Volts", m_climber.getRightVolts());
 
     if (Math.abs(forward) < 0.05) {
 			forward = 0;

@@ -28,6 +28,9 @@ public class Shooter extends SubsystemBase {
   private BangBangController shootController;
   private SimpleMotorFeedforward feedforward;
   private double m_setpoint = 0;
+  private double ks = Constants.ksVoltsShooter;
+  private double kv = Constants.kvVoltsShooter;
+  private double ka = Constants.kaVoltsShooter;
 
   /**
    * Creates a new Shooter.
@@ -49,7 +52,7 @@ public class Shooter extends SubsystemBase {
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
     shootController = new BangBangController(50);
-    //feedforward = new SimpleMotorFeedforward(kS, kV, kA);
+    feedforward = new SimpleMotorFeedforward(ks, kv, ka);
   }
 
   private int m_mode = Constants.ShooterOFF_MODE;
@@ -92,16 +95,16 @@ public class Shooter extends SubsystemBase {
   }
 
   public void setShooterSetpoint(double setpoint) { //Positive will shoot forward
-    if (m_isActive == false) {
+    if (!m_isActive) {
       m_setpoint = 0;
       return;
     }
     m_setpoint = setpoint;
   }
 
-  public void runShooterForward() {
+  public void runShooterForward(double RPM) {
     m_mode = Constants.ShooterON_MODE;
-    setShooterSetpoint(Constants.ShooterMotorRPM);
+    setShooterSetpoint(RPM);
     //m_leftShooterMotor.set(-0.4);
     //m_rightShooterMotor.set(-0.4);
   }
@@ -120,24 +123,24 @@ public class Shooter extends SubsystemBase {
     m_rightShooterMotor.set(0);
   }
 
-  public double getShooterMotorLevel() { //Positive will shoot forward
+  public double getShooterMotorVoltage() { //Positive will shoot forward
     if (m_isActive == false) {
       return 0;
     }
-    return mLevel;
+    return m_leftShooterMotor.getMotorOutputVoltage();
   }
 
   public double getShooterMotorRPM() { //Positive will shoot forward
-    if (m_isActive == false) {
+    /*if (m_isActive == false) {
       return 0;
-    }
-    return m_leftShooterMotor.getSelectedSensorVelocity(0) * (600.0/4096);
+    }*/
+    return (m_leftShooterMotor.getSelectedSensorVelocity(0)/1024)*(600);
   }
 
 
   public void ToggleShooter() {
     if (m_mode != Constants.ShooterON_MODE){
-      runShooterForward();
+      runShooterForward(Constants.ShooterMotorRPM);
     }
     else {
       stopShooter();
@@ -153,13 +156,17 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
+    double bangBangCalculate = shootController.calculate(getShooterMotorRPM(), m_setpoint);
+    double feedForwardCalculate = feedforward.calculate(m_setpoint);
     SmartDashboard.putNumber("Shooter RPM", getShooterMotorRPM());
-    SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorLevel());
+    SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorVoltage());
     SmartDashboard.putBoolean("Shooter On", m_mode == Constants.ShooterON_MODE);
     SmartDashboard.putBoolean("Shooter Ready", isRPMUpToSpeed());
+    SmartDashboard.putNumber("BangBangCalculate", bangBangCalculate);
+    SmartDashboard.putNumber("FeedForwardCalculate", feedForwardCalculate);
     if(m_setpoint != 0) {
-      m_leftShooterMotor.setVoltage(-1 * (shootController.calculate(getShooterMotorRPM(), m_setpoint) * 12.0 + 0.9 * feedforward.calculate(m_setpoint)));
-      m_rightShooterMotor.setVoltage(-1 * (shootController.calculate(getShooterMotorRPM(), m_setpoint) * 12.0 + 0.9 * feedforward.calculate(m_setpoint)));
+      m_leftShooterMotor.setVoltage(-1 * (bangBangCalculate * 12.0 + 0.9 * feedForwardCalculate));
+      m_rightShooterMotor.setVoltage(-1 * (bangBangCalculate * 12.0 + 0.9 * feedForwardCalculate));
     }
   }
 }
