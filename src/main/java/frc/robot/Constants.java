@@ -26,8 +26,10 @@ public final class Constants {
     public static final int StorageCAN_Address = 3; //final
     public static final int IntakeMotorCAN_Address = 4; //final
     public static final int KickerMotorCAN_Address = 5; //final
-    public static final int LeftClimberMotorCAN_Address = 55; //final
-    public static final int RightClimberMotorCAN_Address = 56; //final
+    public static final int LeftFrontClimberMotorCAN_Address = 55; //final
+    public static final int RightFrontClimberMotorCAN_Address = 56; //final
+    public static final int LeftBackClimberMotorCAN_Address = 35; //final
+    public static final int RightBackClimberMotorCAN_Address = 36; //final
     public static final int PCMCAN_Address = 12; //CHANGE THIS IS TEMPORARY 
 
     //PDP Ports
@@ -40,8 +42,10 @@ public final class Constants {
     public static final int StoragePDP_Port = 4; //final
     public static final int IntakeMotorPDP_Port = 12; //final
     public static final int KickerMotorPDP_Port = 5; //final
-    public static final int LeftClimberMotorPDP_Port = 2; //final
-    public static final int RightClimberMotorPDP_Port = 13; //final
+    public static final int LeftFrontClimberMotorPDP_Port = 2; //final
+    public static final int RightFrontClimberMotorPDP_Port = 13; //final
+    // public static final int LeftBackClimberMotorPDP_Port = ; //TBD
+    // public static final int RightBackClimberMotorPDP_Port = ; //TBD
     
     //Solenoid IDs
     //public static final int Module_ID = 0;

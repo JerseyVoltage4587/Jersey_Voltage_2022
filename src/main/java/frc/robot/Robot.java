@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Auto.Auto;
 import frc.robot.commands.Auto.SimpleAuto;
+import frc.robot.commands.Climber.DefaultClimberCommand;
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.Drive.DefaultDriveBaseCommand;
 import frc.robot.subsystems.*;
@@ -91,6 +92,7 @@ public class Robot extends TimedRobot {
     //runLimeLight();
     CameraServer.startAutomaticCapture();
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
+    getClimber().setDefaultCommand(new DefaultClimberCommand());
     getDriveBase().zeroDriveSensors(true);
     CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
   }

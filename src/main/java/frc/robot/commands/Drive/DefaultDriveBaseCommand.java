@@ -21,15 +21,13 @@ public class DefaultDriveBaseCommand extends CommandBase {
    * Creates a new DefaultDriveBase.
    */
   private DriveBase m_drivebase;
-  private Climber m_climber;
   private OI m_OI;
 
   public DefaultDriveBaseCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drivebase = Robot.getDriveBase();
-    m_climber = Robot.getClimber();
     m_OI = Robot.getOI();
-    addRequirements(m_drivebase, m_climber);
+    addRequirements(m_drivebase);
 
   }
 
@@ -48,19 +46,6 @@ public class DefaultDriveBaseCommand extends CommandBase {
   public void execute() {
     double forward = m_OI.getDrive();
     double turn = m_OI.getTurn();
-    double climbLeft = m_OI.getLeftClimbStick();
-    double climbRight = m_OI.getRightClimbStick();
-    if (Math.abs(climbLeft)<0.05){
-      climbLeft = 0;
-    }
-    if (Math.abs(climbRight)<0.05){
-      climbRight = 0;
-    }
-    m_climber.setLeftMotorLevel(climbLeft * 0.8);
-    m_climber.setRightMotorLevel(climbRight * 0.8);
-
-    SmartDashboard.putNumber("Left Volts", m_climber.getLeftVolts());
-    SmartDashboard.putNumber("Right Volts", m_climber.getRightVolts());
 
     if (Math.abs(forward) < 0.05) {
 			forward = 0;
