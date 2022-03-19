@@ -66,10 +66,10 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = 0.85;
     public static double IntakeBackMotorLevel = 0.5;
-    public static double ShooterMotorRPM = 7000; //HIGH GOAL RPM
+    public static double ShooterMotorRPM = 10000; //HIGH GOAL RPM
     public static double ShooterBackMotorRPM = -60; //TBD
     public static double StorageMotorLevel = 0.75;
-    public static double StorageMotorLevelShooting = 0.5;
+    public static double StorageMotorLevelShooting = 0.25; //.5
     public static double StorageBackMotorLevel = -0.5;
     public static double KickerMotorLevel = -0.8; //TBD
     public static double KickerSlowBackMotorLevel = 0.4; //TBD
@@ -118,6 +118,7 @@ public final class Constants {
     public final static int ShooterON_MODE = 0;
     public final static int ShooterOFF_MODE = 1;
     public final static int ShooterBACK_MODE = 2;
+
 
     public final static double climberVoltageChange = 0.001;
 }
