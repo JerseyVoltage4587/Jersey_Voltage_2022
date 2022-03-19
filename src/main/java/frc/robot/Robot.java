@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Auto.Auto;
-import frc.robot.commands.Auto.SimpleAuto;
 import frc.robot.commands.Climber.DefaultClimberCommand;
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.commands.Drive.DefaultDriveBaseCommand;

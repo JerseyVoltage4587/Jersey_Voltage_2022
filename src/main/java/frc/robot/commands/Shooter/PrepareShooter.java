@@ -5,7 +5,6 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
@@ -14,16 +13,18 @@ import frc.robot.subsystems.Shooter;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PrepareShooter extends InstantCommand {
   Shooter m_shooter;
+  double m_RPM;
 
-  public PrepareShooter() {
+  public PrepareShooter(double RPM) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = Robot.getShooter();
+    m_RPM = RPM;
     addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.runShooterForward(4000);
+    m_shooter.runShooterForward(m_RPM);
   }
 }

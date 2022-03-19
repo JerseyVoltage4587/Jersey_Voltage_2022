@@ -4,25 +4,19 @@
 
 package frc.robot.commands.Shooter;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.Robot;
-import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
+import frc.robot.commands.Intake.EjectBall;
+import frc.robot.commands.Intake.StopEjectBall;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PrepareShooterHigh extends InstantCommand {
-  Shooter m_shooter;
-
+public class PrepareShooterHigh extends SequentialCommandGroup {
+  /** Creates a new PrepareShooterHigh. */
   public PrepareShooterHigh() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_shooter = Robot.getShooter();
-    addRequirements(m_shooter);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    m_shooter.runShooterForward(7000);
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(new EjectBall(), new StopEjectBall(), new PrepareShooter(Constants.ShooterMotorHighRPM));
   }
 }

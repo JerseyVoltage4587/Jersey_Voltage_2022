@@ -12,20 +12,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Auto.SimpleAuto;
-import frc.robot.commands.Climber.ToggleClimbMotors;
 import frc.robot.commands.Climber.ToggleClimbPistons;
 import frc.robot.commands.Climber.WinchDown;
 import frc.robot.commands.Climber.WinchStop;
 import frc.robot.commands.Climber.WinchUp;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.PrepareShooter;
-import frc.robot.commands.Shooter.PrepareShooterHigh;
 import frc.robot.commands.Shooter.ShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
 import frc.robot.commands.Shooter.StopShooter;
-import frc.robot.commands.Shooter.ToggleShooter;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -84,7 +80,7 @@ public class OI extends CommandBase {
     //upArrow2 = new POVButton(m_joy2, 0);
     //downArrow2 = new POVButton(m_joy2, 180);
 
-    buttonA1.whenPressed(new SimpleAuto(30,0));
+    buttonA1.whenPressed(new SimpleAuto(22,0));
     buttonB1.whenPressed(new EjectBall());
     buttonB1.whenReleased(new StopEjectBall());
     //buttonY1.whenPressed();
@@ -99,7 +95,7 @@ public class OI extends CommandBase {
     //leftBumper1.whenPressed(new IntakeBall());
     //rightBumper1.whileHeld();
 
-    buttonA2.whenPressed(new PrepareShooter());
+    buttonA2.whenPressed(new PrepareShooter(Constants.ShooterMotorLowRPM));
     buttonA2.whenReleased(new StopShooter());
     buttonB2.whenPressed(new WinchDown());
     buttonB2.whenReleased(new WinchStop());
@@ -111,7 +107,7 @@ public class OI extends CommandBase {
     downArrow2.whenPressed(new WinchDown());
     downArrow2.whenReleased(new WinchStop());
     */
-    buttonY2.whenPressed(new PrepareShooterHigh());
+    buttonY2.whenPressed(new PrepareShooter(Constants.ShooterMotorHighRPM));
     buttonY2.whenReleased(new StopShooter());
     //startButton2.whenPressed();
     //backButton2.whenPressed();

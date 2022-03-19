@@ -6,9 +6,8 @@ package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.Intake.DeployIntake;
+import frc.robot.Constants;
 import frc.robot.commands.Intake.IntakeBall;
-import frc.robot.commands.Intake.RetractIntake;
 import frc.robot.commands.Intake.StopIntakeBall;
 import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
@@ -23,6 +22,17 @@ public class Auto extends SequentialCommandGroup {
   public Auto(int distance, double heading) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PrepareShooter(), new IntakeBall(), new SimpleAuto(distance, heading), new WaitCommand(1), new StopIntakeBall(),  new WaitCommand(0.5), new SimpleAutoBack(60, heading), new WaitCommand(1), new ShootBall(), new WaitCommand(1.5), new SimpleAuto(60, heading), new StopShootBall(), new StopShooter());
+    addCommands(new PrepareShooter(Constants.ShooterMotorHighRPM), 
+                new IntakeBall(), 
+                new SimpleAuto(distance, heading), 
+                new WaitCommand(1), new StopIntakeBall(),  
+                new WaitCommand(0.5), 
+                new SimpleAutoBack(62, heading), 
+                new WaitCommand(1), 
+                new ShootBall(), 
+                new WaitCommand(3), 
+                new SimpleAuto(62, heading), 
+                new StopShootBall(), 
+                new StopShooter());
   }
 }

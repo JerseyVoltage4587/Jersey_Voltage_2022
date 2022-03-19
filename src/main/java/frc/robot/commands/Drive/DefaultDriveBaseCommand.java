@@ -8,12 +8,10 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
 
 public class DefaultDriveBaseCommand extends CommandBase {

@@ -24,7 +24,6 @@ public class Shooter extends SubsystemBase {
   static Shooter m_Instance = null;
   private static WPI_TalonSRX m_leftShooterMotor = null;
   private static WPI_TalonSRX m_rightShooterMotor = null;
-  private double mLevel;
   private BangBangController shootController;
   private SimpleMotorFeedforward feedforward;
   private double m_setpoint = 0;
@@ -140,7 +139,7 @@ public class Shooter extends SubsystemBase {
 
   public void ToggleShooter() {
     if (m_mode != Constants.ShooterON_MODE){
-      runShooterForward(Constants.ShooterMotorRPM);
+      runShooterForward(Constants.ShooterMotorHighRPM);
     }
     else {
       stopShooter();
@@ -148,7 +147,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isRPMUpToSpeed() {
-    return Math.abs(getShooterMotorRPM()) >= Math.abs((Constants.ShooterMotorRPM));
+    return Math.abs(getShooterMotorRPM()) >= Math.abs((Constants.ShooterMotorHighRPM));
   }
 
   @Override 
