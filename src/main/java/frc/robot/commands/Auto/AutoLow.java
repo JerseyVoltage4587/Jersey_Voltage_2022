@@ -17,21 +17,21 @@ import frc.robot.commands.Shooter.StopShooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Auto extends SequentialCommandGroup {
+public class AutoLow extends SequentialCommandGroup {
   /** Creates a new Auto. */
-  public Auto(int distance, double heading) {
+  public AutoLow(int distance, double heading) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PrepareShooter(Constants.ShooterMotorHighRPM), 
+    addCommands(new PrepareShooter(Constants.ShooterMotorLowRPM), 
                 new IntakeBall(), 
                 new SimpleAuto(distance, heading), 
                 new WaitCommand(1), new StopIntakeBall(),  
-                new WaitCommand(0.5),
-                new SimpleAutoBack(62, heading), 
+                new WaitCommand(0.5), 
+                new SimpleAutoBack(distance, heading), 
                 new WaitCommand(1), 
                 new ShootBall(), 
-                new WaitCommand(2), 
-                new SimpleAuto(62, heading), 
+                new WaitCommand(3), 
+                new SimpleAuto(distance, heading), 
                 new StopShootBall(), 
                 new StopShooter());
   }

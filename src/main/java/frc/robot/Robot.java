@@ -24,8 +24,11 @@ import frc.robot.util.Gyro;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
+
+
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand = new Auto(85, 0)/*AutoChoice.getAutoChoice()*/;
+  private static RobotContainer m_robotContainer = new RobotContainer();
+  private Command m_autonomousCommand;
   private static PowerDistribution m_PDP;
 
   public static PowerDistribution getPDP() {
@@ -129,6 +132,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand()/*AutoChoice.getAutoChoice()*/;
     //CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
     CommandScheduler.getInstance().schedule(m_autonomousCommand);
   }
