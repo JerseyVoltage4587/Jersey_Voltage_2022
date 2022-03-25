@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SimpleAutoBack extends SequentialCommandGroup {
-  /** Creates a new SimpleAutoBack. */
-  public SimpleAutoBack(int distance, double heading) {
+public class SimpleAutoForward extends SequentialCommandGroup {
+  /** Creates a new SimpleAutoForward. */
+  public SimpleAutoForward(int distance, double heading) {
     // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new WaitCommand(SmartDashboard.getNumber("Auto Wait Time", 0)), new AutoBack(distance, heading));
+    addCommands(new WaitCommand(SmartDashboard.getNumber("Auto Wait Time", 0)), new AutoForward(distance, heading));
   }
 }

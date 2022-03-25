@@ -9,6 +9,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Auto.Auto;
@@ -30,6 +31,10 @@ public class Robot extends TimedRobot {
   private static RobotContainer m_robotContainer = new RobotContainer();
   private Command m_autonomousCommand;
   private static PowerDistribution m_PDP;
+  private NetworkTableInstance Table;
+  private NetworkTable limelight;
+  private NetworkTableEntry camMode, stream;
+  private double autoWaitTime;
 
   public static PowerDistribution getPDP() {
     if (m_PDP == null) {
@@ -80,9 +85,6 @@ public class Robot extends TimedRobot {
     camMode.setNumber(1);
     stream.setNumber(0);
   }
-  private NetworkTableInstance Table;
-  private NetworkTable limelight;
-  private NetworkTableEntry camMode, stream;
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -93,6 +95,7 @@ public class Robot extends TimedRobot {
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
     //runLimeLight();
     CameraServer.startAutomaticCapture();
+    SmartDashboard.putNumber("Auto Wait Time", autoWaitTime);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getClimber().setDefaultCommand(new DefaultClimberCommand());
     getDriveBase().zeroDriveSensors(true);

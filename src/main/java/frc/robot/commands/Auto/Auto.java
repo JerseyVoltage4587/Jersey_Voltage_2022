@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Auto;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
@@ -22,16 +23,16 @@ public class Auto extends SequentialCommandGroup {
   public Auto(int distance, double heading) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PrepareShooter(Constants.ShooterMotorHighRPM), 
+    addCommands(new WaitCommand(SmartDashboard.getNumber("Auto Wait Time", 0)), new PrepareShooter(Constants.ShooterMotorHighRPM), 
                 new IntakeBall(), 
-                new SimpleAuto(distance, heading), 
+                new AutoForward(distance, heading), 
                 new WaitCommand(1), new StopIntakeBall(),  
                 new WaitCommand(0.5),
-                new SimpleAutoBack(62, heading), 
+                new AutoBack(62, heading), 
                 new WaitCommand(1), 
                 new ShootBall(), 
                 new WaitCommand(2), 
-                new SimpleAuto(62, heading), 
+                new AutoForward(62, heading), 
                 new StopShootBall(), 
                 new StopShooter());
   }

@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Auto.SimpleAuto;
+import frc.robot.commands.Auto.AutoForward;
+import frc.robot.commands.Auto.SimpleAutoForward;
 import frc.robot.commands.Climber.ToggleClimbPistons;
 import frc.robot.commands.Climber.WinchDown;
 import frc.robot.commands.Climber.WinchStop;
@@ -80,7 +81,7 @@ public class OI extends CommandBase {
     //upArrow2 = new POVButton(m_joy2, 0);
     //downArrow2 = new POVButton(m_joy2, 180);
 
-    buttonA1.whenPressed(new SimpleAuto(18, 0));
+    buttonA1.whenPressed(new SimpleAutoForward(18, 0));
     buttonB1.whenPressed(new EjectBall());
     buttonB1.whenReleased(new StopEjectBall());
     //buttonY1.whenPressed();

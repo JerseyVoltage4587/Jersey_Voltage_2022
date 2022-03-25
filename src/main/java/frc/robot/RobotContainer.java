@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto.Auto;
 import frc.robot.commands.Auto.AutoLow;
 import frc.robot.commands.Auto.DoNothing;
-import frc.robot.commands.Auto.SimpleAuto;
+import frc.robot.commands.Auto.SimpleAutoForward;
+import frc.robot.commands.Auto.AutoForward;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -43,7 +44,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     m_chooser.setDefaultOption("Two Ball (High)", new Auto(85, 0));
-    m_chooser.addOption("Leave Tarmac", new SimpleAuto(85, 0));
+    m_chooser.addOption("Leave Tarmac", new SimpleAutoForward(85, 0));
     m_chooser.addOption("Do Nothing", new DoNothing());
     m_chooser.addOption("Two Ball (Low)", new AutoLow(85, 0));
     SmartDashboard.putData(m_chooser);
