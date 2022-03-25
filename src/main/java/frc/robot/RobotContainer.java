@@ -33,6 +33,7 @@ public class RobotContainer {
   public RobotContainer() {
     m_chooser = new SendableChooser<>();
     // Configure the button bindings
+    Robot.autoWaitTime = SmartDashboard.getNumber("Auto Wait Time", 0);
     configureButtonBindings();
   }
 

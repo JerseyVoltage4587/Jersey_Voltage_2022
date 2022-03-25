@@ -15,6 +15,6 @@ public class SimpleAutoForward extends SequentialCommandGroup {
   /** Creates a new SimpleAutoForward. */
   public SimpleAutoForward(int distance, double heading) {
     // Add your commands in the addCommands() call, e.g.
-    addCommands(new WaitCommand(SmartDashboard.getNumber("Auto Wait Time", 0)), new AutoForward(distance, heading));
+    addCommands(new AutoForward(distance, heading));
   }
 }

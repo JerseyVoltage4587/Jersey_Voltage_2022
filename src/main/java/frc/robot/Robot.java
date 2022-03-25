@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Auto.Auto;
 import frc.robot.commands.Climber.DefaultClimberCommand;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -34,7 +35,7 @@ public class Robot extends TimedRobot {
   private NetworkTableInstance Table;
   private NetworkTable limelight;
   private NetworkTableEntry camMode, stream;
-  private double autoWaitTime;
+  public static double autoWaitTime;
 
   public static PowerDistribution getPDP() {
     if (m_PDP == null) {
@@ -95,7 +96,7 @@ public class Robot extends TimedRobot {
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
     //runLimeLight();
     CameraServer.startAutomaticCapture();
-    SmartDashboard.putNumber("Auto Wait Time", autoWaitTime);
+    SmartDashboard.putNumber("Auto Wait Time", 0);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getClimber().setDefaultCommand(new DefaultClimberCommand());
     getDriveBase().zeroDriveSensors(true);
@@ -137,7 +138,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand()/*AutoChoice.getAutoChoice()*/;
     //CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
-    CommandScheduler.getInstance().schedule(m_autonomousCommand);
+    autoWaitTime = SmartDashboard.getNumber("Auto Wait Time", 0);
+    CommandScheduler.getInstance().schedule(new WaitCommand(autoWaitTime) , m_autonomousCommand);
   }
 
   /** This function is called periodically during autonomous. */

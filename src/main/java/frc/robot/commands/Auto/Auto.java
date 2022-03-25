@@ -23,7 +23,7 @@ public class Auto extends SequentialCommandGroup {
   public Auto(int distance, double heading) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new WaitCommand(SmartDashboard.getNumber("Auto Wait Time", 0)), new PrepareShooter(Constants.ShooterMotorHighRPM), 
+    addCommands(new PrepareShooter(Constants.ShooterMotorHighRPM), 
                 new IntakeBall(), 
                 new AutoForward(distance, heading), 
                 new WaitCommand(1), new StopIntakeBall(),  

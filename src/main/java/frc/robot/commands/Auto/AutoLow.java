@@ -23,7 +23,7 @@ public class AutoLow extends SequentialCommandGroup {
   public AutoLow(int distance, double heading) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new WaitCommand(SmartDashboard.getNumber("Auto Wait Time", 0)), new PrepareShooter(Constants.ShooterMotorLowRPM), 
+    addCommands(new PrepareShooter(Constants.ShooterMotorLowRPM), 
                 new IntakeBall(), 
                 new AutoForward(distance, heading), 
                 new WaitCommand(1), new StopIntakeBall(),  
