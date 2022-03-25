@@ -29,8 +29,8 @@ public class AutoBack extends CommandBase {
     m_heading = heading;
     m_drivebase = Robot.getDriveBase();
     addRequirements(m_drivebase);
-    rightMotorLevelChange = 0.3;
-    leftMotorLevelChange = 0.3;
+    rightMotorLevelChange = -0.3;
+    leftMotorLevelChange = -0.3;
     leftInches = 0;
     rightInches = 0;
     startLeftInches = 0;
@@ -68,7 +68,7 @@ public class AutoBack extends CommandBase {
     if (delta < -180) {
       delta += 360;
     }
-
+    /*
     if (Math.abs(delta) > 2) {
       if (delta < 0) {
         rightMotorLevelChange -= 0.01;
@@ -83,7 +83,7 @@ public class AutoBack extends CommandBase {
         m_drivebase.setLeftMotorLevel(-1*leftMotorLevelChange);
       }
     }
-    
+    */
     else {
       rightMotorLevelChange = 0.3;
       leftMotorLevelChange = 0.3;

@@ -36,8 +36,8 @@ public class DefaultClimberCommand extends CommandBase {
     if (Math.abs(climbRight)<0.05){
       climbRight = 0;
     }
-    m_climber.setLeftFrontMotorLevel(climbLeft * 0.8);
-    m_climber.setRightFrontMotorLevel(climbRight * 0.8);
+    m_climber.setLeftFrontMotorLevel(climbLeft);
+    m_climber.setRightFrontMotorLevel(climbRight);
 
     SmartDashboard.putNumber("Left Volts", m_climber.getLeftVolts());
     SmartDashboard.putNumber("Right Volts", m_climber.getRightVolts());
