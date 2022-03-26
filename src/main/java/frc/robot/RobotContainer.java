@@ -9,9 +9,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.Auto.Auto;
-import frc.robot.commands.Auto.AutoLow;
+import frc.robot.commands.Auto.TwoBallHigh;
+import frc.robot.commands.Auto.TwoBallLow;
 import frc.robot.commands.Auto.DoNothing;
+import frc.robot.commands.Auto.OneBallHigh;
+import frc.robot.commands.Auto.OneBallLow;
 import frc.robot.commands.Auto.SimpleAutoForward;
 import frc.robot.commands.Auto.AutoForward;
 
@@ -44,10 +46,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_chooser.setDefaultOption("Two Ball (High)", new Auto(85, 0));
+    m_chooser.setDefaultOption("Two Ball (High)", new TwoBallHigh(85, 0));
     m_chooser.addOption("Leave Tarmac", new SimpleAutoForward(85, 0));
     m_chooser.addOption("Do Nothing", new DoNothing());
-    m_chooser.addOption("Two Ball (Low)", new AutoLow(85, 0));
+    m_chooser.addOption("Two Ball (Low)", new TwoBallLow(85, 0));
+    m_chooser.addOption("One Ball (High)", new OneBallHigh());
+    m_chooser.addOption("One Ball (Low)", new OneBallLow());
     SmartDashboard.putData(m_chooser);
   }
 

@@ -4,12 +4,9 @@
 
 package frc.robot.commands.Auto;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
-import frc.robot.commands.Intake.IntakeBall;
-import frc.robot.commands.Intake.StopIntakeBall;
 import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
@@ -18,22 +15,11 @@ import frc.robot.commands.Shooter.StopShooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Auto extends SequentialCommandGroup {
-  /** Creates a new Auto. */
-  public Auto(int distance, double heading) {
+public class OneBallLow extends SequentialCommandGroup {
+  /** Creates a new OneBallHigh. */
+  public OneBallLow() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PrepareShooter(Constants.ShooterMotorHighRPM), 
-                new IntakeBall(), 
-                new AutoForward(distance, heading), 
-                new WaitCommand(1), new StopIntakeBall(),  
-                new WaitCommand(0.5),
-                new AutoBack(62, heading), 
-                new WaitCommand(1), 
-                new ShootBall(), 
-                new WaitCommand(2), 
-                new AutoForward(62, heading), 
-                new StopShootBall(), 
-                new StopShooter());
+    addCommands(new PrepareShooter(Constants.ShooterMotorLowRPM), new WaitCommand(1), new ShootBall(), new WaitCommand(2), new StopShootBall(), new StopShooter(), new SimpleAutoForward(75, 0));
   }
 }

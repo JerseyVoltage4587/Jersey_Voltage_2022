@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.Auto.Auto;
-import frc.robot.commands.Auto.TwoBallAuto;
+import frc.robot.commands.Auto.TwoBallHigh;
+//import frc.robot.commands.Auto.TwoBallAuto;
 
 public class AutoChoice {
   /** Creates a new Auto. */
@@ -21,8 +21,8 @@ public class AutoChoice {
 
   public AutoChoice() {
     // Use addRequirements() here to declare subsystem dependencies.
-    autoCommands.put("TwoBallAuto", new TwoBallAuto());
-    autoCommands.put("Auto", new Auto(75, 0));
+//    autoCommands.put("TwoBallAuto", new TwoBallAuto());
+    autoCommands.put("Auto", new TwoBallHigh(75, 0));
   }
 
   public static Command getAutoChoice() {
