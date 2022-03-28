@@ -52,7 +52,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
 			turn = 0;
     }
 
-    m_drivebase.arcadeDrive(forward, turn);
+    m_drivebase.arcadeDrive(Math.pow(forward, 3), Math.pow(turn, 3));
   }
 
   // Called once the command ends or is interrupted.
