@@ -27,9 +27,6 @@ public class Shooter extends SubsystemBase {
   private BangBangController shootController;
   private SimpleMotorFeedforward feedforward;
   private double m_setpoint = 0;
-  private double ks = Constants.ksVoltsShooter;
-  private double kv = Constants.kvVoltsShooter;
-  private double ka = Constants.kaVoltsShooter;
 
   /**
    * Creates a new Shooter.
@@ -40,7 +37,6 @@ public class Shooter extends SubsystemBase {
     }
     m_leftShooterMotor = new WPI_TalonSRX(Constants.LeftShooterMotorCAN_Address);
     m_rightShooterMotor = new WPI_TalonSRX(Constants.RightShooterMotorCAN_Address);
-    //m_leftShooterMotor.follow(m_rightShooterMotor);
     m_leftShooterMotor.setInverted(InvertType.OpposeMaster);
     m_leftShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_rightShooterMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
@@ -51,7 +47,7 @@ public class Shooter extends SubsystemBase {
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
     shootController = new BangBangController(50);
-    feedforward = new SimpleMotorFeedforward(ks, kv, ka);
+    feedforward = new SimpleMotorFeedforward(Constants.ksVoltsShooter, Constants.kvVoltsShooter, Constants.kaVoltsShooter);
   }
 
   private int m_mode = Constants.ShooterOFF_MODE;
@@ -130,9 +126,9 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getShooterMotorRPM() { //Positive will shoot forward
-    /*if (m_isActive == false) {
+    if (m_isActive == false) {
       return 0;
-    }*/
+    }
     return (m_leftShooterMotor.getSelectedSensorVelocity(0)/1024)*(600);
   }
 

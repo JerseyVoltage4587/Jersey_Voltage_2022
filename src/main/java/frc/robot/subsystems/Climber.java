@@ -55,7 +55,6 @@ public class Climber extends SubsystemBase {
 		return m_Instance;
   }
 
-  // FYI - I have no idea how you guys want this to work, or how it works at all
   //Pull up with Back motors by set amount of rotations
 /*   public void climbStep1(double rotations) {
     m_leftBackClimberMotor pull by set amount of rotations
@@ -64,14 +63,12 @@ public class Climber extends SubsystemBase {
     m_rightFrontClimberMotor.setNeutralMode(NeutralMode.Coast);
   } */
 
-  // FYI - I have no idea how you guys want this to work, or how it works at all
   //Extend Pistons
 /*   public void climbStep2() {
-    m_leftClimberSolenoid.set(true)
-    m_rightClimberSolenoid.set(true)
+    m_leftClimberSolenoid.set(true);
+    m_rightClimberSolenoid.set(true);
   } */
 
-  // FYI - I have no idea how you guys want this to work, or how it works at all
   //Pull down Front Motors until it hits high bar
 /*   public void climbStep3(double rotations) {
     m_leftFrontClimberMotor pull by set amount of rotations
@@ -80,11 +77,10 @@ public class Climber extends SubsystemBase {
     m_rightBackClimberMotor.setNeutralMode(NeutralMode.Coast);
   } */
 
-  // FYI - I have no idea how you guys want this to work, or how it works at all
   //Retract Pistons
 /*   public void climbStep4() {
-    m_leftClimberSolenoid.set(false)
-    m_rightClimberSolenoid.set(false)
+    m_leftClimberSolenoid.set(false);
+    m_rightClimberSolenoid.set(false);
   } */
 
   public double getLeftFrontEncoder() {
