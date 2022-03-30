@@ -64,6 +64,10 @@ public class DriveBase extends SubsystemBase {
     m_rightSpark.setIdleMode(IdleMode.kBrake);
     m_leftSpark.setInverted(false);
     m_rightSpark.setInverted(true);
+    m_leftSpark.setSmartCurrentLimit(30);
+    m_rightSpark.setSmartCurrentLimit(30);
+    m_leftSpark.setOpenLoopRampRate(0.1);
+    m_rightSpark.setOpenLoopRampRate(0.1);
     m_drive = new DifferentialDrive(m_leftSpark, m_rightSpark);
     m_drive.setSafetyEnabled(false);
     m_loggingData = new DriveBaseLoggingData();

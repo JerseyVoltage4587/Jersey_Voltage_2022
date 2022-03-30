@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
   static Shooter m_Instance = null;
   private static WPI_TalonSRX m_leftShooterMotor = null;
   private static WPI_TalonSRX m_rightShooterMotor = null;
-  private BangBangController shootController;
+  private BangBangController shootController, shootController2;
   private SimpleMotorFeedforward feedforward;
   private double m_setpoint = 0;
   private double ks = Constants.ksVoltsShooter;
@@ -51,6 +51,7 @@ public class Shooter extends SubsystemBase {
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
     shootController = new BangBangController(50);
+    shootController2 = new BangBangController(200);
     feedforward = new SimpleMotorFeedforward(ks, kv, ka);
   }
 
@@ -133,7 +134,7 @@ public class Shooter extends SubsystemBase {
     /*if (m_isActive == false) {
       return 0;
     }*/
-    return (m_leftShooterMotor.getSelectedSensorVelocity(0)/1024)*(600);
+    return (m_leftShooterMotor.getSelectedSensorVelocity(0)/3072)*(600);
   }
 
 
@@ -156,6 +157,7 @@ public class Shooter extends SubsystemBase {
       return;
     }
     double bangBangCalculate = shootController.calculate(getShooterMotorRPM(), m_setpoint);
+    double bangBangCalculate2 = (m_setpoint - Math.abs(getShooterMotorRPM())) > 200 ? 1 : 0;
     double feedForwardCalculate = feedforward.calculate(m_setpoint);
     SmartDashboard.putNumber("Shooter RPM", getShooterMotorRPM());
     SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorVoltage());
@@ -164,8 +166,8 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("BangBangCalculate", bangBangCalculate);
     SmartDashboard.putNumber("FeedForwardCalculate", feedForwardCalculate);
     if(m_setpoint != 0) {
-      m_leftShooterMotor.setVoltage(-1 * (bangBangCalculate * 12.0 + 0.9 * feedForwardCalculate));
-      m_rightShooterMotor.setVoltage(-1 * (bangBangCalculate * 12.0 + 0.9 * feedForwardCalculate));
+      m_leftShooterMotor.setVoltage(-1 * (bangBangCalculate * m_setpoint / 2500 + 1.0 * feedForwardCalculate + 4 * bangBangCalculate2));
+      m_rightShooterMotor.setVoltage(-1 * (bangBangCalculate * m_setpoint / 2500 + 1.0 * feedForwardCalculate + 4 * bangBangCalculate2));
     }
   }
 }

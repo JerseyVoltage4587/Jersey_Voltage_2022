@@ -67,7 +67,7 @@ public final class Constants {
     public static double IntakeMotorLevel = 0.85;
     public static double IntakeBackMotorLevel = 0.5;
     public static double ShooterMotorLowRPM = 4000; //LOW GOAL RPM
-    public static double ShooterMotorHighRPM = 7900; //HIGH GOAL RPM
+    public static double ShooterMotorHighRPM = 7000; //HIGH GOAL RPM
     public static double ShooterBackMotorRPM = -60; //TBD
     public static double StorageMotorLevel = 0.75;
     public static double StorageMotorLevelShooting = 0.2; //.5
@@ -106,7 +106,7 @@ public final class Constants {
         public static final double kaVoltsRight = 0;*/
         // Unit of gain uncertain - likely meter, possibly rotations.
         public static final double ksVoltsShooter = 0.5;//0.89343;
-        public static final double kvVoltsShooter = 0.001;//0.13196;
+        public static final double kvVoltsShooter = 0.00142;//0.13196;
         public static final double kaVoltsShooter = 0.0016662;
     public final static double ksVolts = 0; //TBD
     public final static double kvVolts = 0; //TBD
