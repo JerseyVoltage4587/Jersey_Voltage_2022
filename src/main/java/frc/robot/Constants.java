@@ -66,11 +66,12 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = 0.85;
     public static double IntakeBackMotorLevel = 0.5;
-    public static double ShooterMotorLowRPM = 4000; //LOW GOAL RPM
-    public static double ShooterMotorHighRPM = 7000; //HIGH GOAL RPM
+    public static double ShooterMotorLowRPM = 1650; //LOW GOAL RPM
+    public static double ShooterMotorHighRPM = 4000; //HIGH GOAL RPM
+    public static double ShooterMotorPadRPM = 5300; //PAD GOAL RPM
     public static double ShooterBackMotorRPM = -60; //TBD
     public static double StorageMotorLevel = 0.75;
-    public static double StorageMotorLevelShooting = 0.2; //.5
+    public static double StorageMotorLevelShooting = 0.6; //.5
     public static double StorageBackMotorLevel = -0.5;
     public static double KickerMotorLevel = -0.8; //TBD
     public static double KickerSlowBackMotorLevel = 0.4; //TBD

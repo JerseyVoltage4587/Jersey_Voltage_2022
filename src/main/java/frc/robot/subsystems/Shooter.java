@@ -152,8 +152,9 @@ public class Shooter extends SubsystemBase {
       return;
     }
     double bangBangCalculate = shootController.calculate(getShooterMotorRPM(), m_setpoint);
-    double bangBangCalculate2 = (m_setpoint - Math.abs(getShooterMotorRPM())) > 200 ? 1 : 0;
+    double bangBangCalculate2 = (m_setpoint - Math.abs(getShooterMotorRPM())) > 0.05 * m_setpoint ? 1 : 0;
     double feedForwardCalculate = feedforward.calculate(m_setpoint);
+    double error = m_setpoint > 2500 ? 7 : 3;
     SmartDashboard.putNumber("Shooter RPM", getShooterMotorRPM());
     SmartDashboard.putNumber("Shooter Motor Level", getShooterMotorVoltage());
     SmartDashboard.putBoolean("Shooter On", m_mode == Constants.ShooterON_MODE);
@@ -161,8 +162,8 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("BangBangCalculate", bangBangCalculate);
     SmartDashboard.putNumber("FeedForwardCalculate", feedForwardCalculate);
     if(m_setpoint != 0) {
-      m_leftShooterMotor.setVoltage(-1 * (bangBangCalculate * m_setpoint / 2500 + 1.0 * feedForwardCalculate + 4 * bangBangCalculate2));
-      m_rightShooterMotor.setVoltage(-1 * (bangBangCalculate * m_setpoint / 2500 + 1.0 * feedForwardCalculate + 4 * bangBangCalculate2));
+      m_leftShooterMotor.setVoltage(-1 * (bangBangCalculate * m_setpoint / 2000 + 1.0 * feedForwardCalculate + error * bangBangCalculate2));
+      m_rightShooterMotor.setVoltage(-1 * (bangBangCalculate * m_setpoint / 2000 + 1.0 * feedForwardCalculate + error * bangBangCalculate2));
     }
   }
 }

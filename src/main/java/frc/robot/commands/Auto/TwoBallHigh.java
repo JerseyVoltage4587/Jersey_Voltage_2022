@@ -28,11 +28,11 @@ public class TwoBallHigh extends SequentialCommandGroup {
                 new AutoForward(distance, heading), 
                 new WaitCommand(1), new StopIntakeBall(),  
                 new WaitCommand(0.5),
-                new AutoBack(62, heading), 
+                new AutoBack(10, heading),
                 new WaitCommand(1), 
-                new ShootBall(), 
+                new ShootBall(), new WaitCommand(0.125), new StopShootBall(), new WaitCommand(1), new ShootBall(),
                 new WaitCommand(2), 
-                new AutoForward(62, heading), 
+                new AutoForward(10, heading), 
                 new StopShootBall(), 
                 new StopShooter());
   }

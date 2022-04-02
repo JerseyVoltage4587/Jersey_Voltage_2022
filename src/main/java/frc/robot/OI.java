@@ -21,6 +21,7 @@ import frc.robot.commands.Climber.WinchUp;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
+import frc.robot.commands.Shooter.StaggerShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
 import frc.robot.commands.Shooter.StopShooter;
 
@@ -91,24 +92,26 @@ public class OI extends CommandBase {
     //rightStickButton1.whenPressed();
     leftTrigger1.whenPressed(new IntakeBall());
     leftTrigger1.whenReleased(new StopIntakeBall());
-    rightTrigger1.whenPressed(new ShootBall());
-    rightTrigger1.whenReleased(new StopShootBall());
-    //leftBumper1.whenPressed(new IntakeBall());
+    rightTrigger1.whenPressed(new StaggerShootBall());
+    //rightTrigger1.whenReleased(new StopShootBall());
+    //leftBumper1.whenPressed(new IntaeBall());
     //rightBumper1.whileHeld();
 
-    buttonA2.whenPressed(new PrepareShooter(Constants.ShooterMotorLowRPM));
+    buttonA2.whenPressed(new PrepareShooter(Constants.ShooterMotorHighRPM));
     buttonA2.whenReleased(new StopShooter());
     buttonB2.whenPressed(new WinchDown());
     buttonB2.whenReleased(new WinchStop());
     buttonX2.whenPressed(new WinchUp());
     buttonX2.whenReleased(new WinchStop());
+    rightBumper2.whenPressed(new PrepareShooter(Constants.ShooterMotorLowRPM));
+    rightBumper2.whenReleased(new StopShooter());
     /*
     upArrow2.whenPressed(new WinchUp());
     upArrow2.whenReleased(new WinchStop());
     downArrow2.whenPressed(new WinchDown());
     downArrow2.whenReleased(new WinchStop());
     */
-    buttonY2.whenPressed(new PrepareShooter(Constants.ShooterMotorHighRPM));
+    buttonY2.whenPressed(new PrepareShooter(Constants.ShooterMotorPadRPM));
     buttonY2.whenReleased(new StopShooter());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
