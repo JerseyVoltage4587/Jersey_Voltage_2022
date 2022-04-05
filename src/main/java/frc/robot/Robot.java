@@ -116,11 +116,13 @@ public class Robot extends TimedRobot {
 
   public static void changeCamera() {
     if (m_cameraMode == Constants.FrontCamera) {
+      m_backCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
       getServer().setSource(getBackCamera());
       m_frontCamera.setConnectionStrategy(ConnectionStrategy.kForceClose);
       m_cameraMode = Constants.BackCamera;
     }
     else {
+      m_frontCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
       getServer().setSource(getFrontCamera());
       m_backCamera.setConnectionStrategy(ConnectionStrategy.kForceClose);
       m_cameraMode = Constants.FrontCamera;
