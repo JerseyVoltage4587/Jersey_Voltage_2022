@@ -39,8 +39,8 @@ public class DefaultClimberCommand extends CommandBase {
     m_climber.setLeftFrontMotorLevel(climbLeft);
     m_climber.setRightFrontMotorLevel(climbRight);
 
-    SmartDashboard.putNumber("Left Volts", m_climber.getLeftVolts());
-    SmartDashboard.putNumber("Right Volts", m_climber.getRightVolts());
+    SmartDashboard.putNumber("Left Volts", m_climber.getLeftFrontVolts());
+    SmartDashboard.putNumber("Right Volts", m_climber.getRightFrontVolts());
   }
 
   // Called once the command ends or is interrupted.
