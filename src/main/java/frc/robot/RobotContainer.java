@@ -46,7 +46,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_chooser.setDefaultOption("Two Ball (High)", new TwoBallHigh(85, 0));
+    m_chooser.setDefaultOption("Two Ball (High)", new TwoBallHigh(90, 0));
     m_chooser.addOption("Leave Tarmac", new SimpleAutoForward(85, 0));
     m_chooser.addOption("Do Nothing", new DoNothing());
     m_chooser.addOption("Two Ball (Low)", new TwoBallLow(85, 0));
