@@ -85,43 +85,75 @@ public class DriveBase extends SubsystemBase {
     return m_Instance;
   }
 
-  public void setLeftVolts(double v) {
-    m_leftSpark.setVoltage(v);
-  }
-
-  public void setRightVolts(double v) {
-    m_rightSpark.setVoltage(v);
-  }
-
-  public void setLeftMotorLevel(double x) {
-    if (m_isActive == false) {
-      return;
+  //Left Motor Variables
+    public void setLeftVolts(double v) {
+      m_leftSpark.setVoltage(v);
     }
-    LeftMotorLevel = x;
-    m_leftSpark.set(LeftMotorLevel);
-  }
 
-  public double getLeftMotorLevel() {
-    if (m_isActive == false) {
-      return -1;
+    public double getLeftMotorLevel() {
+      if (m_isActive == false) {
+        return -1;
+      }
+      return LeftMotorLevel;
     }
-    return LeftMotorLevel;
-  }
 
-  public void setRightMotorLevel(double x) {
-    if (m_isActive == false) {
-      return;
+    public void setLeftMotorLevel(double x) {
+      if (m_isActive == false) {
+        return;
+      }
+      LeftMotorLevel = x;
+      m_leftSpark.set(LeftMotorLevel);
     }
-    RightMotorLevel = x;
-    m_rightSpark.set(RightMotorLevel);
-  }
 
-  public double getRightMotorLevel() {
-    if (m_isActive == false) {
-      return -1;
+    public double getLeftEncoder() {
+      if (m_isActive == false) {
+        return 0;
+      }
+      return m_leftDriveEncoder.getPosition() / 10.75;
     }
-    return RightMotorLevel;
-  }
+
+    public double getLeftDistanceInches() {
+      return getLeftEncoder() * Constants.DriveBaseWheelDiameter * Math.PI;
+    }
+
+    public double getPartialLeftInches() {
+      return partialLeftInches;
+    }
+
+  //Right Motor Variables
+    public void setRightVolts(double v) {
+      m_rightSpark.setVoltage(v);
+    }
+
+    public double getRightMotorLevel() {
+      if (m_isActive == false) {
+        return -1;
+      }
+      return RightMotorLevel;
+    }
+
+    public void setRightMotorLevel(double x) {
+      if (m_isActive == false) {
+        return;
+      }
+      RightMotorLevel = x;
+      m_rightSpark.set(RightMotorLevel);
+    }
+
+    public double getRightEncoder() {
+      if (m_isActive == false) {
+        return 0;
+      }
+      return m_rightDriveEncoder.getPosition() / 10.75;
+    }
+
+    public double getRightDistanceInches() {
+      return getRightEncoder() * Constants.DriveBaseWheelDiameter * Math.PI;
+    }
+
+    public double getPartialRightInches() {
+      return partialRightInches;
+    }
 
   public void setLayout(String l) {
     layout = l;
@@ -155,6 +187,10 @@ public class DriveBase extends SubsystemBase {
       return;
     }
     m_drive.arcadeDrive(forward, turn);
+  }
+
+  private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
+    return (finalValue - initialValue) / (finalTime - initialTime);
   }
 
   @Override
@@ -196,40 +232,6 @@ public class DriveBase extends SubsystemBase {
     SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
     SmartDashboard.putNumber("Left Distance", getLeftDistanceInches());
     SmartDashboard.putNumber("Right Distance", getRightDistanceInches());
-  }
-
-  public double getLeftEncoder() {
-    if (m_isActive == false) {
-      return 0;
-    }
-    return m_leftDriveEncoder.getPosition() / 10.75;
-  }
-
-  public double getLeftDistanceInches() {
-    return getLeftEncoder() * Constants.DriveBaseWheelDiameter * Math.PI;
-  }
-
-  public double getRightEncoder() {
-    if (m_isActive == false) {
-      return 0;
-    }
-    return m_rightDriveEncoder.getPosition() / 10.75;
-  }
-
-  public double getRightDistanceInches() {
-    return getRightEncoder() * Constants.DriveBaseWheelDiameter * Math.PI;
-  }
-
-  private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
-    return (finalValue - initialValue) / (finalTime - initialTime);
-  }
-
-  public double getPartialLeftInches() {
-    return partialLeftInches;
-  }
-
-  public double getPartialRightInches() {
-    return partialRightInches;
   }
 
   public static class DriveBaseLoggingData {

@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.subsystems.DriveBase.DriveBaseLoggingData;
+import frc.robot.util.AsyncStructuredLogger;
 import frc.robot.util.Gyro;
 
 public class Climber extends SubsystemBase {
@@ -26,6 +28,9 @@ public class Climber extends SubsystemBase {
   private Solenoid m_leftClimberSolenoid, m_rightClimberSolenoid;
   public static boolean leftClimberState,  rightClimberState;
   private static double rightVoltage, leftVoltage, m_roll;
+  private long m_lastLogTime;
+  private ClimberLoggingData m_loggingData;
+  private AsyncStructuredLogger<ClimberLoggingData> m_logger;
 
   public Climber() {
     if (m_isActive == false) {
@@ -44,6 +49,8 @@ public class Climber extends SubsystemBase {
     leftClimberState = false;
     rightClimberState = false;
     m_roll = Gyro.getRoll();
+    m_loggingData = new ClimberLoggingData();
+    m_logger = new AsyncStructuredLogger<ClimberLoggingData>("Climber", /*forceUnique=*/false, ClimberLoggingData.class);
   }
 
   public static Climber getInstance() {
@@ -83,29 +90,49 @@ public class Climber extends SubsystemBase {
     m_rightClimberSolenoid.set(false);
   } */
 
-  public double getLeftFrontEncoder() {
-    return m_leftFrontClimberMotor.getSelectedSensorPosition();
-  }
+  // Left
+    // Left Front Motor
+      public double getLeftFrontEncoder() {
+        return m_leftFrontClimberMotor.getSelectedSensorPosition();
+      }
 
-  public double getRightFrontEncoder() {
-    return m_rightFrontClimberMotor.getSelectedSensorPosition();
-  }
+      public void setLeftFrontMotorLevel(double mL) {
+        m_leftFrontClimberMotor.set(mL);
+      }
 
-  public void setRightFrontMotorLevel(double mL) {
-    m_rightFrontClimberMotor.set(mL);
-  }
+      public void setLeftFrontVolts(double volts) {
+        m_leftFrontClimberMotor.setVoltage(volts);
+      }
 
-  public void setLeftFrontMotorLevel(double mL) {
-    m_leftFrontClimberMotor.set(mL);
-  }
+      public double getLeftFrontVolts() {
+        return m_leftFrontClimberMotor.getBusVoltage();
+      }
 
-  public void setRightFrontMotorVolts(double volts) {
-    m_rightFrontClimberMotor.setVoltage(volts);
-  }
+      public double getLeftRotaions() {
+        return (getLeftFrontEncoder() / 4096);
+      }
 
-  public void setLeftFrontMotorVolts(double volts) {
-    m_leftFrontClimberMotor.setVoltage(volts);
-  }
+  // Right
+    // Right Front
+      public double getRightFrontEncoder() {
+        return m_rightFrontClimberMotor.getSelectedSensorPosition();
+      }
+
+      public void setRightFrontMotorLevel(double mL) {
+        m_rightFrontClimberMotor.set(mL);
+      }
+
+      public void setRightFrontVolts(double volts) {
+        m_rightFrontClimberMotor.setVoltage(volts);
+      }
+
+      public double getRightFrontVolts() {
+        return m_rightFrontClimberMotor.getBusVoltage();
+      }
+
+      public double getRightRotations() {
+        return (getRightFrontEncoder() / 4096);
+      }
 
   public void toggleClimbPistons() {
     leftClimberState = !leftClimberState; //Reflects this change in a constant so we know where the piston is
@@ -122,13 +149,6 @@ public class Climber extends SubsystemBase {
     climbingStatus = !climbingStatus;
   }
 
-  public double getLeftVolts() {
-    return m_leftFrontClimberMotor.getBusVoltage();
-  }
-
-  public double getRightVolts() {
-    return m_rightFrontClimberMotor.getBusVoltage();
-  }
 
   public void winchUp() {
     m_leftBackClimberMotor.set(0.75);
@@ -145,9 +165,23 @@ public class Climber extends SubsystemBase {
     m_rightBackClimberMotor.set(0);
   }
 
+  private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
+    return (finalValue - initialValue) / (finalTime - initialTime);
+  }
+
   @Override
   public void periodic() {
+    if (m_isActive == false) {
+      return;
+    }
+
     // This method will be called once per scheduler run
+    long now = System.nanoTime();
+    double lastLeftEncoderReading = m_loggingData.LeftEncoderReading;
+    double lastLeftVelocity = m_loggingData.LeftVelocity;
+    double lastRightEncoderReading = m_loggingData.RightEncoderReading;
+    double lastRightVelocity = m_loggingData.RightVelocity;
+
     Robot.getGyro();
     m_roll = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftFrontEncoder());
@@ -185,8 +219,30 @@ public class Climber extends SubsystemBase {
         }
       }
       
-        setLeftFrontMotorVolts(leftVoltage);
-        setRightFrontMotorVolts(rightVoltage);
+        setLeftFrontVolts(leftVoltage);
+        setRightFrontVolts(rightVoltage);
     }
+
+    m_loggingData.LeftFrontMotorLevel = m_leftFrontClimberMotor.get();
+    m_loggingData.RightFrontMotorLevel = m_rightFrontClimberMotor.get();
+    m_loggingData.LeftEncoderReading = getLeftFrontEncoder();
+    m_loggingData.RightEncoderReading = getRightFrontEncoder();
+    m_loggingData.LeftVelocity = (getLeftFrontEncoder() - lastLeftEncoderReading) / (now - m_lastLogTime);
+    m_loggingData.RightVelocity = (getRightFrontEncoder() - lastRightEncoderReading) / (now - m_lastLogTime);
+    m_loggingData.LeftAcceleration = (getRateOfChange(lastLeftVelocity, m_loggingData.LeftVelocity, m_lastLogTime, now));
+    m_loggingData.RightAcceleration = (getRateOfChange(lastRightVelocity, m_loggingData.RightVelocity, m_lastLogTime, now));
+    m_loggingData.LeftRotations = getLeftRotaions();
+    m_loggingData.RightRotations = getRightRotations();
+    
+    m_logger.queueData(m_loggingData);
+    m_lastLogTime = now;
+  }
+
+  public static class ClimberLoggingData {
+    public double LeftFrontMotorLevel, RightFrontMotorLevel;
+    public double LeftEncoderReading, RightEncoderReading;
+    public double LeftVelocity, RightVelocity;
+    public double LeftAcceleration, RightAcceleration;
+    public double LeftRotations, RightRotations;
   }
 }
