@@ -18,6 +18,6 @@ public class ChangeCamera extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.ChangeCamera();
+    Robot.changeCamera();
   }
 }

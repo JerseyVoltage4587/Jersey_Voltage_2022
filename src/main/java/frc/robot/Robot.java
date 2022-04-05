@@ -64,17 +64,6 @@ public class Robot extends TimedRobot {
     return m_backCamera;
   }
 
-  public static void ChangeCamera() {
-    if (m_cameraMode == Constants.FrontCamera) {
-      getServer().setSource(getBackCamera());
-      m_cameraMode = Constants.BackCamera;
-    }
-    else {
-      getServer().setSource(getFrontCamera());
-      m_cameraMode = Constants.FrontCamera;
-    }
-  }
-
   public static PowerDistribution getPDP() {
     if (m_PDP == null) {
       m_PDP = new PowerDistribution();
@@ -123,6 +112,19 @@ public class Robot extends TimedRobot {
     
     camMode.setNumber(1);
     stream.setNumber(0);
+  }
+
+  public static void changeCamera() {
+    if (m_cameraMode == Constants.FrontCamera) {
+      getServer().setSource(getBackCamera());
+      m_frontCamera.setConnectionStrategy(ConnectionStrategy.kForceClose);
+      m_cameraMode = Constants.BackCamera;
+    }
+    else {
+      getServer().setSource(getFrontCamera());
+      m_backCamera.setConnectionStrategy(ConnectionStrategy.kForceClose);
+      m_cameraMode = Constants.FrontCamera;
+    }
   }
   
   /**
