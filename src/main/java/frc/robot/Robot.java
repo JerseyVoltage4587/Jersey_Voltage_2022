@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Auto.TwoBallHigh;
 import frc.robot.commands.Climber.DefaultClimberCommand;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoSink;
+import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
 import frc.robot.commands.Drive.DefaultDriveBaseCommand;
 import frc.robot.subsystems.*;
 import frc.robot.util.Gyro;
@@ -36,6 +39,41 @@ public class Robot extends TimedRobot {
   private NetworkTable limelight;
   private NetworkTableEntry camMode, stream;
   public static double autoWaitTime;
+  private static UsbCamera m_frontCamera, m_backCamera;
+  private static VideoSink m_cameraServer;
+  private static int m_cameraMode;
+
+  public static VideoSink getServer() {
+    if (m_cameraServer == null) {
+      m_cameraServer = CameraServer.getServer();
+    }
+    return m_cameraServer;
+  }
+
+  public static UsbCamera getFrontCamera() {
+    if (m_frontCamera == null) {
+      m_frontCamera = CameraServer.startAutomaticCapture(0);
+    }
+    return m_frontCamera;
+  }
+  
+  public static UsbCamera getBackCamera() {
+    if (m_backCamera == null) {
+      m_backCamera = CameraServer.startAutomaticCapture(1);
+    }
+    return m_backCamera;
+  }
+
+  public static void ChangeCamera() {
+    if (m_cameraMode == Constants.FrontCamera) {
+      getServer().setSource(getBackCamera());
+      m_cameraMode = Constants.BackCamera;
+    }
+    else {
+      getServer().setSource(getFrontCamera());
+      m_cameraMode = Constants.FrontCamera;
+    }
+  }
 
   public static PowerDistribution getPDP() {
     if (m_PDP == null) {
@@ -95,7 +133,10 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
     //runLimeLight();
-    CameraServer.startAutomaticCapture();
+    m_frontCamera = CameraServer.startAutomaticCapture(0);
+    m_backCamera = CameraServer.startAutomaticCapture(1);
+    m_cameraServer = CameraServer.getServer();
+    m_cameraMode = Constants.FrontCamera;
     SmartDashboard.putNumber("Auto Wait Time", 0);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     getClimber().setDefaultCommand(new DefaultClimberCommand());
