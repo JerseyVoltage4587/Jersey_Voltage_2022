@@ -113,7 +113,7 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("IntakeMotorLevel", getIntakeMotorLevel());
 
-    if ((Robot.getClimber().getClimbingStatus()) && (!deployed)){
+    if (Robot.getClimber().getClimbingStatus() && !deployed) {
       deployIntake();  //If climber is active and the intake is not deployed, deploy intake
     }
   }

@@ -145,22 +145,25 @@ public class Climber extends SubsystemBase {
     return climbingStatus;
   }
 
-  public void toggleClimbMotors() {
-    climbingStatus = !climbingStatus;
+  public void setClimbingStatus(boolean status) {
+    climbingStatus = status;
   }
 
 
   public void winchUp() {
+    setClimbingStatus(true);
     m_leftBackClimberMotor.set(0.75);
     m_rightBackClimberMotor.set(-0.75);
   }
 
   public void winchDown() {
+    setClimbingStatus(true);
     m_leftBackClimberMotor.set(-0.75);
     m_rightBackClimberMotor.set(0.75);
   }
 
   public void winchStop() {
+    setClimbingStatus(false);
     m_leftBackClimberMotor.set(0);
     m_rightBackClimberMotor.set(0);
   }
@@ -187,6 +190,8 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putNumber("left climber", getLeftFrontEncoder());
     SmartDashboard.putNumber("right climber", getRightFrontEncoder());
     SmartDashboard.putBoolean("Pistons Extended", leftClimberState && rightClimberState);
+    SmartDashboard.putNumber("Left Rotations", m_loggingData.LeftRotations);
+    SmartDashboard.putNumber("Right Rotations", m_loggingData.RightRotations);
 
     if (climbingStatus) {
       System.out.println("roll control");
@@ -233,7 +238,7 @@ public class Climber extends SubsystemBase {
     m_loggingData.RightAcceleration = (getRateOfChange(lastRightVelocity, m_loggingData.RightVelocity, m_lastLogTime, now));
     m_loggingData.LeftRotations = getLeftRotaions();
     m_loggingData.RightRotations = getRightRotations();
-    
+
     m_logger.queueData(m_loggingData);
     m_lastLogTime = now;
   }
