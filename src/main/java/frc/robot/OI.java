@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ChangeCamera;
 import frc.robot.commands.Auto.AutoForward;
 import frc.robot.commands.Auto.SimpleAutoForward;
 import frc.robot.commands.Climber.ToggleClimbPistons;
@@ -95,7 +96,7 @@ public class OI extends CommandBase {
     rightTrigger1.whenPressed(new StaggerShootBall());
     //rightTrigger1.whenReleased(new StopShootBall());
     //leftBumper1.whenPressed(new IntaeBall());
-    //rightBumper1.whileHeld();
+    rightBumper1.whenPressed(new ChangeCamera());
 
     buttonA2.whenPressed(new PrepareShooter(Constants.ShooterMotorHighRPM));
     buttonA2.whenReleased(new StopShooter());
