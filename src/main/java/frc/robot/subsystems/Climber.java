@@ -192,6 +192,14 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putBoolean("Pistons Extended", leftClimberState && rightClimberState);
     SmartDashboard.putNumber("Left Rotations", m_loggingData.LeftRotations);
     SmartDashboard.putNumber("Right Rotations", m_loggingData.RightRotations);
+    SmartDashboard.putNumber("Left Climber Motor Voltage", leftVoltage);
+    SmartDashboard.putNumber("Right Climber Motor Voltage", rightVoltage);
+    SmartDashboard.putNumber("Left Climber Motor Level", m_leftFrontClimberMotor.get());
+    SmartDashboard.putNumber("Right Climber Motor Level", m_rightFrontClimberMotor.get());
+    SmartDashboard.putNumber("Left Climber Motor Current Out", m_leftFrontClimberMotor.getStatorCurrent());
+    SmartDashboard.putNumber("Right Climber Motor Current Out", m_rightFrontClimberMotor.getStatorCurrent());
+    SmartDashboard.putNumber("Left Climber Motor Current In", m_leftFrontClimberMotor.getSupplyCurrent());
+    SmartDashboard.putNumber("Right Climber Motor Current In", m_rightFrontClimberMotor.getSupplyCurrent());
 
     if (climbingStatus) {
       System.out.println("roll control");
@@ -227,6 +235,7 @@ public class Climber extends SubsystemBase {
         setLeftFrontVolts(leftVoltage);
         setRightFrontVolts(rightVoltage);
     }
+
 
     m_loggingData.LeftFrontMotorLevel = m_leftFrontClimberMotor.get();
     m_loggingData.RightFrontMotorLevel = m_rightFrontClimberMotor.get();
