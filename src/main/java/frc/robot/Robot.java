@@ -134,10 +134,10 @@ public class Robot extends TimedRobot {
     //runLimeLight();
     m_frontCamera = CameraServer.startAutomaticCapture(0);
     m_frontCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-    m_frontCamera.setVideoMode(PixelFormat.kYUYV, 160, 120, 30);
+    m_frontCamera.setVideoMode(PixelFormat.kYUYV, 320, 240, 30);
     m_backCamera = CameraServer.startAutomaticCapture(1);
     m_backCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-    m_backCamera.setVideoMode(PixelFormat.kYUYV, 160, 120, 30);
+    m_backCamera.setVideoMode(PixelFormat.kYUYV, 320, 240, 30);
     m_cameraServer = CameraServer.getServer();
     m_cameraMode = Constants.FrontCamera;
     SmartDashboard.putNumber("Auto Wait Time", 0);
