@@ -83,7 +83,7 @@ public class OI extends CommandBase {
     //upArrow2 = new POVButton(m_joy2, 0);
     //downArrow2 = new POVButton(m_joy2, 180);
 
-    buttonA1.whenPressed(new SimpleAutoForward(23, 0));
+    buttonA1.whenPressed(new SimpleAutoForward(10, 0));
     buttonB1.whenPressed(new EjectBall());
     buttonB1.whenReleased(new StopEjectBall());
     //buttonY1.whenPressed();

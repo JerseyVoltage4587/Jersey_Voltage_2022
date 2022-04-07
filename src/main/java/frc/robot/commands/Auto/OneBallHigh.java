@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
+import frc.robot.commands.Shooter.StaggerShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
 import frc.robot.commands.Shooter.StopShooter;
 
@@ -20,6 +21,6 @@ public class OneBallHigh extends SequentialCommandGroup {
   public OneBallHigh() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PrepareShooter(Constants.ShooterMotorHighRPM), new WaitCommand(2), new SimpleAutoForward(23, 0), new ShootBall(), new WaitCommand(2), new SimpleAutoForward(57, 0), new StopShootBall(), new StopShooter());
+    addCommands(new PrepareShooter(Constants.ShooterMotorHighRPM), new WaitCommand(2), new SimpleAutoForward(80, 0), new StaggerShootBall(), new WaitCommand(2), new SimpleAutoForward(10, 0), new StopShooter());
   }
 }

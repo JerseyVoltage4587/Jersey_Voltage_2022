@@ -12,6 +12,7 @@ import frc.robot.commands.Intake.IntakeBall;
 import frc.robot.commands.Intake.StopIntakeBall;
 import frc.robot.commands.Shooter.PrepareShooter;
 import frc.robot.commands.Shooter.ShootBall;
+import frc.robot.commands.Shooter.StaggerShootBall;
 import frc.robot.commands.Shooter.StopShootBall;
 import frc.robot.commands.Shooter.StopShooter;
 
@@ -28,12 +29,11 @@ public class TwoBallLow extends SequentialCommandGroup {
                 new AutoForward(distance, heading), 
                 new WaitCommand(1), new StopIntakeBall(),  
                 new WaitCommand(0.5), 
-                new AutoBack(distance, heading), 
+                new AutoBack(distance-10, heading), 
                 new WaitCommand(1), 
-                new ShootBall(), 
+                new StaggerShootBall(), 
                 new WaitCommand(3), 
                 new AutoForward(distance, heading), 
-                new StopShootBall(), 
                 new StopShooter());
   }
 }
