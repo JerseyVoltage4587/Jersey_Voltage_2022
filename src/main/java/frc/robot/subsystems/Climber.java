@@ -189,7 +189,7 @@ public class Climber extends SubsystemBase {
     m_roll = Gyro.getYaw();
     SmartDashboard.putNumber("left climber", getLeftFrontEncoder());
     SmartDashboard.putNumber("right climber", getRightFrontEncoder());
-    SmartDashboard.putBoolean("Pistons Extended", leftClimberState && rightClimberState);
+    SmartDashboard.putBoolean("Pistons Extended", !leftClimberState && !rightClimberState);
     SmartDashboard.putNumber("Left Rotations", m_loggingData.LeftRotations);
     SmartDashboard.putNumber("Right Rotations", m_loggingData.RightRotations);
     SmartDashboard.putNumber("Left Climber Motor Voltage", leftVoltage);

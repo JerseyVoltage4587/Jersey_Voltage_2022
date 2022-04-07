@@ -18,6 +18,7 @@ import frc.robot.commands.Climber.DefaultClimberCommand;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
+import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
 import frc.robot.commands.Drive.DefaultDriveBaseCommand;
 import frc.robot.subsystems.*;
@@ -51,16 +52,10 @@ public class Robot extends TimedRobot {
   }
 
   public static UsbCamera getFrontCamera() {
-    if (m_frontCamera == null) {
-      m_frontCamera = CameraServer.startAutomaticCapture(0);
-    }
     return m_frontCamera;
   }
   
   public static UsbCamera getBackCamera() {
-    if (m_backCamera == null) {
-      m_backCamera = CameraServer.startAutomaticCapture(1);
-    }
     return m_backCamera;
   }
 
@@ -116,15 +111,15 @@ public class Robot extends TimedRobot {
 
   public static void changeCamera() {
     if (m_cameraMode == Constants.FrontCamera) {
-      m_backCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+      //m_backCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
       getServer().setSource(getBackCamera());
-      m_frontCamera.setConnectionStrategy(ConnectionStrategy.kForceClose);
+      //m_frontCamera.setConnectionStrategy(ConnectionStrategy.kForceClose);
       m_cameraMode = Constants.BackCamera;
     }
     else {
-      m_frontCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+      //m_frontCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
       getServer().setSource(getFrontCamera());
-      m_backCamera.setConnectionStrategy(ConnectionStrategy.kForceClose);
+      //m_backCamera.setConnectionStrategy(ConnectionStrategy.kForceClose);
       m_cameraMode = Constants.FrontCamera;
     }
   }
@@ -138,7 +133,11 @@ public class Robot extends TimedRobot {
     //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
     //runLimeLight();
     m_frontCamera = CameraServer.startAutomaticCapture(0);
+    m_frontCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+    m_frontCamera.setVideoMode(PixelFormat.kYUYV, 160, 120, 30);
     m_backCamera = CameraServer.startAutomaticCapture(1);
+    m_backCamera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+    m_backCamera.setVideoMode(PixelFormat.kYUYV, 160, 120, 30);
     m_cameraServer = CameraServer.getServer();
     m_cameraMode = Constants.FrontCamera;
     SmartDashboard.putNumber("Auto Wait Time", 0);

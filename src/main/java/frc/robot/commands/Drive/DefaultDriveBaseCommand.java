@@ -52,7 +52,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
 			turn = 0;
     }
 
-    m_drivebase.arcadeDrive(Math.signum(forward) * Math.pow(forward, 2), turn);
+    m_drivebase.arcadeDrive(Math.signum(forward) * Math.pow(forward, 2), turn * 0.85);
   }
 
   // Called once the command ends or is interrupted.
@@ -63,7 +63,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public boolean isFinished() { 
     return false;
   }
 }
