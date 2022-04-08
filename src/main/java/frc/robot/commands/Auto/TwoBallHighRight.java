@@ -24,11 +24,12 @@ public class TwoBallHighRight extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new PrepareShooter(Constants.ShooterMotorHighRPM), 
           new IntakeBall(), 
+          new WaitCommand(1.5), 
           new AutoForward(distance, heading), 
           new WaitCommand(1), 
           new StopIntakeBall(),  
           new WaitCommand(0.5),
-          new AutoBack(7, heading),
+          new AutoBack(6, heading),
           new WaitCommand(1), 
           new ShootBall(), 
           new WaitCommand(0.125), 

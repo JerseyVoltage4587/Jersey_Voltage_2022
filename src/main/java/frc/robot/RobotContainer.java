@@ -54,7 +54,7 @@ public class RobotContainer {
     m_chooser.addOption("Two Ball (Low)", new TwoBallLow(85, 0));
     m_chooser.addOption("One Ball (High)", new OneBallHigh());
     m_chooser.addOption("One Ball (Low)", new OneBallLow());
-    m_chooser.addOption("Two Ball High Right", new TwoBallHighRight(40, 0));
+    m_chooser.addOption("Two Ball High Right", new TwoBallHighRight(32, 0));
     m_chooser.addOption("Two Ball Low Right", new TwoBallLowRight(20, 0));
     SmartDashboard.putData(m_chooser);
   }
