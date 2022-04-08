@@ -180,10 +180,10 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand()/*AutoChoice.getAutoChoice()*/;
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();/*AutoChoice.getAutoChoice()*/
     //CommandScheduler.getInstance().cancelAll(); //Makes sure nothing is running from a previous enable
     autoWaitTime = SmartDashboard.getNumber("Auto Wait Time", 0);
-    CommandScheduler.getInstance().schedule(new WaitCommand(autoWaitTime) , m_autonomousCommand);
+    CommandScheduler.getInstance().schedule(m_autonomousCommand);
   }
 
   /** This function is called periodically during autonomous. */

@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Auto.TwoBallHigh;
+import frc.robot.commands.Auto.TwoBallHighRight;
 import frc.robot.commands.Auto.TwoBallLow;
+import frc.robot.commands.Auto.TwoBallLowRight;
 import frc.robot.commands.Auto.DoNothing;
 import frc.robot.commands.Auto.OneBallHigh;
 import frc.robot.commands.Auto.OneBallLow;
@@ -52,6 +54,8 @@ public class RobotContainer {
     m_chooser.addOption("Two Ball (Low)", new TwoBallLow(85, 0));
     m_chooser.addOption("One Ball (High)", new OneBallHigh());
     m_chooser.addOption("One Ball (Low)", new OneBallLow());
+    m_chooser.addOption("Two Ball High Right", new TwoBallHighRight(40, 0));
+    m_chooser.addOption("Two Ball Low Right", new TwoBallLowRight(20, 0));
     SmartDashboard.putData(m_chooser);
   }
 
