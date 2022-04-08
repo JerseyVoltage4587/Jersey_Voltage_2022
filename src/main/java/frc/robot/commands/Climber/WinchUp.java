@@ -20,5 +20,6 @@ public class WinchUp extends InstantCommand {
   @Override
   public void initialize() {
     Robot.getClimber().winchUp();
+    Robot.getClimber().extendClimbPistons();
   }
 }

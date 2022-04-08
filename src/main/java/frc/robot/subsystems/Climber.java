@@ -141,6 +141,11 @@ public class Climber extends SubsystemBase {
     m_rightClimberSolenoid.toggle();
   }
 
+  public void extendClimbPistons() {
+    m_leftClimberSolenoid.set(true);
+    m_rightClimberSolenoid.set(true);
+  }
+
   public boolean getClimbingStatus() {
     return climbingStatus;
   }
