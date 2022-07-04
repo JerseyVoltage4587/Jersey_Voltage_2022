@@ -1,0 +1,15 @@
+Top joystick horizontal axis: 0
+Top joystick vertical axis: 1
+Bottom joystick horizontal axis: 2
+Bottom joystick vertical axis: 3
+
+Y: 1
+B: 2
+A: 3
+X: 4
+
+Left bumper: 5
+Right bumper: 6
+
+Left trigger: 7
+Right trigger: 8
