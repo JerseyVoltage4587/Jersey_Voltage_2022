@@ -149,8 +149,8 @@ public class OI extends CommandBase {
     /*
     upArrow2.whenPressed(new WinchUp());
     upArrow2.whenReleased(new WinchStop());
-    downArrow2.whenPressed(new WinchDown());
     downArrow2.whenReleased(new WinchStop());
+    downArrow2.whenPressed(new WinchDown());
     */
     buttonY2.whenPressed(new PrepareShooter(Constants.ShooterMotorPadRPM));
     buttonY2.whenReleased(new StopShooter());
