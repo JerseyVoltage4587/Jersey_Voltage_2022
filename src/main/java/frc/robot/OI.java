@@ -35,10 +35,12 @@ public class OI extends CommandBase {
     leftBumper1, rightBumper1, backButton1, startButton1, 
     leftStickButton1, rightStickButton1;
   JoyButton leftTrigger1, rightTrigger1;
+  //Button leftTrigger1, rightTrigger1;
   Button buttonA2, buttonB2, buttonX2, buttonY2, 
     leftBumper2, rightBumper2, backButton2, startButton2, 
     leftStickButton2, rightStickButton2;
   JoyButton leftTrigger2, rightTrigger2;
+  //Button leftTrigger2, rightTrigger2;
 
   public static OI getInstance() {
     if (m_Instance == null) {
@@ -53,6 +55,7 @@ public class OI extends CommandBase {
    * Creates a new OI.
    */
   public OI() {
+    
     m_joy1 = new Joystick(0);
     buttonA1 = new JoystickButton(m_joy1, 1);
     buttonB1 = new JoystickButton(m_joy1, 2);
@@ -66,6 +69,23 @@ public class OI extends CommandBase {
     rightStickButton1 = new JoystickButton(m_joy1, 10);
     leftTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 2);
     rightTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 3);
+    
+
+    /*
+    m_joy1 = new Joystick(0);
+    buttonA1 = new JoystickButton(m_joy1, 2);
+    buttonB1 = new JoystickButton(m_joy1, 3);
+    buttonX1 = new JoystickButton(m_joy1, 1);
+    buttonY1 = new JoystickButton(m_joy1, 4);
+    leftBumper1 = new JoystickButton(m_joy1, 5);
+    rightBumper1 = new JoystickButton(m_joy1, 6);
+    backButton1 = new JoystickButton(m_joy1, 9);
+    startButton1 = new JoystickButton(m_joy1, 10);
+    leftStickButton1 = new JoystickButton(m_joy1, 11);
+    rightStickButton1 = new JoystickButton(m_joy1, 12);
+    leftTrigger1 = new JoystickButton(m_joy1, 7);
+    rightTrigger1 = new JoystickButton(m_joy1, 8);
+    */
     
     m_joy2 = new Joystick(1);
     buttonA2 = new JoystickButton(m_joy2, 1);
@@ -82,21 +102,41 @@ public class OI extends CommandBase {
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
     //upArrow2 = new POVButton(m_joy2, 0);
     //downArrow2 = new POVButton(m_joy2, 180);
+    
+
+    /*
+    m_joy2 = new Joystick(1);
+    buttonA2 = new JoystickButton(m_joy2, 2);
+    buttonB2 = new JoystickButton(m_joy2, 3);
+    buttonX2 = new JoystickButton(m_joy2, 1);
+    buttonY2 = new JoystickButton(m_joy2, 4);
+    leftBumper2 = new JoystickButton(m_joy2, 5);
+    rightBumper2 = new JoystickButton(m_joy2, 6);
+    backButton2 = new JoystickButton(m_joy2, 9);
+    startButton2 = new JoystickButton(m_joy2, 10);
+    leftStickButton2 = new JoystickButton(m_joy2, 11);
+    rightStickButton2 = new JoystickButton(m_joy2, 12);
+    leftTrigger2 = new JoystickButton(m_joy2, 7);
+    rightTrigger2 = new JoystickButton(m_joy2, 8);
+    */
 
     buttonA1.whenPressed(new SimpleAutoForward(10, 0));
     buttonB1.whenPressed(new EjectBall());
     buttonB1.whenReleased(new StopEjectBall());
-    //buttonY1.whenPressed();
+    //buttonY1.whenPressed(new IntakeBall());
+    //buttonY1.whenReleased(new StopIntakeBall());
     //startButton1.whenPressed();
     //backButton1.whenPressed();
     //leftStickButton1.whenPressed();
     //rightStickButton1.whenPressed();
-    leftTrigger1.whenPressed(new IntakeBall());
-    leftTrigger1.whenReleased(new StopIntakeBall());
-    rightTrigger1.whenPressed(new StaggerShootBall());
-    //rightTrigger1.whenReleased(new StopShootBall());
-    //leftBumper1.whenPressed(new IntaeBall());
-    rightBumper1.whenPressed(new ChangeCamera());
+    //leftTrigger1.whenPressed(new IntakeBall());
+    //leftTrigger1.whenReleased(new StopIntakeBall());
+    rightTrigger1.whenPressed(new ShootBall());
+    rightTrigger1.whenReleased(new StopShootBall());
+    leftBumper1.whenPressed(new IntakeBall());
+    leftBumper1.whenReleased(new StopIntakeBall());
+    rightBumper1.whenPressed(new StaggerShootBall());
+    buttonY1.whenPressed(new ChangeCamera());
 
     buttonA2.whenPressed(new PrepareShooter(Constants.ShooterMotorHighRPM));
     buttonA2.whenReleased(new StopShooter());

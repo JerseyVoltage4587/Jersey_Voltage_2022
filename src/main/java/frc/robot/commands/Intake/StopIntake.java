@@ -24,5 +24,6 @@ public class StopIntake extends InstantCommand {
   @Override
   public void initialize() {
     m_intake.stopIntakeBall();
+    m_intake.retractIntake();
   }
 }

@@ -23,6 +23,6 @@ public class StartIntake extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intake.intakeBall();
+    m_intake.startIntakeBall();
   }
 }
