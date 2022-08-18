@@ -34,13 +34,13 @@ public class OI extends CommandBase {
   Button buttonA1, buttonB1, buttonX1, buttonY1, 
     leftBumper1, rightBumper1, backButton1, startButton1, 
     leftStickButton1, rightStickButton1;
-  JoyButton leftTrigger1, rightTrigger1;
-  //Button leftTrigger1, rightTrigger1;
+  //JoyButton leftTrigger1, rightTrigger1;
+  Button leftTrigger1, rightTrigger1;
   Button buttonA2, buttonB2, buttonX2, buttonY2, 
     leftBumper2, rightBumper2, backButton2, startButton2, 
     leftStickButton2, rightStickButton2;
-  JoyButton leftTrigger2, rightTrigger2;
-  //Button leftTrigger2, rightTrigger2;
+  //JoyButton leftTrigger2, rightTrigger2;
+  Button leftTrigger2, rightTrigger2;
 
   public static OI getInstance() {
     if (m_Instance == null) {
@@ -56,6 +56,7 @@ public class OI extends CommandBase {
    */
   public OI() {
     
+    /*
     m_joy1 = new Joystick(0);
     buttonA1 = new JoystickButton(m_joy1, 1);
     buttonB1 = new JoystickButton(m_joy1, 2);
@@ -69,14 +70,14 @@ public class OI extends CommandBase {
     rightStickButton1 = new JoystickButton(m_joy1, 10);
     leftTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 2);
     rightTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 3);
-    
+    */
 
-    /*
+    
     m_joy1 = new Joystick(0);
-    buttonA1 = new JoystickButton(m_joy1, 2);
-    buttonB1 = new JoystickButton(m_joy1, 3);
-    buttonX1 = new JoystickButton(m_joy1, 1);
-    buttonY1 = new JoystickButton(m_joy1, 4);
+    buttonA1 = new JoystickButton(m_joy1, 3);
+    buttonB1 = new JoystickButton(m_joy1, 2);
+    buttonX1 = new JoystickButton(m_joy1, 4);
+    buttonY1 = new JoystickButton(m_joy1, 1);
     leftBumper1 = new JoystickButton(m_joy1, 5);
     rightBumper1 = new JoystickButton(m_joy1, 6);
     backButton1 = new JoystickButton(m_joy1, 9);
@@ -85,8 +86,9 @@ public class OI extends CommandBase {
     rightStickButton1 = new JoystickButton(m_joy1, 12);
     leftTrigger1 = new JoystickButton(m_joy1, 7);
     rightTrigger1 = new JoystickButton(m_joy1, 8);
-    */
     
+    
+    /*
     m_joy2 = new Joystick(1);
     buttonA2 = new JoystickButton(m_joy2, 1);
     buttonB2 = new JoystickButton(m_joy2, 2);
@@ -102,14 +104,14 @@ public class OI extends CommandBase {
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
     //upArrow2 = new POVButton(m_joy2, 0);
     //downArrow2 = new POVButton(m_joy2, 180);
-    
+    */
 
-    /*
+    
     m_joy2 = new Joystick(1);
-    buttonA2 = new JoystickButton(m_joy2, 2);
-    buttonB2 = new JoystickButton(m_joy2, 3);
-    buttonX2 = new JoystickButton(m_joy2, 1);
-    buttonY2 = new JoystickButton(m_joy2, 4);
+    buttonA2 = new JoystickButton(m_joy2, 3);
+    buttonB2 = new JoystickButton(m_joy2, 2);
+    buttonX2 = new JoystickButton(m_joy2, 4);
+    buttonY2 = new JoystickButton(m_joy2, 1);
     leftBumper2 = new JoystickButton(m_joy2, 5);
     rightBumper2 = new JoystickButton(m_joy2, 6);
     backButton2 = new JoystickButton(m_joy2, 9);
@@ -118,7 +120,7 @@ public class OI extends CommandBase {
     rightStickButton2 = new JoystickButton(m_joy2, 12);
     leftTrigger2 = new JoystickButton(m_joy2, 7);
     rightTrigger2 = new JoystickButton(m_joy2, 8);
-    */
+    
 
     buttonA1.whenPressed(new SimpleAutoForward(10, 0));
     buttonB1.whenPressed(new EjectBall());
@@ -171,14 +173,14 @@ public class OI extends CommandBase {
 
 	// Get the value of the "turn" stick.
 	public double getTurn() {
-    return m_joy1.getRawAxis(4);
+    return m_joy1.getRawAxis(2);
 	}
   // Get value of the "climb" stick.
   public double getLeftClimbStick() {
     return m_joy2.getRawAxis(1);
   }
   public double getRightClimbStick(){
-    return m_joy2.getRawAxis(5);
+    return m_joy2.getRawAxis(3);
   }
   // Called when the command is initially scheduled.
   @Override
